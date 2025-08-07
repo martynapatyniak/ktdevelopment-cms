@@ -7,6 +7,41 @@
   <link rel="stylesheet" href="styles.css" />
 
   <style>
+    /* Stylowanie nagłówka AI */
+    .hero-logos {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .logo-with-ai {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 55px; /* Dopasuj rozmiar czcionki do swojego projektu */
+      font-family: 'Segoe UI', sans-serif;
+      font-weight: 300;
+    }
+
+    .left-ai, .right-ai {
+      display: flex;
+      align-items: center;
+    }
+
+    .left-ai .pink {
+      color: #DF1995;
+    }
+
+    .right-ai .pink {
+      color: #DF1995;
+    }
+
+    .separator {
+      border-left: 1px solid black;
+      height: 62px; /* Wysokość linii */
+      margin: 0 15px; /* Odstęp od liter po obu stronach */
+    }
+
+    /* Reszta twoich stylów... */
     .language-switcher {
       position: fixed;
       top: 10px;
@@ -61,21 +96,18 @@
 
   <section class="hero-logos">
     <div class="logo-with-ai">
-      <svg width="640" height="240" viewBox="0 0 210 80" xmlns="http://www.w3.org/2000/svg">
-        <text x="50" y="62" font-family="Segoe UI, sans-serif" font-size="55" font-weight="300" letter-spacing="-2">
-          <tspan fill="#DF1995">A</tspan>
-          <tspan fill="#000000">I</tspan>
-        </text>
-        <rect x="125" y="12" width="0.5" height="62" fill="#000000" />
-        <text x="135" y="62" font-family="Segoe UI, sans-serif" font-size="55" font-weight="300" letter-spacing="-2">
-          <tspan fill="#DF1995">I</tspan>
-          <tspan fill="#000000">A</tspan>
-        </text>
-      </svg>
-
-      <div class="kt-logo">
-        <img src="base_logo_white_background.png" alt="KT Development Full Logo" />
+      <div class="left-ai">
+        <span class="pink">A</span>
+        <span>I</span>
       </div>
+      <div class="separator"></div>
+      <div class="right-ai">
+        <span class="pink">I</span>
+        <span>A</span>
+      </div>
+    </div>
+    <div class="kt-logo">
+      <img src="base_logo_white_background.png" alt="KT Development Full Logo" />
     </div>
   </section>
 
