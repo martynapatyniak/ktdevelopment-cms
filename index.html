@@ -7,6 +7,159 @@
   <link rel="stylesheet" href="styles.css" />
 
   <style>
+    /* Reset i podstawowe style */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fff;
+    }
+
+    /* Container i layout */
+    .container-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      width: 50px;
+      height: 50px;
+    }
+
+    .logo-title h1 {
+      font-size: 32px;
+      font-weight: 300;
+      color: #333;
+    }
+
+    /* Nawigacja */
+    .nav {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      padding: 10px 0;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .nav a:hover {
+      color: #DF1995;
+      border-bottom-color: #DF1995;
+    }
+
+    /* Hero section */
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h2 {
+      font-size: 42px;
+      font-weight: 300;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 40px;
+      color: #666;
+      line-height: 1.8;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: #DF1995;
+      color: white;
+      padding: 15px 30px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background-color: #c41780;
+    }
+
+    /* Sections */
+    section {
+      padding: 60px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    section h3 {
+      font-size: 32px;
+      font-weight: 300;
+      margin-bottom: 30px;
+      color: #DF1995;
+    }
+
+    section p {
+      margin-bottom: 20px;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    section ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    section li {
+      margin-bottom: 15px;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    section li strong {
+      color: #DF1995;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      background-color: #f8f9fa;
+      color: #666;
+    }
+
+    /* KT Logo */
+    .kt-logo {
+      margin-top: 30px;
+    }
+
+    .kt-logo img {
+      max-width: 300px;
+      height: auto;
+    }
+
     /* Stylowanie nagłówka AI */
     .hero-logos {
       text-align: center;
@@ -91,6 +244,7 @@
         flex-wrap: wrap;
         gap: 15px;
         font-size: 14px;
+        justify-content: center;
       }
 
       .hero-logos {
@@ -109,6 +263,10 @@
 
       .kt-logo img {
         max-width: 200px;
+      }
+
+      .hero {
+        padding: 40px 20px;
       }
 
       .hero h2 {
@@ -141,6 +299,12 @@
     }
 
     @media (max-width: 480px) {
+      .logo-title {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+      }
+
       .logo-title h1 {
         font-size: 20px;
       }
@@ -162,6 +326,10 @@
 
       .kt-logo img {
         max-width: 150px;
+      }
+
+      .hero {
+        padding: 30px 15px;
       }
 
       .hero h2 {
