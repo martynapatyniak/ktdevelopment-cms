@@ -20,6 +20,7 @@
       font-size: 55px; /* Dopasuj rozmiar czcionki do swojego projektu */
       font-family: 'Segoe UI', sans-serif;
       font-weight: 300;
+      gap: 30px; /* Równa odległość między elementami */
     }
 
     .left-ai, .right-ai {
@@ -38,7 +39,8 @@
     .separator {
       border-left: 1px solid black;
       height: 62px; /* Wysokość linii */
-      margin: 0 15px; /* Odstęp od liter po obu stronach */
+      width: 1px;
+      flex-shrink: 0; /* Nie pozwala separatorowi się kurczyć */
     }
 
     /* Reszta twoich stylów... */
@@ -225,4 +227,5 @@
     }
   </script>
 </body>
+</html>
 </html>
