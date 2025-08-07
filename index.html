@@ -41,6 +41,7 @@
       height: 62px; /* Wysokość linii */
       width: 1px;
       flex-shrink: 0; /* Nie pozwala separatorowi się kurczyć */
+      transform: translateX(-7px); /* Przesunięcie o 7px w lewo dla idealnego wyśrodkowania */
     }
 
     /* Reszta twoich stylów... */
@@ -69,6 +70,130 @@
 
     .language-switcher span {
       padding: 0 2px;
+    }
+
+    /* Responsywność dla urządzeń mobilnych */
+    @media (max-width: 768px) {
+      .container-column {
+        padding: 0 20px;
+      }
+
+      .logo-title h1 {
+        font-size: 24px;
+      }
+
+      .logo {
+        width: 40px;
+        height: 40px;
+      }
+
+      .nav {
+        flex-wrap: wrap;
+        gap: 15px;
+        font-size: 14px;
+      }
+
+      .hero-logos {
+        margin-top: 30px;
+      }
+
+      .logo-with-ai {
+        font-size: 40px;
+        gap: 20px;
+      }
+
+      .separator {
+        height: 45px;
+        transform: translateX(-5px);
+      }
+
+      .kt-logo img {
+        max-width: 200px;
+      }
+
+      .hero h2 {
+        font-size: 28px;
+        line-height: 1.2;
+      }
+
+      .hero p {
+        font-size: 16px;
+        line-height: 1.4;
+      }
+
+      .cta-button {
+        padding: 12px 24px;
+        font-size: 16px;
+      }
+
+      section {
+        padding: 40px 20px;
+      }
+
+      h3 {
+        font-size: 24px;
+      }
+
+      p, li {
+        font-size: 16px;
+        line-height: 1.5;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo-title h1 {
+        font-size: 20px;
+      }
+
+      .nav {
+        gap: 10px;
+        font-size: 12px;
+      }
+
+      .logo-with-ai {
+        font-size: 32px;
+        gap: 15px;
+      }
+
+      .separator {
+        height: 35px;
+        transform: translateX(-4px);
+      }
+
+      .kt-logo img {
+        max-width: 150px;
+      }
+
+      .hero h2 {
+        font-size: 24px;
+      }
+
+      .hero p {
+        font-size: 14px;
+      }
+
+      .cta-button {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+
+      section {
+        padding: 30px 15px;
+      }
+
+      h3 {
+        font-size: 20px;
+      }
+
+      p, li {
+        font-size: 14px;
+      }
+
+      .language-switcher {
+        top: 5px;
+        right: 10px;
+        font-size: 12px;
+      }
     }
   </style>
 </head>
