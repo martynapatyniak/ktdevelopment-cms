@@ -14,6 +14,7 @@ body {
 .container {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .logo {
@@ -86,17 +87,26 @@ footer {
   color: #888;
 }
 
+/* POPRAWKA – usunięcie sztywnego paddingu */
 .container-column {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding-left: 400px;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
+/* Nagłówek z logo + tekstem */
 .logo-title {
   display: flex;
   align-items: center;
   gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.logo-title h1 {
+  font-size: 2rem;
+  margin: 0;
 }
 
 /* układ logo i SVG */
@@ -109,50 +119,23 @@ footer {
   margin: 2rem auto;
 }
 
-/* przesunięcie SVG w prawo */
-.ai-ia-big {
-
-}
-<style>
-  .language-switcher {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-family: inherit;
-    font-size: 14px;
-    z-index: 1000;
-  }
-
-  .language-switcher button {
-    background: none;
-    border: none;
-    color: inherit;
-    font: inherit;
-    cursor: pointer;
-    padding: 0 5px;
-    text-decoration: none;
-  }
-
-  .language-switcher button:hover {
-    text-decoration: underline;
-  }
-
-  .language-switcher span {
-    padding: 0 2px;
-  }
-</style>
-/* ... Twoje wcześniejsze style ... */
-
+/* media queries */
 @media (max-width: 768px) {
   .container-column {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 1rem;
+    padding-right: 1rem;
     align-items: center;
+    text-align: center;
   }
 
   .logo-title {
     flex-direction: column;
-    text-align: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .logo-title h1 {
+    font-size: 1.5rem;
   }
 
   .logo {
@@ -179,7 +162,7 @@ footer {
   .logo-with-ai {
     flex-direction: row;
     flex-wrap: wrap;
-    font-size: 28px;
+    font-size: 1.5rem;
     gap: 10px;
     text-align: center;
   }
@@ -191,4 +174,32 @@ footer {
   section {
     padding: 1.5rem 1rem;
   }
+}
+
+/* język */
+.language-switcher {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-family: inherit;
+  font-size: 14px;
+  z-index: 1000;
+}
+
+.language-switcher button {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  padding: 0 5px;
+  text-decoration: none;
+}
+
+.language-switcher button:hover {
+  text-decoration: underline;
+}
+
+.language-switcher span {
+  padding: 0 2px;
 }
