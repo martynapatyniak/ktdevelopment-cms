@@ -1,82 +1,53 @@
-/* Reset i podstawowe style */
-* {
-  box-sizing: border-box;
-}
-
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   background: #fff;
   color: #333;
-  overflow-x: hidden; /* Zapobiega przewijaniu poziomemu */
 }
-
-/* Header - responsywny */
 .header {
   border-bottom: 1px solid #eee;
   padding: 1rem;
-  width: 100%;
 }
-
 .container {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  max-width: 100%;
 }
-
 .logo {
   height: 48px;
   margin-right: 1rem;
-  flex-shrink: 0;
 }
-
 .nav {
   margin-top: 0.5rem;
   text-align: center;
-  width: 100%;
 }
-
 .nav a {
   margin-right: 1rem;
   text-decoration: none;
   color: #DF1995;
-  display: inline-block;
-  padding: 0.25rem;
 }
-
-/* Hero section - responsywne logo */
 .hero-logos {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 3rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   margin: 2rem auto;
-  max-width: 100%;
 }
-
 .ai-logo svg {
   height: 100px;
-  width: auto;
-  max-width: 100%;
 }
-
 .kt-logo img {
-  height: auto;
-  max-width: 100%;
-  width: auto;
+  height: 410px;
+  max-width: 105vw;
   display: block;
+  margin-top: -150px;
 }
-
-/* Hero section */
 .hero {
   text-align: center;
   padding: 4rem 2rem;
   background: #f9f9f9;
-  width: 100%;
 }
-
 .cta-button {
   display: inline-block;
   padding: 0.75rem 1.5rem;
@@ -84,73 +55,52 @@ body {
   color: white;
   text-decoration: none;
   border-radius: 6px;
-  margin-top: 1rem;
 }
-
-/* Sekcje */
 section {
   padding: 2rem;
   max-width: 800px;
   margin: auto;
   text-align: left;
-  width: 100%;
 }
-
 h3 {
   color: #DF1995;
   text-align: left;
 }
-
 footer {
   text-align: center;
   padding: 2rem;
   font-size: 0.875rem;
   color: #888;
-  width: 100%;
 }
-
-/* Container kolumnowy */
+/* POPRAWKA – usunięcie sztywnego paddingu */
 .container-column {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0 2rem;
-  max-width: 100%;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
-
-/* Logo z tytułem */
+/* Nagłówek z logo + tekstem */
 .logo-title {
   display: flex;
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
-  width: 100%;
 }
-
 .logo-title h1 {
-  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-size: 2rem;
   margin: 0;
 }
-
-/* Logo z AI */
+/* układ logo i SVG */
 .logo-with-ai {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   margin: 2rem auto;
-  max-width: 100%;
-  font-size: clamp(1.25rem, 3vw, 1.75rem);
 }
-
-/* Separator */
-.separator {
-  height: clamp(30px, 8vw, 50px);
-  width: auto;
-}
-
-/* Language switcher */
+/* język */
 .language-switcher {
   position: absolute;
   top: 10px;
@@ -159,7 +109,6 @@ footer {
   font-size: 14px;
   z-index: 1000;
 }
-
 .language-switcher button {
   background: none;
   border: none;
@@ -169,21 +118,22 @@ footer {
   padding: 0 5px;
   text-decoration: none;
 }
-
 .language-switcher button:hover {
   text-decoration: underline;
 }
-
 .language-switcher span {
   padding: 0 2px;
 }
 
-/* Media queries dla responsywności */
-
-/* Tablety */
+/* MEDIA QUERIES - TYLKO DLA URZĄDZEŃ MOBILNYCH */
 @media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+  
   .container-column {
-    padding: 0 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     align-items: center;
     text-align: center;
   }
@@ -192,7 +142,10 @@ footer {
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    text-align: center;
+  }
+  
+  .logo-title h1 {
+    font-size: 1.5rem;
   }
   
   .logo {
@@ -200,25 +153,30 @@ footer {
   }
   
   .nav {
-    display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    margin-top: 1rem;
-  }
-  
-  .nav a {
-    margin: 0;
-    padding: 0.5rem;
   }
   
   .hero-logos {
     flex-direction: column;
-    gap: 1.5rem;
-    margin: 1rem auto;
+    gap: 1rem;
+    margin-top: 1rem;
   }
   
-  .ai-logo svg {
-    height: 80px;
+  .kt-logo img {
+    height: auto;
+    max-width: 90vw;
+    margin-top: 0;
+  }
+  
+  .logo-with-ai {
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 1.5rem;
+    gap: 10px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
   }
   
   .kt-logo {
@@ -228,14 +186,13 @@ footer {
   }
   
   .kt-logo img {
-    max-width: 200px;
+    max-width: 160px;
     height: auto;
   }
   
-  .logo-with-ai {
-    flex-direction: row;
-    justify-content: center;
-    gap: 0.5rem;
+  .separator {
+    height: 40px;
+    transform: translateX(-5px);
   }
   
   .hero {
@@ -244,7 +201,6 @@ footer {
   
   section {
     padding: 1.5rem 1rem;
-    text-align: left;
   }
   
   .language-switcher {
@@ -253,41 +209,19 @@ footer {
   }
 }
 
-/* Małe tablety i duże telefony */
-@media (max-width: 600px) {
-  .hero {
-    padding: 1.5rem 1rem;
-  }
-  
-  .logo-with-ai {
-    gap: 0.25rem;
-  }
-  
-  .kt-logo img {
-    max-width: 150px;
-  }
-  
-  section {
-    padding: 1rem;
-  }
-}
-
-/* Małe telefony */
 @media (max-width: 480px) {
-  .container-column {
-    padding: 0 0.5rem;
-  }
-  
-  .logo-title h1 {
-    text-align: center;
-  }
-  
-  .nav a {
-    font-size: 0.9rem;
+  .logo-with-ai {
+    font-size: 22px;
+    gap: 8px;
   }
   
   .kt-logo img {
     max-width: 120px;
+  }
+  
+  .separator {
+    height: 30px;
+    transform: translateX(-4px);
   }
   
   .cta-button {
@@ -300,34 +234,11 @@ footer {
   }
   
   .hero {
-    padding: 1rem 0.5rem;
-  }
-  
-  h3 {
-    font-size: 1.1rem;
+    padding: 1.5rem 0.5rem;
   }
   
   .language-switcher {
     right: 5px;
-    top: 5px;
     font-size: 11px;
-  }
-}
-
-/* Bardzo małe telefony */
-@media (max-width: 360px) {
-  .logo-with-ai {
-    flex-direction: column;
-    gap: 0.5rem;
-    align-items: center;
-  }
-  
-  .kt-logo img {
-    max-width: 100px;
-  }
-  
-  .separator {
-    transform: rotate(90deg);
-    height: 20px;
   }
 }
