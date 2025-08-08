@@ -203,3 +203,46 @@ footer {
 .language-switcher span {
   padding: 0 2px;
 }
+@media (max-width: 768px) {
+  .logo-with-ai {
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 28px;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .kt-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .kt-logo img {
+    max-width: 160px;
+    height: auto;
+  }
+
+  .separator {
+    height: 40px;
+    transform: translateX(-5px);
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-with-ai {
+    font-size: 22px;
+    gap: 8px;
+  }
+
+  .kt-logo img {
+    max-width: 120px;
+  }
+
+  .separator {
+    height: 30px;
+    transform: translateX(-4px);
+  }
+}
