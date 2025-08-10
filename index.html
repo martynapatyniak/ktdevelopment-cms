@@ -2,137 +2,10 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- ważne na iPhone: viewport-fit=cover dla notcha -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>KT DEVELOPMENT</title>
-
-  <style>
-    /* Reset i podstawowe style */
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height:1.6; color:#333; background:#fff; }
-
-    /* Container i layout */
-    .container-column { display:flex; flex-direction:column; align-items:center; padding:20px; max-width:1200px; margin:0 auto; }
-    .logo-title { display:flex; align-items:center; gap:15px; margin-bottom:16px; width:100%; justify-content:center; }
-    .logo { width:50px; height:50px; }
-    .logo-title h1 { font-size:32px; font-weight:300; color:#333; }
-
-    /* Nawigacja (desktop) */
-    .nav { display:flex; gap:30px; margin-bottom:50px; }
-    .nav a { text-decoration:none; color:#333; font-weight:500; padding:10px 0; border-bottom:2px solid transparent; transition:all .3s ease; }
-    .nav a:hover { color:#DF1995; border-bottom-color:#DF1995; }
-
-    /* Hero section */
-    .hero { text-align:center; padding:80px 20px; max-width:800px; margin:0 auto; }
-    .hero h2 { font-size:42px; font-weight:300; margin-bottom:30px; color:#333; }
-    .hero p { font-size:18px; margin-bottom:40px; color:#666; line-height:1.8; }
-    .cta-button { display:inline-block; background:#DF1995; color:#fff; padding:15px 30px; text-decoration:none; border-radius:5px; font-weight:500; transition:background-color .3s ease; }
-    .cta-button:hover { background:#c41780; }
-
-    /* Sections */
-    section { padding:60px 20px; max-width:800px; margin:0 auto; }
-    section h3 { font-size:32px; font-weight:300; margin-bottom:30px; color:#DF1995; }
-    section p { margin-bottom:20px; font-size:16px; line-height:1.7; }
-    section ul { list-style:none; padding-left:0; }
-    section li { margin-bottom:15px; font-size:16px; line-height:1.6; }
-    section li strong { color:#DF1995; }
-
-    /* Footer */
-    footer { text-align:center; padding:40px 20px; background:#f8f9fa; color:#666; }
-
-    /* KT Logo i AI nagłówek */
-    .kt-logo { margin-top:30px; }
-    .kt-logo img { max-width:300px; height:auto; }
-    .hero-logos { text-align:center; margin-top:50px; }
-    .logo-with-ai { display:flex; justify-content:center; align-items:center; font-size:55px; font-weight:300; gap:30px; }
-    .left-ai,.right-ai { display:flex; align-items:center; }
-    .left-ai .pink,.right-ai .pink { color:#DF1995; }
-    .separator { border-left:1px solid black; height:62px; width:1px; flex-shrink:0; transform:translateX(-7px); }
-
-    /* Language switcher */
-    .language-switcher {
-      position: fixed; top: 10px; right: 20px; z-index: 11000;
-      font-family: inherit; font-size: 14px; background: rgba(255,255,255,.85);
-      backdrop-filter: saturate(180%) blur(6px); border-radius: 10px; padding: 4px 8px;
-    }
-    .language-switcher button { background:none; border:none; color:inherit; font:inherit; cursor:pointer; padding:0 5px; text-decoration:none; }
-    .language-switcher button:hover { text-decoration:underline; }
-    .language-switcher span { padding:0 2px; }
-
-    /* === MOBILE HAMBURGER + DRAWER === */
-    .hamburger {
-      position: fixed; top: 12px; left: 12px; z-index: 12000;
-      display: none; /* desktop: ukryty */
-      width: 42px; height: 42px; border: none; background: rgba(255,255,255,.9);
-      backdrop-filter: saturate(180%) blur(6px);
-      border-radius: 10px; cursor: pointer; align-items: center; justify-content: center;
-    }
-    .hamburger:focus-visible { outline: 2px solid #DF1995; outline-offset: 2px; }
-    .hamburger .bar { position: relative; width: 22px; height: 2px; background: #333; border-radius: 2px; }
-    .hamburger .bar::before, .hamburger .bar::after {
-      content: ""; position: absolute; left: 0; width: 22px; height: 2px; background: #333; border-radius: 2px;
-    }
-    .hamburger .bar::before { top: -7px; }
-    .hamburger .bar::after  { top:  7px; }
-
-    .mobile-drawer-backdrop {
-      position: fixed; inset: 0; background: rgba(0,0,0,.3); backdrop-filter: blur(2px);
-      opacity: 0; pointer-events: none; transition: opacity .2s ease; z-index: 11990;
-    }
-    .mobile-drawer {
-      position: fixed; top: 0; left: 0; height: 100dvh; width: 80vw; max-width: 320px;
-      background: #fff; box-shadow: 2px 0 20px rgba(0,0,0,.12);
-      transform: translateX(-100%); transition: transform .25s ease; z-index: 11995;
-      padding: 20px; display: flex; flex-direction: column; gap: 10px;
-    }
-    .mobile-drawer header { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
-    .mobile-drawer h2 { font-size:16px; font-weight:600; color:#333; }
-    .mobile-drawer .close { background:none; border:none; font-size:24px; line-height:1; cursor:pointer; color:#333; }
-    .mobile-drawer nav { display:flex; flex-direction:column; gap:14px; margin-top:8px; }
-    .mobile-drawer a { text-decoration:none; color:#333; font-weight:500; padding:6px 0; border-bottom:1px solid #eee; }
-    .mobile-drawer a:hover { color:#DF1995; }
-
-    .mobile-menu-open .mobile-drawer { transform: translateX(0); }
-    .mobile-menu-open .mobile-drawer-backdrop { opacity: 1; pointer-events: auto; }
-
-    /* Responsywność */
-    @media (max-width: 768px) {
-      .container-column { padding:0 20px; }
-      .logo-title h1 { font-size:24px; }
-      .logo { width:40px; height:40px; }
-
-      /* Pokaż hamburger, schowaj poziome menu */
-      .hamburger { display: inline-flex; }
-      .container-column > .nav { display: none; }
-
-      .hero-logos { margin-top:30px; }
-      .logo-with-ai { font-size:40px; gap:20px; }
-      .separator { height:45px; transform:translateX(-5px); }
-      .kt-logo img { max-width:200px; }
-      .hero { padding:40px 20px; }
-      .hero h2 { font-size:28px; line-height:1.2; }
-      .hero p { font-size:16px; line-height:1.4; }
-      .cta-button { padding:12px 24px; font-size:16px; }
-      section { padding:40px 20px; }
-      h3 { font-size:24px; }
-      p, li { font-size:16px; line-height:1.5; }
-    }
-
-    @media (max-width: 480px) {
-      .logo-title { flex-direction:column; text-align:center; gap:10px; }
-      .logo-title h1 { font-size:20px; }
-      .logo-with-ai { font-size:32px; gap:15px; }
-      .separator { height:35px; transform:translateX(-4px); }
-      .kt-logo img { max-width:150px; }
-      .hero { padding:30px 15px; }
-      .hero h2 { font-size:24px; }
-      .hero p { font-size:14px; }
-      .cta-button { padding:10px 20px; font-size:14px; }
-      section { padding:30px 15px; }
-      h3 { font-size:20px; }
-      p, li { font-size:14px; }
-      .language-switcher { top:5px; right:10px; font-size:12px; }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css?v=3" />
 </head>
 <body>
 
@@ -143,7 +16,7 @@
     <button onclick="switchLanguage('en')">EN</button>
   </div>
 
-  <!-- HAMBURGER (3 kreski) — tylko mobile -->
+  <!-- HAMBURGER (3 kreski) — tylko na mobile -->
   <button class="hamburger" aria-label="Otwórz menu" aria-controls="mobile-drawer" aria-expanded="false">
     <span class="bar"></span>
   </button>
@@ -164,26 +37,29 @@
     </nav>
   </aside>
 
-  <div class="container-column">
-    <div class="logo-title">
-      <img src="base_icon_white_background.png" alt="KT Logo" class="logo" />
-      <h1>KT DEVELOPMENT</h1>
-    </div>
+  <!-- Nagłówek i klasy zgodne z Twoim CSS -->
+  <header class="header">
+    <div class="container container-column">
+      <div class="logo-title">
+        <img src="base_icon_white_background.png" alt="KT Logo" class="logo" />
+        <h1>KT DEVELOPMENT</h1>
+      </div>
 
-    <!-- Nawigacja desktopowa (na mobile schowana CSS-em) -->
-    <nav class="nav">
-      <a href="#about" data-i18n="nav_about">O nas</a>
-      <a href="#offer" data-i18n="nav_offer">Oferta</a>
-      <a href="#projects" data-i18n="nav_projects">Projekty</a>
-      <a href="#blog" data-i18n="nav_blog">Blog</a>
-      <a href="#contact" data-i18n="nav_contact">Kontakt</a>
-    </nav>
-  </div>
+      <!-- Poziome menu (desktop). Na mobile chowamy w CSS -->
+      <nav class="nav">
+        <a href="#about" data-i18n="nav_about">O nas</a>
+        <a href="#offer" data-i18n="nav_offer">Oferta</a>
+        <a href="#projects" data-i18n="nav_projects">Projekty</a>
+        <a href="#blog" data-i18n="nav_blog">Blog</a>
+        <a href="#contact" data-i18n="nav_contact">Kontakt</a>
+      </nav>
+    </div>
+  </header>
 
   <section class="hero-logos">
     <div class="logo-with-ai">
       <div class="left-ai"><span class="pink">A</span><span>I</span></div>
-      <div class="separator"></div>
+      <div class="separator" style="border-left:1px solid #000; height:62px; width:1px;"></div>
       <div class="right-ai"><span class="pink">I</span><span>A</span></div>
     </div>
     <div class="kt-logo">
@@ -295,7 +171,7 @@
       });
     }
 
-    /* Hamburger / Drawer logic (ARIA, UX) */
+    /* Hamburger / Drawer logic (ARIA + iOS safe areas) */
     (function() {
       const html = document.documentElement;
       const btn  = document.querySelector('.hamburger');
@@ -327,7 +203,7 @@
       btnClose.addEventListener('click', closeMenu);
       backdrop.addEventListener('click', closeMenu);
 
-      // Zamknij po kliknięciu linku
+      // Zamykaj po kliknięciu linku
       drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
       // ESC zamyka
