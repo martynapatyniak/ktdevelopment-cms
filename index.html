@@ -2,10 +2,10 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <!-- ważne na iPhone: viewport-fit=cover dla notcha -->
+  <!-- ważne na iPhone: viewport-fit=cover -->
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>KT DEVELOPMENT</title>
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=5" />
 </head>
 <body>
 
@@ -16,10 +16,30 @@
     <button onclick="switchLanguage('en')">EN</button>
   </div>
 
-  <!-- HAMBURGER (3 kreski) — tylko na mobile -->
-  <button class="hamburger" aria-label="Otwórz menu" aria-controls="mobile-drawer" aria-expanded="false">
-    <span class="bar"></span>
-  </button>
+  <!-- Nagłówek -->
+  <header class="header">
+    <div class="container container-column">
+
+      <!-- HAMBURGER (3 kreski) – pierwszy element w nagłówku -->
+      <button class="hamburger" aria-label="Otwórz menu" aria-controls="mobile-drawer" aria-expanded="false">
+        <span class="bar"></span>
+      </button>
+
+      <div class="logo-title">
+        <img src="base_icon_white_background.png" alt="KT Logo" class="logo" />
+        <h1>KT DEVELOPMENT</h1>
+      </div>
+
+      <!-- Poziome menu (desktop). Na mobile chowamy w CSS -->
+      <nav class="nav">
+        <a href="#about" data-i18n="nav_about">O nas</a>
+        <a href="#offer" data-i18n="nav_offer">Oferta</a>
+        <a href="#projects" data-i18n="nav_projects">Projekty</a>
+        <a href="#blog" data-i18n="nav_blog">Blog</a>
+        <a href="#contact" data-i18n="nav_contact">Kontakt</a>
+      </nav>
+    </div>
+  </header>
 
   <!-- Backdrop + Drawer menu -->
   <div class="mobile-drawer-backdrop" hidden></div>
@@ -37,25 +57,7 @@
     </nav>
   </aside>
 
-  <!-- Nagłówek i klasy zgodne z Twoim CSS -->
-  <header class="header">
-    <div class="container container-column">
-      <div class="logo-title">
-        <img src="base_icon_white_background.png" alt="KT Logo" class="logo" />
-        <h1>KT DEVELOPMENT</h1>
-      </div>
-
-      <!-- Poziome menu (desktop). Na mobile chowamy w CSS -->
-      <nav class="nav">
-        <a href="#about" data-i18n="nav_about">O nas</a>
-        <a href="#offer" data-i18n="nav_offer">Oferta</a>
-        <a href="#projects" data-i18n="nav_projects">Projekty</a>
-        <a href="#blog" data-i18n="nav_blog">Blog</a>
-        <a href="#contact" data-i18n="nav_contact">Kontakt</a>
-      </nav>
-    </div>
-  </header>
-
+  <!-- Reszta strony -->
   <section class="hero-logos">
     <div class="logo-with-ai">
       <div class="left-ai"><span class="pink">A</span><span>I</span></div>
@@ -171,7 +173,7 @@
       });
     }
 
-    /* Hamburger / Drawer logic (ARIA + iOS safe areas) */
+    /* Drawer / Hamburger */
     (function() {
       const html = document.documentElement;
       const btn  = document.querySelector('.hamburger');
@@ -202,11 +204,7 @@
       btn.addEventListener('click', toggleMenu);
       btnClose.addEventListener('click', closeMenu);
       backdrop.addEventListener('click', closeMenu);
-
-      // Zamykaj po kliknięciu linku
       drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-
-      // ESC zamyka
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
     })();
   </script>
