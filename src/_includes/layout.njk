@@ -1,39 +1,56 @@
 <!DOCTYPE html>
 <html lang="pl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ title or "KT Development" }}</title>
-    <link rel="stylesheet" href="{{ '/styles.css' | url }}" />
-  </head>
-  <body>
-    <header>
-      <div class="container-column">
-        <!-- logo i tytuł serwisu -->
-        <div class="logo-title">
-          <img src="/base_icon_white_background.png" alt="KT Logo" class="logo" />
-          <h1>KT DEVELOPMENT</h1>
-        </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title or "KT Development" }}</title>
+    <link rel="stylesheet" href="{{ '/styles.css' | url }}" />
+  </head>
+  <body>
 
-        <!-- nawigacja główna -->
-        <nav class="nav">
-          <a href="/pl/index/">Strona główna</a>
-          <a href="/pl/oferta/">Oferta</a>
-          <a href="/pl/projekty/">Projekty</a>
-          <a href="/blog/">Blog</a>
-          <a href="/pl/kontakt/">Kontakt</a>
-        </nav>
+        <input type="checkbox" id="menu-toggle" class="menu-toggle" />
+    <label for="menu-toggle" class="hamburger" aria-label="Otwórz menu" aria-controls="mobile-drawer" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </label>
 
-        <!-- przełącznik języka -->
-        <div class="language-switcher">
-          <a href="/pl/index/">PL</a> | <a href="/en/">EN</a>
-        </div>
-      </div>
-    </header>
+    <div class="mobile-drawer-backdrop" onclick="document.getElementById('menu-toggle').checked=false"></div>
+    <aside id="mobile-drawer" class="mobile-drawer" role="navigation" aria-label="Główne">
+      <header>
+        <h2>Menu</h2>
+        <button class="close" aria-label="Zamknij" onclick="document.getElementById('menu-toggle').checked=false">×</button>
+      </header>
+      <nav>
+        <a href="/pl/index/" onclick="document.getElementById('menu-toggle').checked=false">Strona główna</a>
+        <a href="/pl/oferta/" onclick="document.getElementById('menu-toggle').checked=false">Oferta</a>
+        <a href="/pl/projekty/" onclick="document.getElementById('menu-toggle').checked=false">Projekty</a>
+        <a href="/blog/" onclick="document.getElementById('menu-toggle').checked=false">Blog</a>
+        <a href="/pl/kontakt/" onclick="document.getElementById('menu-toggle').checked=false">Kontakt</a>
+      </nav>
+    </aside>
 
-    <main>
-      {{ content | safe }}
-    </main>
-  </body>
+    <header>
+      <div class="container-column">
+                <div class="logo-title">
+          <img src="/base_icon_white_background.png" alt="KT Logo" class="logo" />
+          <h1>KT DEVELOPMENT</h1>
+        </div>
+
+                <nav class="nav">
+          <a href="/pl/index/">Strona główna</a>
+          <a href="/pl/oferta/">Oferta</a>
+          <a href="/pl/projekty/">Projekty</a>
+          <a href="/blog/">Blog</a>
+          <a href="/pl/kontakt/">Kontakt</a>
+        </nav>
+
+                <div class="language-switcher">
+          <a href="/pl/index/">PL</a> | <a href="/en/">EN</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      {{ content | safe }}
+    </main>
+  </body>
 </html>
-
