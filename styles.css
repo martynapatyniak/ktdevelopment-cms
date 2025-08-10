@@ -154,3 +154,14 @@ footer{ text-align:center; padding:2rem; font-size:.875rem; color:#888; }
     z-index: 12000; /* wyżej niż language switcher */
   }
 }
+/* TEST: wymuś widoczność hamburgera i menu */
+.hamburger{
+  display:flex !important;
+  position:fixed;
+  top:15px;
+  right:15px;
+  z-index:12000;
+}
+.mobile-drawer, .mobile-drawer-backdrop{
+  display:block !important;
+}
