@@ -50,9 +50,7 @@
     .language-switcher button:hover { text-decoration:underline; }
     .language-switcher span { padding:0 2px; }
 
-    /* =====================  HAMBURGER + DRAWER (CSS-ONLY)  ===================== */
-
-    /* ukryty przełącznik */
+    /* =====================  HAMBURGER + DRAWER  ===================== */
     .menu-toggle { 
       position: absolute; 
       left: -9999px; 
@@ -60,21 +58,17 @@
       opacity: 0; 
       pointer-events: none;
     }
-
-    /* przycisk – 3 równe kreski - ZAWSZE WIDOCZNY */
     .hamburger {
-      display: flex !important;     /* FORCE DISPLAY */
+      display: none; /* domyślnie ukryty (desktop) */
       position: fixed;
       left: 15px;
       top: 15px;
       width: 50px; 
       height: 50px;    
-      z-index: 99999;              /* BARDZO WYSOKI Z-INDEX */
-      background: #DF1995;         /* RÓŻOWY KOLOR - ŁATWO WIDOCZNY */
+      z-index: 9999;
+      background: #DF1995;
       border-radius: 8px;
       cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
       align-items: center; 
       justify-content: center;
       flex-direction: column;
@@ -84,13 +78,11 @@
       display: block; 
       width: 20px; 
       height: 2px; 
-      background: white;           /* BIAŁE KRESKI NA RÓŻOWYM TLE */
+      background: white;
       border-radius: 2px;
       transition: all 0.3s ease;
     }
     .hamburger span + span { margin-top: 6px; }
-
-    /* Animacja hamburger -> X */
     .menu-toggle:checked + .hamburger span:nth-child(1) {
       transform: rotate(45deg) translate(6px, 6px);
     }
@@ -101,16 +93,15 @@
       transform: rotate(-45deg) translate(6px, -6px);
     }
 
-    /* backdrop */
     .mobile-drawer-backdrop {
+      display: none;
       position: fixed; inset: 0;
       background: rgba(0,0,0,.3); backdrop-filter: blur(2px);
       opacity: 0; pointer-events: none; transition: opacity .2s ease;
       z-index: 11990;
     }
-
-    /* panel */
     .mobile-drawer {
+      display: none;
       position: fixed; top: 0; left: 0;
       height: 100dvh; width: 80vw; max-width: 320px;
       background: #fff; box-shadow: 2px 0 20px rgba(0,0,0,.12);
@@ -126,17 +117,16 @@
     .mobile-drawer a { text-decoration:none; color:#333; font-weight:500; padding:12px 8px; border-bottom:1px solid #eee; transition: color 0.2s; }
     .mobile-drawer a:hover { color:#DF1995; }
 
-    /* stan otwarty (checkbox checked) */
-    .menu-toggle:checked ~ .mobile-drawer         { transform: translateX(0); }
+    .menu-toggle:checked ~ .mobile-drawer { transform: translateX(0); }
     .menu-toggle:checked ~ .mobile-drawer-backdrop{ opacity:1; pointer-events:auto; }
 
     /* =====================  MEDIA QUERIES  ===================== */
-
-    /* HAMBURGER ZAWSZE WIDOCZNY - USUWAM WSZYSTKIE WARUNKI */
-
-    /* Dodatkowe dostosowania mobilne (typografia/layout) */
     @media screen and (max-width: 768px) {
-      * { box-sizing: border-box; }
+      .hamburger { display: flex; }
+      .mobile-drawer,
+      .mobile-drawer-backdrop { display: block; }
+      .nav { display: none; }
+
       body { overflow-x: hidden; font-size: 16px; }
       .header { padding: 1rem .5rem; }
       .container { flex-direction: column; align-items: center; width: 100%; }
@@ -151,29 +141,6 @@
       .kt-logo img { max-width: clamp(200px, 60vw, 400px); height:auto; margin-top:0; }
 
       .hero { padding: clamp(2rem, 8vw, 4rem) clamp(1rem, 4vw, 2rem); width: 100%; }
-      .hero h2 { font-size: clamp(1.5rem, 6vw, 2.5rem); line-height: 1.3; margin-bottom: 1.5rem; }
-      .hero p { font-size: clamp(1rem, 4vw, 1.3rem); line-height: 1.6; margin-bottom: 2rem; max-width: 90%; margin-inline:auto; }
-      .cta-button { padding: clamp(1rem, 4vw, 1.5rem) clamp(1.5rem, 6vw, 2.5rem); font-size: clamp(1rem, 4vw, 1.3rem); min-height: 50px; display:flex; align-items:center; justify-content:center; }
-    }
-
-    /* very small phones */
-    @media (max-width: 480px) {
-      .hero-logos { gap: 2rem; }
-      .logo-with-ai { gap: clamp(.5rem, 3vw, 1rem); }
-    }
-
-    /* ultra small */
-    @media (max-width: 360px) {
-      .container-column { padding: 0 .5rem; }
-      .logo-with-ai { font-size: clamp(2.5rem, 10vw, 4rem); }
-      .hero { padding: 1.5rem .5rem; }
-      section { padding: 1.5rem .5rem; }
-    }
-
-    /* Desktop – upewnij się, że menu poziome widoczne na dużych ekranach */
-    @media (min-width: 1200px) {
-      .nav { display: block !important; }
-      /* Hamburger pozostaje widoczny dla testów */
     }
   </style>
 </head>
@@ -186,7 +153,7 @@
     <button onclick="switchLanguage('en')">EN</button>
   </div>
 
-  <!-- ====== HAMBURGER (CSS-only) + DRAWER ====== -->
+  <!-- ====== HAMBURGER ====== -->
   <input type="checkbox" id="menu-toggle" class="menu-toggle" />
   <label for="menu-toggle" class="hamburger" aria-label="Otwórz menu" aria-controls="mobile-drawer">
     <span></span><span></span><span></span>
@@ -199,14 +166,13 @@
       <button class="close" aria-label="Zamknij" onclick="document.getElementById('menu-toggle').checked=false">×</button>
     </header>
     <nav>
-      <a href="#about"   data-i18n="nav_about"    onclick="document.getElementById('menu-toggle').checked=false">O nas</a>
-      <a href="#offer"   data-i18n="nav_offer"    onclick="document.getElementById('menu-toggle').checked=false">Oferta</a>
-      <a href="#projects"data-i18n="nav_projects" onclick="document.getElementById('menu-toggle').checked=false">Projekty</a>
-      <a href="#blog"    data-i18n="nav_blog"     onclick="document.getElementById('menu-toggle').checked=false">Blog</a>
-      <a href="#contact" data-i18n="nav_contact"  onclick="document.getElementById('menu-toggle').checked=false">Kontakt</a>
+      <a href="#about" onclick="document.getElementById('menu-toggle').checked=false">O nas</a>
+      <a href="#offer" onclick="document.getElementById('menu-toggle').checked=false">Oferta</a>
+      <a href="#projects" onclick="document.getElementById('menu-toggle').checked=false">Projekty</a>
+      <a href="#blog" onclick="document.getElementById('menu-toggle').checked=false">Blog</a>
+      <a href="#contact" onclick="document.getElementById('menu-toggle').checked=false">Kontakt</a>
     </nav>
   </aside>
-  <!-- ====== /HAMBURGER ====== -->
 
   <!-- Nagłówek -->
   <header class="header">
@@ -215,14 +181,12 @@
         <div style="width: 48px; height: 48px; background: #DF1995; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px;">KT</div>
         <h1>KT DEVELOPMENT</h1>
       </div>
-
-      <!-- Poziome menu (desktop). Na mobile chowa CSS -->
       <nav class="nav">
-        <a href="#about" data-i18n="nav_about">O nas</a>
-        <a href="#offer" data-i18n="nav_offer">Oferta</a>
-        <a href="#projects" data-i18n="nav_projects">Projekty</a>
-        <a href="#blog" data-i18n="nav_blog">Blog</a>
-        <a href="#contact" data-i18n="nav_contact">Kontakt</a>
+        <a href="#about">O nas</a>
+        <a href="#offer">Oferta</a>
+        <a href="#projects">Projekty</a>
+        <a href="#blog">Blog</a>
+        <a href="#contact">Kontakt</a>
       </nav>
     </div>
   </header>
@@ -239,108 +203,41 @@
   </section>
 
   <section class="hero">
-    <h2 data-i18n="hero_title">Decyzje, które zakrzywiają rzeczywistość</h2>
-    <p data-i18n="hero_text">KT DEVELOPMENT to firma doradczo-strategiczna, która łączy technologię, AI i ludzką świadomość w jednym celu – by rzeczy działały lepiej, szybciej i mądrzej.</p>
-    <a href="#contact" class="cta-button" data-i18n="contact_button">Skontaktuj się</a>
+    <h2>Decyzje, które zakrzywiają rzeczywistość</h2>
+    <p>KT DEVELOPMENT to firma doradczo-strategiczna, która łączy technologię, AI i ludzką świadomość w jednym celu – by rzeczy działały lepiej, szybciej i mądrzej.</p>
+    <a href="#contact" class="cta-button">Skontaktuj się</a>
   </section>
 
   <section id="about">
-    <h3 data-i18n="about_title">Kim jesteśmy</h3>
-    <p data-i18n="about_text1">Twórca: Kacper Turczyński – doradca strategyczny, operator rzeczywistości, człowiek, który nie tylko rozumie AI, ale potrafi je zastosować w życiu i biznesie.</p>
-    <p data-i18n="about_text2">Wartości: Prawda, efektywność, wolność. Rola AI: partner, nie narzędzie.</p>
+    <h3>Kim jesteśmy</h3>
+    <p>Twórca: Kacper Turczyński – doradca strategiczny, operator rzeczywistości, człowiek, który nie tylko rozumie AI, ale potrafi je zastosować w życiu i biznesie.</p>
   </section>
 
   <section id="offer">
-    <h3 data-i18n="offer_title">Oferta</h3>
+    <h3>Oferta</h3>
     <ul>
-      <li data-i18n="offer_1"><strong>Konsulting strategiczny</strong> – Transformujemy chaos w strukturę i cele.</li>
-      <li data-i18n="offer_2"><strong>Integracja AI</strong> – Wdrażamy AI nie dla mody, ale dla wyniku.</li>
-      <li data-i18n="offer_3"><strong>Systemy decyzyjne</strong> – Tworzymy modele, które wspierają ludzi, nie ich zastępują.</li>
-      <li data-i18n="offer_4"><strong>Transformacja firm</strong> – Nowe ramy dla starego świata. Bez bullshitu.</li>
+      <li><strong>Konsulting strategiczny</strong> – Transformujemy chaos w strukturę i cele.</li>
+      <li><strong>Integracja AI</strong> – Wdrażamy AI nie dla mody, ale dla wyniku.</li>
     </ul>
-  </section>
-
-  <section id="projects">
-    <h3 data-i18n="projects_title">Wybrane projekty</h3>
-    <ul>
-      <li data-i18n="projects_1"><strong>CANAL++ WizzAir</strong> – partnerstwo strategiczne w branży medialno-lotniczej</li>
-      <li data-i18n="projects_2"><strong>MODUS</strong> – zakończona współpraca z największym dostawcą dla WizzAir</li>
-      <li data-i18n="projects_3"><strong>In progress</strong> – nowe kierunki na styku AI, consulting i decyzji</li>
-    </ul>
-  </section>
-
-  <section id="blog">
-    <h3 data-i18n="blog_title">Blog & Publikacje</h3>
-    <p data-i18n="blog_text">Tu pojawią się treści o AI, strategii i podejmowaniu decyzji w XXI wieku.</p>
   </section>
 
   <section id="contact">
-    <h3 data-i18n="contact_title">Kontakt</h3>
-    <p data-i18n="contact_text">Masz projekt lub potrzebujesz partnera do rozmowy strategicznej? Napisz: <a href="mailto:kontakt@ktdevelopment.pl">kontakt@ktdevelopment.pl</a></p>
+    <h3>Kontakt</h3>
+    <p>Masz projekt? Napisz: <a href="mailto:kontakt@ktdevelopment.pl">kontakt@ktdevelopment.pl</a></p>
   </section>
 
   <footer>
-    <p data-i18n="footer_text">© 2025 KT DEVELOPMENT. Wszystkie prawa zastrzeżone.</p>
+    <p>© 2025 KT DEVELOPMENT. Wszystkie prawa zastrzeżone.</p>
   </footer>
 
   <script>
-    /* i18n (bez zmian) */
-    const translations = {
-      pl: {
-        nav_about: "O nas", nav_offer: "Oferta", nav_projects: "Projekty", nav_blog: "Blog", nav_contact: "Kontakt",
-        hero_title: "Decyzje, które zakrzywiają rzeczywistość",
-        hero_text: "KT DEVELOPMENT to firma doradczo-strategiczna, która łączy technologię, AI i ludzką świadomość w jednym celu – by rzeczy działały lepiej, szybciej i mądrzej.",
-        contact_button: "Skontaktuj się",
-        about_title: "Kim jesteśmy",
-        about_text1: "Twórca: Kacper Turczyński – doradca strategiczny, operator rzeczywistości, człowiek, który nie tylko rozumie AI, ale potrafi je zastosować w życiu i biznesie.",
-        about_text2: "Wartości: Prawda, efektywność, wolność. Rola AI: partner, nie narzędzie.",
-        offer_title: "Oferta",
-        offer_1: "Konsulting strategiczny – Transformujemy chaos w strukturę i cele.",
-        offer_2: "Integracja AI – Wdrażamy AI nie dla mody, ale dla wyniku.",
-        offer_3: "Systemy decyzyjne – Tworzymy modele, które wspierają ludzi, nie zastępują.",
-        offer_4: "Transformacja firm – Nowe ramy dla starego świata. Bez bullshitu.",
-        projects_title: "Wybrane projekty",
-        projects_1: "CANAL++ WizzAir – partnerstwo strategiczne w branży medialno-lotniczej",
-        projects_2: "MODUS – zakończona współpraca z największym dostawcą dla WizzAir",
-        projects_3: "In progress – nowe kierunki na styku AI, consulting i decyzji",
-        blog_title: "Blog & Publikacje",
-        blog_text: "Tu pojawią się treści o AI, strategii i podejmowaniu decyzji w XXI wieku.",
-        contact_title: "Kontakt",
-        contact_text: "Masz projekt lub potrzebujesz partnera do rozmowy strategicznej? Napisz: <a href='mailto:kontakt@ktdevelopment.pl'>kontakt@ktdevelopment.pl</a>",
-        footer_text: "© 2025 KT DEVELOPMENT. Wszystkie prawa zastrzeżone."
-      },
-      en: {
-        nav_about: "About", nav_offer: "Offer", nav_projects: "Projects", nav_blog: "Blog", nav_contact: "Contact",
-        hero_title: "Decisions that bend reality",
-        hero_text: "KT DEVELOPMENT is a strategic advisory company combining technology, AI, and human consciousness to make things work better, faster, and smarter.",
-        contact_button: "Contact us",
-        about_title: "Who we are",
-        about_text1: "Founder: Kacper Turczyński – strategic advisor, reality operator, a man who not only understands AI but applies it in life and business.",
-        about_text2: "Values: Truth, efficiency, freedom. Role of AI: partner, not a tool.",
-        offer_title: "Offer",
-        offer_1: "Strategic consulting – We transform chaos into structure and goals.",
-        offer_2: "AI integration – We implement AI not for trend, but for results.",
-        offer_3: "Decision systems – We create models that support people, not replace them.",
-        offer_4: "Business transformation – New frameworks for the old world. No bullshit.",
-        projects_title: "Selected Projects",
-        projects_1: "CANAL++ WizzAir – strategic partnership in media and aviation",
-        projects_2: "MODUS – completed collaboration with the main supplier for WizzAir",
-        projects_3: "In progress – new directions at the intersection of AI, consulting, and decision-making",
-        blog_title: "Blog & Publications",
-        blog_text: "Here you'll find content about AI, strategy, and decision-making in the 21st century.",
-        contact_title: "Contact",
-        contact_text: "Have a project or need a strategic thinking partner? Write to: <a href='mailto:kontakt@ktdevelopment.pl'>kontakt@ktdevelopment.pl</a>",
-        footer_text: "© 2025 KT DEVELOPMENT. All rights reserved."
-      }
-    };
-
-    function switchLanguage(lang) {
-      document.documentElement.lang = lang;
-      document.querySelectorAll("[data-i18n]").forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        if (translations[lang][key]) el.innerHTML = translations[lang][key];
-      });
+    const menuToggle = document.getElementById('menu-toggle');
+    const hamburger = document.querySelector('label[for="menu-toggle"]');
+    function syncAria() {
+      hamburger.setAttribute('aria-expanded', menuToggle.checked ? 'true' : 'false');
     }
+    menuToggle.addEventListener('change', syncAria);
+    syncAria();
   </script>
 </body>
 </html>
