@@ -144,3 +144,13 @@ footer{ text-align:center; padding:2rem; font-size:.875rem; color:#888; }
   .hero{ padding:1.5rem .5rem; }
   section{ padding:1.5rem .5rem; }
 }
+@media (max-width:768px){
+  .hamburger{
+    display:flex !important;
+    position: fixed;
+    top: 15px;
+    right: 15px; /* zamiast left */
+    left: auto;
+    z-index: 12000; /* wyżej niż language switcher */
+  }
+}
