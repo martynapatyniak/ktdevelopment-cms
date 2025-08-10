@@ -16,24 +16,10 @@
     .logo { width:50px; height:50px; }
     .logo-title h1 { font-size:32px; font-weight:300; color:#333; }
 
-    /* Nawigacja */
+    /* Nawigacja (desktop) */
     .nav { display:flex; gap:30px; margin-bottom:50px; }
     .nav a { text-decoration:none; color:#333; font-weight:500; padding:10px 0; border-bottom:2px solid transparent; transition:all .3s ease; }
     .nav a:hover { color:#DF1995; border-bottom-color:#DF1995; }
-
-    /* Przycisk hamburgera */
-    .hamburger {
-      display:none; /* desktop: ukryty */
-      font-size:28px;
-      background:none;
-      border:1px solid transparent;
-      cursor:pointer;
-      color:#333;
-      border-radius:8px;
-      padding:6px 10px;
-      line-height:1;
-    }
-    .hamburger:focus-visible { outline:2px solid #DF1995; outline-offset:2px; }
 
     /* Hero section */
     .hero { text-align:center; padding:80px 20px; max-width:800px; margin:0 auto; }
@@ -57,16 +43,56 @@
     .kt-logo { margin-top:30px; }
     .kt-logo img { max-width:300px; height:auto; }
     .hero-logos { text-align:center; margin-top:50px; }
-    .logo-with-ai { display:flex; justify-content:center; align-items:center; font-size:55px; font-family:'Segoe UI', sans-serif; font-weight:300; gap:30px; }
+    .logo-with-ai { display:flex; justify-content:center; align-items:center; font-size:55px; font-weight:300; gap:30px; }
     .left-ai,.right-ai { display:flex; align-items:center; }
     .left-ai .pink,.right-ai .pink { color:#DF1995; }
     .separator { border-left:1px solid black; height:62px; width:1px; flex-shrink:0; transform:translateX(-7px); }
 
     /* Language switcher */
-    .language-switcher { position:fixed; top:10px; right:20px; font-family:inherit; font-size:14px; z-index:9999; background:rgba(255,255,255,.8); backdrop-filter:saturate(180%) blur(6px); border-radius:10px; padding:4px 8px; }
+    .language-switcher {
+      position: fixed; top: 10px; right: 20px; z-index: 11000;
+      font-family: inherit; font-size: 14px; background: rgba(255,255,255,.85);
+      backdrop-filter: saturate(180%) blur(6px); border-radius: 10px; padding: 4px 8px;
+    }
     .language-switcher button { background:none; border:none; color:inherit; font:inherit; cursor:pointer; padding:0 5px; text-decoration:none; }
     .language-switcher button:hover { text-decoration:underline; }
     .language-switcher span { padding:0 2px; }
+
+    /* === MOBILE HAMBURGER + DRAWER === */
+    .hamburger {
+      position: fixed; top: 12px; left: 12px; z-index: 12000;
+      display: none; /* desktop: ukryty */
+      width: 42px; height: 42px; border: none; background: rgba(255,255,255,.9);
+      backdrop-filter: saturate(180%) blur(6px);
+      border-radius: 10px; cursor: pointer; align-items: center; justify-content: center;
+    }
+    .hamburger:focus-visible { outline: 2px solid #DF1995; outline-offset: 2px; }
+    .hamburger .bar { position: relative; width: 22px; height: 2px; background: #333; border-radius: 2px; }
+    .hamburger .bar::before, .hamburger .bar::after {
+      content: ""; position: absolute; left: 0; width: 22px; height: 2px; background: #333; border-radius: 2px;
+    }
+    .hamburger .bar::before { top: -7px; }
+    .hamburger .bar::after  { top:  7px; }
+
+    .mobile-drawer-backdrop {
+      position: fixed; inset: 0; background: rgba(0,0,0,.3); backdrop-filter: blur(2px);
+      opacity: 0; pointer-events: none; transition: opacity .2s ease; z-index: 11990;
+    }
+    .mobile-drawer {
+      position: fixed; top: 0; left: 0; height: 100dvh; width: 80vw; max-width: 320px;
+      background: #fff; box-shadow: 2px 0 20px rgba(0,0,0,.12);
+      transform: translateX(-100%); transition: transform .25s ease; z-index: 11995;
+      padding: 20px; display: flex; flex-direction: column; gap: 10px;
+    }
+    .mobile-drawer header { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+    .mobile-drawer h2 { font-size:16px; font-weight:600; color:#333; }
+    .mobile-drawer .close { background:none; border:none; font-size:24px; line-height:1; cursor:pointer; color:#333; }
+    .mobile-drawer nav { display:flex; flex-direction:column; gap:14px; margin-top:8px; }
+    .mobile-drawer a { text-decoration:none; color:#333; font-weight:500; padding:6px 0; border-bottom:1px solid #eee; }
+    .mobile-drawer a:hover { color:#DF1995; }
+
+    .mobile-menu-open .mobile-drawer { transform: translateX(0); }
+    .mobile-menu-open .mobile-drawer-backdrop { opacity: 1; pointer-events: auto; }
 
     /* Responsywność */
     @media (max-width: 768px) {
@@ -74,24 +100,9 @@
       .logo-title h1 { font-size:24px; }
       .logo { width:40px; height:40px; }
 
-      /* HAMBURGER ON */
-      .hamburger { display:block; align-self:flex-end; margin:10px 0 8px; }
-      /* Menu mobilne: domyślnie schowane */
-      .nav {
-        display:none;
-        position:relative;
-        flex-direction:column;
-        gap:10px;
-        width:100%;
-        text-align:center;
-        background:#fff;
-        padding:10px 0;
-        border-top:1px solid #eee;
-        border-bottom:1px solid #eee;
-        box-shadow:0 8px 20px rgba(0,0,0,.04);
-        margin-bottom:30px;
-      }
-      .nav.is-open { display:flex; }
+      /* Pokaż hamburger, schowaj poziome menu */
+      .hamburger { display: inline-flex; }
+      .container-column > .nav { display: none; }
 
       .hero-logos { margin-top:30px; }
       .logo-with-ai { font-size:40px; gap:20px; }
@@ -132,21 +143,35 @@
     <button onclick="switchLanguage('en')">EN</button>
   </div>
 
+  <!-- HAMBURGER (3 kreski) — tylko mobile -->
+  <button class="hamburger" aria-label="Otwórz menu" aria-controls="mobile-drawer" aria-expanded="false">
+    <span class="bar"></span>
+  </button>
+
+  <!-- Backdrop + Drawer menu -->
+  <div class="mobile-drawer-backdrop" hidden></div>
+  <aside id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+    <header>
+      <h2>Menu</h2>
+      <button class="close" aria-label="Zamknij menu">×</button>
+    </header>
+    <nav>
+      <a href="#about"   data-i18n="nav_about">O nas</a>
+      <a href="#offer"   data-i18n="nav_offer">Oferta</a>
+      <a href="#projects"data-i18n="nav_projects">Projekty</a>
+      <a href="#blog"    data-i18n="nav_blog">Blog</a>
+      <a href="#contact" data-i18n="nav_contact">Kontakt</a>
+    </nav>
+  </aside>
+
   <div class="container-column">
     <div class="logo-title">
       <img src="base_icon_white_background.png" alt="KT Logo" class="logo" />
       <h1>KT DEVELOPMENT</h1>
     </div>
 
-    <!-- HAMBURGER + NAV -->
-    <button class="hamburger"
-            aria-label="Otwórz menu"
-            aria-expanded="false"
-            aria-controls="primary-navigation">
-      ☰
-    </button>
-
-    <nav class="nav" id="primary-navigation">
+    <!-- Nawigacja desktopowa (na mobile schowana CSS-em) -->
+    <nav class="nav">
       <a href="#about" data-i18n="nav_about">O nas</a>
       <a href="#offer" data-i18n="nav_offer">Oferta</a>
       <a href="#projects" data-i18n="nav_projects">Projekty</a>
@@ -157,13 +182,9 @@
 
   <section class="hero-logos">
     <div class="logo-with-ai">
-      <div class="left-ai">
-        <span class="pink">A</span><span>I</span>
-      </div>
+      <div class="left-ai"><span class="pink">A</span><span>I</span></div>
       <div class="separator"></div>
-      <div class="right-ai">
-        <span class="pink">I</span><span>A</span>
-      </div>
+      <div class="right-ai"><span class="pink">I</span><span>A</span></div>
     </div>
     <div class="kt-logo">
       <img src="base_logo_white_background.png" alt="KT Development Full Logo" />
@@ -274,40 +295,43 @@
       });
     }
 
-    /* Hamburger logic (ARIA, UX) */
+    /* Hamburger / Drawer logic (ARIA, UX) */
     (function() {
-      const btn = document.querySelector('.hamburger');
-      const nav = document.getElementById('primary-navigation');
+      const html = document.documentElement;
+      const btn  = document.querySelector('.hamburger');
+      const drawer = document.getElementById('mobile-drawer');
+      const backdrop = document.querySelector('.mobile-drawer-backdrop');
+      const btnClose = drawer.querySelector('.close');
 
-      function closeMenu() {
-        nav.classList.remove('is-open');
-        btn.setAttribute('aria-expanded', 'false');
-      }
       function openMenu() {
-        nav.classList.add('is-open');
+        html.classList.add('mobile-menu-open');
+        drawer.setAttribute('aria-hidden', 'false');
         btn.setAttribute('aria-expanded', 'true');
+        backdrop.hidden = false;
+        const firstLink = drawer.querySelector('a');
+        if (firstLink) firstLink.focus();
+      }
+      function closeMenu() {
+        html.classList.remove('mobile-menu-open');
+        drawer.setAttribute('aria-hidden', 'true');
+        btn.setAttribute('aria-expanded', 'false');
+        backdrop.hidden = true;
+        btn.focus();
       }
       function toggleMenu() {
-        const isOpen = nav.classList.contains('is-open');
-        isOpen ? closeMenu() : openMenu();
+        if (html.classList.contains('mobile-menu-open')) closeMenu();
+        else openMenu();
       }
 
       btn.addEventListener('click', toggleMenu);
+      btnClose.addEventListener('click', closeMenu);
+      backdrop.addEventListener('click', closeMenu);
 
       // Zamknij po kliknięciu linku
-      nav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+      drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
       // ESC zamyka
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeMenu();
-      });
-
-      // Klik poza nav zamyka (na mobile)
-      document.addEventListener('click', (e) => {
-        if (!nav.contains(e.target) && e.target !== btn && nav.classList.contains('is-open')) {
-          closeMenu();
-        }
-      });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
     })();
   </script>
 </body>
