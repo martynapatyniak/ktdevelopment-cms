@@ -5,170 +5,112 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>KT DEVELOPMENT</title>
   <style>
-    /* ====== BAZA ====== */
-    body { margin:0; font-family:'Segoe UI',sans-serif; background:#fff; color:#333; }
-    .header { position:relative; border-bottom:1px solid #eee; padding:1rem; }
-    .container { display:flex; align-items:center; flex-wrap:wrap; }
-    .logo { height:48px; margin-right:1rem; }
-    .nav { margin-top:.5rem; text-align:center; }
-    .nav a { margin-right:1rem; text-decoration:none; color:#DF1995; }
+    /* Ukrycie paska przewijania na małych ekranach */
+    body { margin:0; font-family:'Segoe UI',sans-serif; background:#fff; color:#333; overflow-x: hidden; }
+    /* ====== Baza ====== */
+    .header-kt { position:relative; border-bottom:1px solid #eee; padding:1rem; }
+    .nav-desktop { margin-top:.5rem; text-align:center; }
+    .nav-desktop a { margin-right:1rem; text-decoration:none; color:#DF1995; }
+    .container-kt { display:flex; align-items:center; flex-direction:column; }
+    .logo-title-kt { display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
+    .logo-title-kt h1 { font-size:2rem; margin:0; }
+    .kt-logo-icon { width:48px; height:48px; background:#DF1995; border-radius:8px; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:20px; }
+    .language-switcher-kt { position:absolute; top:10px; right:20px; font:inherit; font-size:14px; z-index:1000; }
+    .language-switcher-kt a { padding:0 5px; text-decoration:none; color:inherit; }
+    .language-switcher-kt a:hover { text-decoration:underline; }
 
-    /* ====== HERO / TOP ====== */
-    .hero-logos { display:flex; justify-content:center; align-items:center; gap:3rem; flex-wrap:nowrap; margin:2rem auto; }
-    .ai-logo svg { height:100px; }
-    .kt-logo img { height:410px; max-width:105vw; display:block; margin-top:-150px; }
-    .hero { text-align:center; padding:4rem 2rem; background:#f9f9f9; }
-    .cta-button { display:inline-block; padding:.75rem 1.5rem; background:#DF1995; color:#fff; text-decoration:none; border-radius:6px; }
-
-    section { padding:2rem; max-width:800px; margin:auto; text-align:left; }
-    h3 { color:#DF1995; text-align:left; }
-    footer { text-align:center; padding:2rem; font-size:.875rem; color:#888; }
-
-    /* ====== LAYOUT HELPERS ====== */
-    .container-column { display:flex; flex-direction:column; align-items:flex-start; padding:0 2rem; }
-    .logo-title { display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
-    .logo-title h1 { font-size:2rem; margin:0; }
-    .logo-with-ai { display:flex; align-items:center; justify-content:center; gap:1rem; flex-wrap:nowrap; margin:2rem auto; }
-    .left-ai, .right-ai { font-size:4rem; font-weight:bold; }
-    .pink { color:#DF1995; }
-
-    /* ====== LANGUAGE ====== */
-    .language-switcher { position:absolute; top:10px; right:20px; font:inherit; font-size:14px; z-index:1000; }
-    .language-switcher button { background:none; border:none; color:inherit; cursor:pointer; padding:0 5px; text-decoration:none; }
-    .language-switcher button:hover { text-decoration:underline; }
-    .language-switcher span { padding:0 2px; }
-
-    /* ====== HAMBURGER + DRAWER ====== */
-    /* ukryty checkbox */
-    .menu-toggle { position:absolute; left:-9999px; top:-9999px; opacity:0; pointer-events:none; }
-
-    /* domyślnie (na desktopie) ukryj przycisk i panel */
-    .hamburger { display:none; }
-    .mobile-drawer, .mobile-drawer-backdrop { display:none; }
-
-    /* wygląd przycisku */
-    .hamburger {
-      position:fixed;
-      left:max(15px, env(safe-area-inset-left));
-      top:max(15px, env(safe-area-inset-top));
-      width:50px; height:50px;
-      z-index:9999;
+    /* ====== Menu Hamburgerowe (Mobile) ====== */
+    /* Domyślnie ukryj checkbox, hamburgera i menu na desktopie */
+    #menu-toggle-kt { position:absolute; left:-9999px; opacity:0; }
+    .hamburger-button { display:none; }
+    .mobile-menu { display:none; }
+    .backdrop-kt { display:none; }
+    
+    /* Wygląd ikony hamburgera */
+    .hamburger-button {
+      position:fixed; left:15px; top:15px; width:50px; height:50px; z-index:9999;
       background:#DF1995; border-radius:8px; cursor:pointer;
-      align-items:center; justify-content:center; flex-direction:column;
+      display:flex; align-items:center; justify-content:center; flex-direction:column;
       box-shadow:0 4px 20px rgba(223,25,149,.3);
-      -webkit-tap-highlight-color:transparent;
     }
-    .hamburger span {
+    .hamburger-button span {
       display:block; width:20px; height:2px; background:#fff;
       border-radius:2px; transition:all .3s ease;
     }
-    .hamburger span + span { margin-top:6px; }
+    .hamburger-button span + span { margin-top:6px; }
+    
+    /* Animacja ikony */
+    #menu-toggle-kt:checked + .hamburger-button span:nth-child(1) { transform:rotate(45deg) translate(6px,6px); }
+    #menu-toggle-kt:checked + .hamburger-button span:nth-child(2) { opacity:0; }
+    #menu-toggle-kt:checked + .hamburger-button span:nth-child(3) { transform:rotate(-45deg) translate(6px,-6px); }
 
-    /* animacja hamburger -> X */
-    .menu-toggle:checked + .hamburger span:nth-child(1) { transform:rotate(45deg) translate(6px,6px); }
-    .menu-toggle:checked + .hamburger span:nth-child(2) { opacity:0; }
-    .menu-toggle:checked + .hamburger span:nth-child(3) { transform:rotate(-45deg) translate(6px,-6px); }
-
-    /* backdrop */
-    .mobile-drawer-backdrop {
-      position:fixed; inset:0;
-      background:rgba(0,0,0,.3); backdrop-filter:blur(2px);
-      opacity:0; pointer-events:none; transition:opacity .2s ease;
-      z-index:11990;
-    }
-
-    /* panel */
-    .mobile-drawer {
-      position:fixed; top:0; left:0;
-      height:100dvh; width:80vw; max-width:320px;
+    /* Styl wysuwanego menu */
+    .mobile-menu {
+      position:fixed; top:0; left:0; width:80vw; max-width:320px; height:100vh;
       background:#fff; box-shadow:2px 0 20px rgba(0,0,0,.12);
-      transform:translateX(-100%); transition:transform .25s ease;
-      z-index:11995;
+      transform:translateX(-100%); transition:transform .25s ease; z-index:11995;
       padding:20px; display:flex; flex-direction:column; gap:12px;
       overflow-y:auto;
     }
-    .mobile-drawer header { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
-    .mobile-drawer h2 { font-size:16px; font-weight:600; color:#333; margin:0; }
-    .mobile-drawer .close { background:none; border:none; font-size:24px; line-height:1; cursor:pointer; color:#333; padding:8px; }
-    .mobile-drawer nav { display:flex; flex-direction:column; gap:14px; }
-    .mobile-drawer a { text-decoration:none; color:#333; font-weight:500; padding:12px 8px; border-bottom:1px solid #eee; transition:color .2s; }
-    .mobile-drawer a:hover { color:#DF1995; }
+    .mobile-menu-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+    .mobile-menu-header h2 { font-size:16px; font-weight:600; margin:0; }
+    .mobile-menu-header button { background:none; border:none; font-size:24px; cursor:pointer; padding:8px; }
+    .mobile-menu-nav { display:flex; flex-direction:column; gap:14px; }
+    .mobile-menu-nav a { text-decoration:none; color:#333; font-weight:500; padding:12px 8px; border-bottom:1px solid #eee; transition:color .2s; }
+    .mobile-menu-nav a:hover { color:#DF1995; }
+    .backdrop-kt {
+      position:fixed; inset:0; background:rgba(0,0,0,.3); backdrop-filter:blur(2px);
+      opacity:0; pointer-events:none; transition:opacity .2s ease; z-index:11990;
+    }
 
-    /* stan otwarty */
-    .menu-toggle:checked ~ .mobile-drawer { transform:translateX(0); }
-    .menu-toggle:checked ~ .mobile-drawer-backdrop { opacity:1; pointer-events:auto; }
+    /* Stan otwarcia menu */
+    #menu-toggle-kt:checked ~ .mobile-menu { transform:translateX(0); }
+    #menu-toggle-kt:checked ~ .backdrop-kt { opacity:1; pointer-events:auto; }
 
     /* ====== MEDIA QUERIES ====== */
-    @media (max-width:768px) {
-      /* pokaż hamburger i drawer tylko na mobile */
-      .hamburger { display:flex; }
-      .mobile-drawer, .mobile-drawer-backdrop { display:block; }
-      /* ukryj poziome menu na mobile */
-      .nav { display:none !important; }
-      /* mobilne dopasowania */
-      *{ box-sizing:border-box; }
-      body{ overflow-x:hidden; font-size:16px; }
-      .header{ padding:1rem .5rem; }
-      .container{ flex-direction:column; align-items:center; width:100%; }
-      .container-column{ padding:0 1rem; align-items:center; text-align:center; width:100%; }
-      .logo-title{ flex-direction:column; align-items:center; gap:1rem; width:100%; text-align:center; }
-      .logo-title h1{ font-size:clamp(1.8rem,5vw,2.5rem); text-align:center; margin:0; }
-      .logo{ height:clamp(50px,10vw,70px); margin:0; }
-      .hero-logos{ flex-direction:column; gap:3rem; margin:3rem auto; width:100%; max-width:100vw; }
-      .logo-with-ai{ flex-direction:row; justify-content:center; align-items:center; font-size:clamp(3rem,12vw,6rem); font-weight:bold; gap:clamp(1rem,4vw,2rem); margin:2rem 0; width:100%; }
-      .kt-logo{ display:flex; justify-content:center; }
-      .kt-logo img{ max-width:clamp(200px,60vw,400px); height:auto; margin-top:0; }
-      .hero{ padding:clamp(2rem,8vw,4rem) clamp(1rem,4vw,2rem); width:100%; }
+    @media (max-width:768px){
+      /* Pokaż menu na mobile */
+      .nav-desktop { display:none; }
+      .hamburger-button { display:flex; }
+      .mobile-menu, .backdrop-kt { display:block; }
+      
+      /* Inne dopasowania */
+      .header-kt { padding:1rem .5rem; }
+      .container-kt { flex-direction:column; align-items:center; width:100%; }
+      .logo-title-kt { flex-direction:column; align-items:center; gap:1rem; width:100%; text-align:center; }
     }
-
-    @media (max-width:480px){
-      .hero-logos{ gap:2rem; }
-      .logo-with-ai{ gap:clamp(.5rem,3vw,1rem); }
-    }
-
-    @media (max-width:360px){
-      .container-column{ padding:0 .5rem; }
-      .logo-with-ai{ font-size:clamp(2.5rem,10vw,4rem); }
-      .hero{ padding:1.5rem .5rem; }
-      section{ padding:1.5rem .5rem; }
+    @media (min-width: 769px) {
+      .hamburger-button { display:none; }
     }
   </style>
 </head>
 <body>
-
-  <div class="language-switcher">
-    <button onclick="switchLanguage('pl')">PL</button>
-    <span>|</span>
-    <button onclick="switchLanguage('en')">EN</button>
-  </div>
-
-  <input type="checkbox" id="menu-toggle" class="menu-toggle" />
-  <label for="menu-toggle" class="hamburger" aria-label="Otwórz menu" aria-controls="mobile-drawer" aria-expanded="false">
+  <input type="checkbox" id="menu-toggle-kt" />
+  <label for="menu-toggle-kt" class="hamburger-button" aria-label="Otwórz menu">
     <span></span><span></span><span></span>
   </label>
-
-  <div class="mobile-drawer-backdrop" onclick="document.getElementById('menu-toggle').checked=false"></div>
-  <aside id="mobile-drawer" class="mobile-drawer" role="navigation" aria-label="Główne">
-    <header>
+  <div class="backdrop-kt" onclick="document.getElementById('menu-toggle-kt').checked=false"></div>
+  <aside class="mobile-menu">
+    <header class="mobile-menu-header">
       <h2>Menu</h2>
-      <button class="close" aria-label="Zamknij" onclick="document.getElementById('menu-toggle').checked=false">×</button>
+      <button onclick="document.getElementById('menu-toggle-kt').checked=false">×</button>
     </header>
-    <nav>
-      <a href="#about"    onclick="document.getElementById('menu-toggle').checked=false">O nas</a>
-      <a href="#offer"    onclick="document.getElementById('menu-toggle').checked=false">Oferta</a>
-      <a href="#projects" onclick="document.getElementById('menu-toggle').checked=false">Projekty</a>
-      <a href="#blog"     onclick="document.getElementById('menu-toggle').checked=false">Blog</a>
-      <a href="#contact"  onclick="document.getElementById('menu-toggle').checked=false">Kontakt</a>
+    <nav class="mobile-menu-nav">
+      <a href="#about" onclick="document.getElementById('menu-toggle-kt').checked=false">O nas</a>
+      <a href="#offer" onclick="document.getElementById('menu-toggle-kt').checked=false">Oferta</a>
+      <a href="#projects" onclick="document.getElementById('menu-toggle-kt').checked=false">Projekty</a>
+      <a href="#blog" onclick="document.getElementById('menu-toggle-kt').checked=false">Blog</a>
+      <a href="#contact" onclick="document.getElementById('menu-toggle-kt').checked=false">Kontakt</a>
     </nav>
   </aside>
 
-  <header class="header">
-    <div class="container container-column">
-      <div class="logo-title">
-        <div style="width:48px;height:48px;background:#DF1995;border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;font-size:20px;">KT</div>
+  <header class="header-kt">
+    <div class="container-kt">
+      <div class="logo-title-kt">
+        <div class="kt-logo-icon">KT</div>
         <h1>KT DEVELOPMENT</h1>
       </div>
-      <nav class="nav">
+      <nav class="nav-desktop">
         <a href="#about">O nas</a>
         <a href="#offer">Oferta</a>
         <a href="#projects">Projekty</a>
@@ -177,58 +119,135 @@
       </nav>
     </div>
   </header>
-
-  <section class="hero-logos">
-    <div class="logo-with-ai">
-      <div class="left-ai"><span class="pink">A</span><span>I</span></div>
-      <div class="separator" style="border-left:1px solid #000; height:62px; width:1px;"></div>
-      <div class="right-ai"><span class="pink">I</span><span>A</span></div>
-    </div>
-    <div class="kt-logo">
-      <div style="width:300px;height:150px;background:#f0f0f0;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:bold;color:#DF1995;">KT DEVELOPMENT</div>
-    </div>
-  </section>
-
-  <section class="hero">
-    <h2>Decyzje, które zakrzywiają rzeczywistość</h2>
-    <p>KT DEVELOPMENT to firma doradczo-strategiczna, która łączy technologię, AI i ludzką świadomość w jednym celu – by rzeczy działały lepiej, szybciej i mądrzej.</p>
-    <a href="#contact" class="cta-button">Skontaktuj się</a>
-  </section>
-
-  <section id="about">
-    <h3>Kim jesteśmy</h3>
-    <p>Twórca: Kacper Turczyński – doradca strategiczny, operator rzeczywistości, człowiek, który nie tylko rozumie AI, ale potrafi je zastosować w życiu i biznesie.</p>
-  </section>
-
-  <section id="offer">
-    <h3>Oferta</h3>
-    <ul>
-      <li><strong>Konsulting strategiczny</strong> – Transformujemy chaos w strukturę i cele.</li>
-      <li><strong>Integracja AI</strong> – Wdrażamy AI nie dla mody, ale dla wyniku.</li>
-    </ul>
-  </section>
-
-  <section id="contact">
-    <h3>Kontakt</h3>
-    <p>Masz projekt? Napisz: <a href="mailto:kontakt@ktdevelopment.pl">kontakt@ktdevelopment.pl</a></p>
-  </section>
-
-  <footer>
-    <p>© 2025 KT DEVELOPMENT. Wszystkie prawa zastrzeżone.</p>
-  </footer>
-
-  <script>
-    // ARIA dla przycisku hamburgera
-    const menuToggle = document.getElementById('menu-toggle');
-    const hamburger = document.querySelector('label[for="menu-toggle"]');
-    function syncAria(){ hamburger.setAttribute('aria-expanded', menuToggle.checked ? 'true':'false'); }
-    menuToggle.addEventListener('change', syncAria); syncAria();
-
-    // Proste przełączanie języka (żeby nie było błędu w konsoli)
-    function switchLanguage(lang){
-      document.documentElement.lang = lang;
-      // Tu możesz dodać podmianę tekstów, jeśli chcesz i18n.
-    }
-  </script>
-</body>
+  </body>
 </html>
+
+/* ====== BAZA ====== */
+body { margin:0; font-family:'Segoe UI',sans-serif; background:#fff; color:#333; }
+.header { position:relative; border-bottom:1px solid #eee; padding:1rem; }
+.container { display:flex; align-items:center; flex-wrap:wrap; }
+.logo { height:48px; margin-right:1rem; }
+.nav { margin-top:.5rem; text-align:center; }
+.nav a { margin-right:1rem; text-decoration:none; color:#DF1995; }
+
+/* ====== HERO / TOP ====== */
+.hero-logos { display:flex; justify-content:center; align-items:center; gap:3rem; flex-wrap:nowrap; margin:2rem auto; }
+.ai-logo svg { height:100px; }
+.kt-logo img { height:410px; max-width:105vw; display:block; margin-top:-150px; }
+.hero { text-align:center; padding:4rem 2rem; background:#f9f9f9; }
+.cta-button { display:inline-block; padding:.75rem 1.5rem; background:#DF1995; color:#fff; text-decoration:none; border-radius:6px; }
+
+section { padding:2rem; max-width:800px; margin:auto; text-align:left; }
+h3 { color:#DF1995; text-align:left; }
+footer { text-align:center; padding:2rem; font-size:.875rem; color:#888; }
+
+/* ====== LAYOUT HELPERS ====== */
+.container-column { display:flex; flex-direction:column; align-items:flex-start; padding:0 2rem; }
+.logo-title { display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
+.logo-title h1 { font-size:2rem; margin:0; }
+.logo-with-ai { display:flex; align-items:center; justify-content:center; gap:1rem; flex-wrap:nowrap; margin:2rem auto; }
+.left-ai, .right-ai { font-size:4rem; font-weight:bold; }
+.pink { color:#DF1995; }
+
+/* ====== LANGUAGE ====== */
+.language-switcher { position:absolute; top:10px; right:20px; font:inherit; font-size:14px; z-index:1000; }
+.language-switcher button { background:none; border:none; color:inherit; cursor:pointer; padding:0 5px; text-decoration:none; }
+.language-switcher button:hover { text-decoration:underline; }
+.language-switcher span { padding:0 2px; }
+
+/* ====== HAMBURGER + DRAWER ====== */
+/* ukryty checkbox */
+.menu-toggle { position:absolute; left:-9999px; top:-9999px; opacity:0; pointer-events:none; }
+
+/* domyślnie (na desktopie) ukryj przycisk i panel */
+.hamburger { display:none; }
+.mobile-drawer, .mobile-drawer-backdrop { display:none; }
+
+/* wygląd przycisku */
+.hamburger {
+  position:fixed;
+  left:max(15px, env(safe-area-inset-left));
+  top:max(15px, env(safe-area-inset-top));
+  width:50px; height:50px;
+  z-index:9999;
+  background:#DF1995; border-radius:8px; cursor:pointer;
+  align-items:center; justify-content:center; flex-direction:column;
+  box-shadow:0 4px 20px rgba(223,25,149,.3);
+  -webkit-tap-highlight-color:transparent;
+}
+.hamburger span {
+  display:block; width:20px; height:2px; background:#fff;
+  border-radius:2px; transition:all .3s ease;
+}
+.hamburger span + span { margin-top:6px; }
+
+/* animacja hamburger -> X */
+.menu-toggle:checked + .hamburger span:nth-child(1) { transform:rotate(45deg) translate(6px,6px); }
+.menu-toggle:checked + .hamburger span:nth-child(2) { opacity:0; }
+.menu-toggle:checked + .hamburger span:nth-child(3) { transform:rotate(-45deg) translate(6px,-6px); }
+
+/* backdrop */
+.mobile-drawer-backdrop {
+  position:fixed; inset:0;
+  background:rgba(0,0,0,.3); backdrop-filter:blur(2px);
+  opacity:0; pointer-events:none; transition:opacity .2s ease;
+  z-index:11990;
+}
+
+/* panel */
+.mobile-drawer {
+  position:fixed; top:0; left:0;
+  height:100dvh; width:80vw; max-width:320px;
+  background:#fff; box-shadow:2px 0 20px rgba(0,0,0,.12);
+  transform:translateX(-100%); transition:transform .25s ease;
+  z-index:11995;
+  padding:20px; display:flex; flex-direction:column; gap:12px;
+  overflow-y:auto;
+}
+.mobile-drawer header { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+.mobile-drawer h2 { font-size:16px; font-weight:600; color:#333; margin:0; }
+.mobile-drawer .close { background:none; border:none; font-size:24px; line-height:1; cursor:pointer; color:#333; padding:8px; }
+.mobile-drawer nav { display:flex; flex-direction:column; gap:14px; }
+.mobile-drawer a { text-decoration:none; color:#333; font-weight:500; padding:12px 8px; border-bottom:1px solid #eee; transition:color .2s; }
+.mobile-drawer a:hover { color:#DF1995; }
+
+/* stan otwarty */
+.menu-toggle:checked ~ .mobile-drawer { transform:translateX(0); }
+.menu-toggle:checked ~ .mobile-drawer-backdrop { opacity:1; pointer-events:auto; }
+
+/* ====== MEDIA QUERIES ====== */
+@media (max-width:768px) {
+  /* Pokaż hamburger i drawer tylko na mobile */
+  .hamburger { display:flex; }
+  .mobile-drawer, .mobile-drawer-backdrop { display:block; }
+  
+  /* Ukryj poziome menu na mobile */
+  .nav { display:none !important; }
+  
+  /* Mobilne dopasowania */
+  *{ box-sizing:border-box; }
+  body{ overflow-x:hidden; font-size:16px; }
+  .header{ padding:1rem .5rem; }
+  .container{ flex-direction:column; align-items:center; width:100%; }
+  .container-column{ padding:0 1rem; align-items:center; text-align:center; width:100%; }
+  .logo-title{ flex-direction:column; align-items:center; gap:1rem; width:100%; text-align:center; }
+  .logo-title h1{ font-size:clamp(1.8rem,5vw,2.5rem); text-align:center; margin:0; }
+  .logo{ height:clamp(50px,10vw,70px); margin:0; }
+  .hero-logos{ flex-direction:column; gap:3rem; margin:3rem auto; width:100%; max-width:100vw; }
+  .logo-with-ai{ flex-direction:row; justify-content:center; align-items:center; font-size:clamp(3rem,12vw,6rem); font-weight:bold; gap:clamp(1rem,4vw,2rem); margin:2rem 0; width:100%; }
+  .kt-logo{ display:flex; justify-content:center; }
+  .kt-logo img{ max-width:clamp(200px,60vw,400px); height:auto; margin-top:0; }
+  .hero{ padding:clamp(2rem,8vw,4rem) clamp(1rem,4vw,2rem); width:100%; }
+}
+
+@media (max-width:480px){
+  .hero-logos{ gap:2rem; }
+  .logo-with-ai{ gap:clamp(.5rem,3vw,1rem); }
+}
+
+@media (max-width:360px){
+  .container-column{ padding:0 .5rem; }
+  .logo-with-ai{ font-size:clamp(2.5rem,10vw,4rem); }
+  .hero{ padding:1.5rem .5rem; }
+  section{ padding:1.5rem .5rem; }
+}
