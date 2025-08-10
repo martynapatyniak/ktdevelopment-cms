@@ -61,30 +61,31 @@
       pointer-events: none;
     }
 
-    /* przycisk – 3 równe kreski */
+    /* przycisk – 3 równe kreski - ZAWSZE WIDOCZNY */
     .hamburger {
-      display: inline-flex;         /* ZAWSZE POKAŻ NA MOBILE - zmienione! */
+      display: flex !important;     /* FORCE DISPLAY */
       position: fixed;
-      left: 12px;
-      top: 12px;                    /* zwiększony margines */
-      top: calc(12px + env(safe-area-inset-top)); /* iPhone notch */
-      width: 44px; 
-      height: 44px;    
-      z-index: 12000;
-      background: rgba(255,255,255,.95);
-      backdrop-filter: saturate(180%) blur(6px);
-      border-radius: 10px;
-      box-shadow: 0 2px 15px rgba(0,0,0,.1);
+      left: 15px;
+      top: 15px;
+      width: 50px; 
+      height: 50px;    
+      z-index: 99999;              /* BARDZO WYSOKI Z-INDEX */
+      background: #DF1995;         /* RÓŻOWY KOLOR - ŁATWO WIDOCZNY */
+      border-radius: 8px;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
       align-items: center; 
       justify-content: center;
       flex-direction: column;
-      border: 1px solid rgba(0,0,0,.1);
+      box-shadow: 0 4px 20px rgba(223, 25, 149, 0.3);
     }
     .hamburger span {
-      display: block; width: 24px; height: 2px; background: #333; border-radius: 2px;
+      display: block; 
+      width: 20px; 
+      height: 2px; 
+      background: white;           /* BIAŁE KRESKI NA RÓŻOWYM TLE */
+      border-radius: 2px;
       transition: all 0.3s ease;
     }
     .hamburger span + span { margin-top: 6px; }
@@ -131,16 +132,7 @@
 
     /* =====================  MEDIA QUERIES  ===================== */
 
-    /* Na desktopie ukryj hamburger */
-    @media (min-width: 1200px) {
-      .hamburger { display: none !important; }
-    }
-    
-    /* Na mobile i tablecie pokaż hamburger, ukryj poziome menu */
-    @media (max-width: 1199px) {
-      .hamburger { display: inline-flex !important; }
-      .nav { display: none !important; }
-    }
+    /* HAMBURGER ZAWSZE WIDOCZNY - USUWAM WSZYSTKIE WARUNKI */
 
     /* Dodatkowe dostosowania mobilne (typografia/layout) */
     @media screen and (max-width: 768px) {
@@ -178,10 +170,10 @@
       section { padding: 1.5rem .5rem; }
     }
 
-    /* Desktop – upewnij się, że przycisk ukryty */
+    /* Desktop – upewnij się, że menu poziome widoczne na dużych ekranach */
     @media (min-width: 1200px) {
-      .hamburger { display: none !important; }
       .nav { display: block !important; }
+      /* Hamburger pozostaje widoczny dla testów */
     }
   </style>
 </head>
