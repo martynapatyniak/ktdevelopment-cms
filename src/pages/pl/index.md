@@ -72,10 +72,11 @@ permalink: /
 
   .header-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
+    gap: 3rem;
   }
 
   .logo {
@@ -102,19 +103,20 @@ permalink: /
 
   .nav a {
     text-decoration: none;
-    color: #333;
+    color: #DF1995;
     font-weight: 500;
     transition: color 0.3s;
   }
 
   .nav a:hover {
-    color: #DF1995;
+    color: #c91680;
   }
 
   .lang-switch {
     display: flex;
     gap: 0.5rem;
     font-size: 0.9rem;
+    margin-left: auto;
   }
 
   .lang-switch a {
@@ -136,75 +138,88 @@ permalink: /
     justify-content: center;
     align-items: center;
     padding: 100px 2rem 2rem;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    background: #ffffff;
   }
 
   .logos-container {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 6rem;
+    justify-content: space-between;
+    gap: 4rem;
     margin-bottom: 4rem;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
+    padding: 0 2rem;
   }
 
   .ai-logo {
     flex: 1;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-left: 2rem;
   }
 
   .ai-logo h1 {
-    font-size: clamp(4rem, 12vw, 8rem);
+    font-size: clamp(5rem, 15vw, 12rem);
     font-weight: 300;
-    letter-spacing: 2px;
-    background: linear-gradient(45deg, #DF1995, #ff6b9d);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    letter-spacing: 8px;
+    display: flex;
+    align-items: center;
   }
+
+  .ai-logo .letter-a1 { color: #DF1995; }
+  .ai-logo .letter-i1 { color: #000000; }
+  .ai-logo .separator { color: #DF1995; margin: 0 0.2em; }
+  .ai-logo .letter-i2 { color: #DF1995; }
+  .ai-logo .letter-a2 { color: #000000; }
 
   .kt-logo-container {
     flex: 0 0 auto;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    padding-right: 2rem;
   }
 
   .kt-logo-circle {
-    width: 300px;
-    height: 300px;
-    border: 2px solid #DF1995;
+    width: 350px;
+    height: 350px;
+    border: 3px solid #DF1995;
     border-radius: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background: white;
-    box-shadow: 0 10px 40px rgba(223, 25, 149, 0.1);
-    padding: 2rem;
+    box-shadow: 0 5px 25px rgba(223, 25, 149, 0.1);
+    padding: 2.5rem;
+    position: relative;
   }
 
   .kt-logo-circle img {
-    height: 60px;
-    margin-bottom: 1rem;
+    height: 80px;
+    margin-bottom: 1.5rem;
   }
 
   .kt-logo-circle h2 {
-    font-size: 1rem;
-    color: #333;
+    font-size: 1.3rem;
+    color: #666;
     text-align: center;
-    line-height: 1.3;
-    font-weight: 500;
+    line-height: 1.2;
+    font-weight: 300;
+    letter-spacing: 3px;
+    margin-bottom: 0.5rem;
   }
 
   .kt-logo-circle .business-partner {
-    font-size: 0.7rem;
-    color: #666;
-    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: #999;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    font-weight: 400;
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
   }
 
   /* Hero content */
@@ -373,7 +388,13 @@ permalink: /
 <section class="hero-section">
   <div class="logos-container">
     <div class="ai-logo">
-      <h1>AI | IA</h1>
+      <h1>
+        <span class="letter-a1">A</span>
+        <span class="letter-i1">I</span>
+        <span class="separator">|</span>
+        <span class="letter-i2">I</span>
+        <span class="letter-a2">A</span>
+      </h1>
     </div>
     <div class="kt-logo-container">
       <div class="kt-logo-circle">
