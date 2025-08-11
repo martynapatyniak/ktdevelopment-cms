@@ -5,11 +5,12 @@ permalink: /
 ---
 
 <!-- Lokalny styl TYLKO dla TEJ strony:
-     • AI|IA cieńsze (300) + JEDEN separator (2px)
-     • równe, bardzo małe odstępy A–I–|–I–A (desktop 8px, mobile 6px)
+     • AI|IA cienkie (300) + JEDEN separator (2px)
+     • równe, małe odstępy A–I–|–I–A (desktop 8px, mobile 6px)
      • AI|IA i logo bliżej siebie (1fr/1fr, mały gap kolumn)
      • szary hero węższy (ucięte boki)
-     • #about, #offer, #contact wyrównane szerokością i paddingiem do hero
+     • #about, #offer, #projects, #blog, #contact wyrównane do szerokości hero
+     • na mobile ukrywamy poziome .nav (hamburger z layoutu zostaje)
 -->
 <style>
   :root{
@@ -18,16 +19,16 @@ permalink: /
     --ai-weight:300;     /* grubość liter AI|IA */
     --bar:2px;           /* grubość separatora */
     --ai-gap:8px;        /* równy odstęp między A, I i separatorem (desktop) */
-    --hero-narrow:860px; /* szerokość „kartonika” z hasłem (desktop) */
+    --hero-narrow:860px; /* max-szerokość „kartonika” (desktop) */
   }
 
   /* Mobile: odrobinę ciaśniej */
   @media (max-width:1023px){ :root{ --ai-gap:6px; } }
 
-  /* globalna szerokość sekcji na tej stronie */
+  /* spójna max-szerokość sekcji na TEJ stronie */
   .hero-logos, .hero, section{ max-width: var(--page-max); margin-left:auto; margin-right:auto; }
 
-  /* ===== AI|IA — litery + jeden separator, równe i bardzo małe odstępy ===== */
+  /* ===== AI|IA — litery + jeden separator, równe i małe odstępy ===== */
   .ai-lockup{ display:inline-grid; grid-auto-flow:column; align-items:center; gap: var(--ai-gap); }
   .ai-lockup .ch{ line-height:1; letter-spacing:0; font-weight: var(--ai-weight); }
   .ai-lockup .pink{ color: var(--pink); }
@@ -61,8 +62,8 @@ permalink: /
     section{ padding-left: var(--gutter); padding-right: var(--gutter); }
     h3{ color: var(--pink); }
 
-    /* Wyrównanie #about, #offer, #contact do szerokości hero i jego paddingu */
-    #about, #offer, #contact{
+    /* Wyrównanie sekcji do szerokości hero */
+    #about, #offer, #projects, #blog, #contact{
       max-width: min(92vw, var(--hero-narrow));
       margin-left:auto; margin-right:auto;
       padding-left:32px; padding-right:32px; /* jak .hero */
@@ -78,8 +79,8 @@ permalink: /
     .hero{ padding:24px 16px; background:#f7f7f7; border-radius:16px 16px 0 0; text-align:center; }
     section{ padding:0 16px; }
 
-    /* dopasuj boczne odstępy sekcji do hero na mobile */
-    #about, #offer, #contact{ padding-left:16px; padding-right:16px; }
+    /* na mobile boczne odstępy sekcji jak w hero */
+    #about, #offer, #projects, #blog, #contact{ padding-left:16px; padding-right:16px; }
   }
 
   /* ===== Ukryj poziome menu headera na mobile (hamburger w layoucie) ===== */
@@ -96,7 +97,7 @@ permalink: /
     <span class="ch ink">A</span>
   </div>
   <div class="kt-logo">
-    <img src="/base_logo_white_background.png" alt="Kacper Turczyński Development — logo" />
+    <img src="/base_logo_white_background.png" alt="Logo KT Development" />
   </div>
 </section>
 
@@ -144,8 +145,7 @@ permalink: /
 <!-- ===== KONTAKT ===== -->
 <section id="contact">
   <h3>Kontakt</h3>
-  <p>Masz projekt lub potrzebujesz partnera do rozmowy strategicznej?  Napisz:
-    <a href="mailto:kontakt@ktdevelopment.pl">kontakt@ktdevelopment.pl</a></p>
+  <p>Masz projekt? Napisz: <a href="mailto:kontakt@ktdevelopment.pl">kontakt@ktdevelopment.pl</a></p>
 </section>
 
 <footer>
