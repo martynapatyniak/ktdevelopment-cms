@@ -1,28 +1,27 @@
 ---
-title: KT DEVELOPMENT
+title: Strona główna
 layout: layout.njk
 permalink: /
 ---
 
-<!-- Lokalny styl tylko dla TEJ strony: cieńsze AI|IA + JEDEN czarny separator,
-     układ jak w referencji, hamburger tylko na mobile. -->
+<!-- Lokalny styl tylko dla TEJ strony: AI|IA cieńsze (300) + JEDEN czarny separator (2px).
+     Dodatkowo lekki układ jak w referencji: AI|IA po lewej, duże logo po prawej; mobile skaluje się bezpiecznie. -->
 <style>
-  :root{ --pink:#DF1995; --ink:#111; --page-max:1200px; --gutter:32px; }
+  :root{ --pink:#DF1995; --ink:#111; --page-max:1200px; --gutter:32px; --ai-weight:300; --bar:2px; }
   .hero-logos, .hero, section{ max-width: var(--page-max); margin-left:auto; margin-right:auto; }
 
-  /* ===== AI|IA — litery cieńsze + JEDEN czarny separator ===== */
+  /* ===== AI|IA – litery cieńsze + 1 separator ===== */
   .ai-lockup{ display:inline-grid; grid-auto-flow:column; align-items:center; gap: clamp(14px, 1.8vw, 26px); }
-  .ai-lockup .ch{ line-height:1; letter-spacing:.02em; font-weight: 400; } /* cieńsze */
-  .ai-lockup .ch.a{ /* opcjonalnie delikatnie mocniej dla A */ font-weight: 400; }
-  .ai-lockup .ch.i{ font-weight: 400; }
-  .ai-lockup .bar{ width:3px; height: clamp(90px, 11vw, 160px); background: var(--ink); display:block; }
+  .ai-lockup .ch{ line-height:1; letter-spacing:.01em; font-weight: var(--ai-weight); }
   .ai-lockup .pink{ color: var(--pink); }
   .ai-lockup .ink{ color: var(--ink); }
+  .ai-lockup .bar{ width: var(--bar); background: var(--ink); display:block; }
 
   /* ===== Desktop (jak na zrzucie) ===== */
   @media (min-width: 1024px){
     .hero-logos{ display:grid; grid-template-columns: 1fr 1.25fr; align-items:center; gap:40px; margin-top:24px; padding:0 var(--gutter); }
-    .ai-lockup .ch{ font-size: clamp(72px, 9vw, 140px); }
+    .ai-lockup .ch{ font-size: clamp(68px, 8.6vw, 132px); }
+    .ai-lockup .bar{ height: clamp(88px, 10.8vw, 154px); }
 
     .kt-logo{ display:flex; justify-content:center; align-items:center; }
     .kt-logo img{ width:100%; max-width: 640px; height:auto; display:block; }
@@ -33,70 +32,28 @@ permalink: /
     .cta-button{ border-radius:12px; padding:12px 22px; font-weight:600; background:var(--pink); color:#fff; text-decoration:none; }
 
     section{ padding-left:var(--gutter); padding-right:var(--gutter); }
-    h3{ color:var(--pink); }
+    h3{ color: var(--pink); }
   }
 
   /* ===== Mobile (skalowanie) ===== */
   @media (max-width: 1023px){
     .hero-logos{ display:flex; flex-direction:column; gap:24px; align-items:center; margin-top:16px; padding:0 16px; }
-    .ai-lockup .ch{ font-size: clamp(36px, 12vw, 64px); }
-    .ai-lockup .bar{ height: clamp(44px, 14vw, 80px); }
+    .ai-lockup .ch{ font-size: clamp(34px, 12vw, 60px); }
+    .ai-lockup .bar{ height: clamp(42px, 14vw, 76px); }
     .kt-logo img{ max-width: clamp(240px, 80vw, 480px); height:auto; }
     .hero{ padding:24px 16px; background:#f7f7f7; border-radius:16px 16px 0 0; text-align:center; }
     section{ padding:0 16px; }
   }
-
-  /* ===== HAMBURGER tylko na mobile (≤768px) — ukryj poziome menu headera ===== */
-  @media (min-width: 769px){
-    .hamburger, .mobile-drawer, .mobile-drawer-backdrop{ display:none !important; }
-  }
-  @media (max-width: 768px){
-    header .nav{ display:none !important; }
-    .hamburger{
-      position: fixed; left: max(16px, env(safe-area-inset-left)); top: max(16px, env(safe-area-inset-top));
-      width:50px; height:50px; display:flex; align-items:center; justify-content:center; flex-direction:column;
-      background:var(--pink); color:#fff; border-radius:8px; box-shadow:0 4px 20px rgba(223,25,149,.3); z-index:12090;
-    }
-    .hamburger span{ display:block; width:20px; height:2px; background:#fff; border-radius:2px; transition:all .3s ease; }
-    .hamburger span+span{ margin-top:6px; }
-    .mobile-drawer{ position:fixed; top:0; left:0; height:100dvh; width:80vw; max-width:320px; background:#fff; transform:translateX(-100%); transition:transform .25s ease; z-index:12095; padding:20px; box-shadow:2px 0 20px rgba(0,0,0,.12); display:block; overflow-y:auto; }
-    .mobile-drawer-backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.3); backdrop-filter:blur(2px); opacity:0; pointer-events:none; transition:opacity .2s ease; z-index:12085; display:block; }
-    #menu-toggle:checked + .hamburger span:nth-child(1){ transform:rotate(45deg) translate(6px,6px); }
-    #menu-toggle:checked + .hamburger span:nth-child(2){ opacity:0; }
-    #menu-toggle:checked + .hamburger span:nth-child(3){ transform:rotate(-45deg) translate(6px,-6px); }
-    #menu-toggle:checked ~ .mobile-drawer{ transform:translateX(0); }
-    #menu-toggle:checked ~ .mobile-drawer-backdrop{ opacity:1; pointer-events:auto; }
-  }
 </style>
-
-<!-- === HAMBURGER (MOBILE-ONLY) — ważna kolejność rodzeństwa! === -->
-<input type="checkbox" id="menu-toggle" class="menu-toggle" style="position:absolute;left:-9999px;top:-9999px" />
-<label for="menu-toggle" class="hamburger" aria-label="Otwórz menu" aria-controls="mobile-drawer" aria-expanded="false">
-  <span></span><span></span><span></span>
-</label>
-<aside id="mobile-drawer" class="mobile-drawer" role="navigation" aria-label="Menu">
-  <header>
-    <h2>Menu</h2>
-    <label for="menu-toggle" class="close" aria-label="Zamknij">×</label>
-  </header>
-  <nav>
-    <a href="#about">O nas</a>
-    <a href="#offer">Oferta</a>
-    <a href="#projects">Projekty</a>
-    <a href="#blog">Blog</a>
-    <a href="#contact">Kontakt</a>
-  </nav>
-</aside>
-<label for="menu-toggle" class="mobile-drawer-backdrop" aria-hidden="true"></label>
 
 <!-- ===== HERO / LOGA ===== -->
 <section class="hero-logos">
   <div class="ai-lockup" role="img" aria-label="AI | IA">
-    <span class="ch a pink">A</span>
-    <span class="ch i ink">I</span>
+    <span class="ch pink">A</span>
+    <span class="ch ink">I</span>
     <span class="bar" aria-hidden="true"></span>
-    <span class="ch i pink">I</span>
-    <span class="ch a ink">A</span>
+    <span class="ch pink">I</span>
+    <span class="ch ink">A</span>
   </div>
   <div class="kt-logo">
     <img src="/base_logo_white_background.png" alt="Kacper Turczyński Development — logo" />
@@ -107,7 +64,7 @@ permalink: /
 <section class="hero">
   <h2>Decyzje, które zakrzywiają rzeczywistość</h2>
   <p>KT DEVELOPMENT to firma doradczo‑strategiczna, która łączy technologię, AI i ludzką świadomość w jednym celu – by rzeczy działały lepiej, szybciej i mądrzej.</p>
-  <a href="#contact" class="cta-button">Skontaktuj się</a>
+  <a href="/pl/kontakt/" class="cta-button">Skontaktuj się</a>
 </section>
 
 <!-- ===== O NAS ===== -->
