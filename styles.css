@@ -177,3 +177,20 @@ footer{ text-align:center; padding:2rem; font-size:.875rem; color:#888; }
     transition:none !important;
   }
 }
+```css
+/* Desktop (≥769px): wyłącz hamburger i drawer, włącz poziome menu */
+@media (min-width: 769px){
+  .hamburger,
+  .mobile-drawer,
+  .mobile-drawer-backdrop{ display:none !important; }
+  .nav{ display:block !important; }
+}
+
+/* Mobile (≤768px): ukryj poziome menu, pokaż hamburger + drawer */
+@media (max-width: 768px){
+  .nav{ display:none !important; }
+  .hamburger{ display:flex !important; }
+  .mobile-drawer,
+  .mobile-drawer-backdrop{ display:block !important; }
+}
+```
