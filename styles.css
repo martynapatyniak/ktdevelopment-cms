@@ -172,3 +172,19 @@ footer{ text-align:center; padding:2rem; font-size:.875rem; color:#888; }
     transition:none !important;
   }
 }
+/* === DEBUG: pokaż hamburgera wszędzie i daj go w prawy górny róg === */
+label.hamburger{
+  display:flex !important;
+  position:fixed !important;
+  right:16px !important;
+  top:16px !important;
+  width:56px !important;
+  height:56px !important;
+  z-index:999999 !important;
+  background:#DF1995 !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+label.hamburger span{ width:24px !important; height:2px !important; background:#fff !important; }
+.mobile-drawer, .mobile-drawer-backdrop{ display:block !important; }  /* żeby panel też był dostępny */
+.nav{ display:none !important; } /* ukryj poziome menu na czas testu */
