@@ -5,13 +5,16 @@ permalink: /
 ---
 
 <!--
-  PL/EN bez przeładowania + AI|IA jak wcześniej (różowo‑czarne, duże, z separatorem)
-  • Przełączanie języka: klik w .language-switcher (z layoutu) — bez przeładowania, z localStorage i ?lang=
-  • AI|IA: markup ze spanami + jedna czarna kreska; kolory: A (lewa) różowa, I (lewa) czarna, separator czarny, I (prawa) różowa, A (prawa) czarna
-  • Resztę layoutu zostawiam bez zmian (korzysta z Twojego globalnego styles.css)
+  PL/EN bez przeładowania + AI|IA (różowo‑czarne, duże, z separatorem)
+  ZMIANY:
+  • usunięty czarny napis "Kacper Turczyński Development" pod logo (PL i EN)
+  • usunięta szara kreska w nagłówku (border-bottom) — nadpisanie CSS
 -->
 
 <style>
+  /* === USUŃ SZARĄ LINIĘ POD NAGŁÓWKIEM === */
+  header, .header{ border-bottom:none !important; box-shadow:none !important; }
+
   /* === NO-RELOAD LANGUAGE TOGGLE (widoczność bloków) === */
   html[data-lang="pl"] .lang-en{ display:none !important; }
   html[data-lang="en"] .lang-pl{ display:none !important; }
@@ -47,7 +50,6 @@ permalink: /
       </div>
       <div class="kt-logo">
         <img src="/base_logo_white_background.png" alt="Logo KT Development" />
-        <h2>Kacper Turczyński Development</h2>
       </div>
     </section>
 
@@ -117,7 +119,6 @@ permalink: /
       </div>
       <div class="kt-logo">
         <img src="/base_logo_white_background.png" alt="KT Development logo" />
-        <h2>Kacper Turczyński Development</h2>
       </div>
     </section>
 
