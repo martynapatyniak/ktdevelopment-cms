@@ -5,22 +5,17 @@ permalink: /
 ---
 
 <!--
-  PL/EN bez przeładowania + AI|IA (różowo‑czarne, duże, z separatorem)
-  ZMIANY:
-  • usunięty czarny napis "Kacper Turczyński Development" pod logo (PL i EN)
-  • usunięta szara kreska w nagłówku (border-bottom) — nadpisanie CSS
+  HOME NO-RELOAD: klik „Strona główna” pokazuje DOKŁADNIE widok z pierwszego wejścia,
+  bez przeładowania. Działa razem z przełącznikiem PL/EN (no‑reload).
 -->
 
 <style>
-  /* === USUŃ SZARĄ LINIĘ POD NAGŁÓWKIEM === */
-  header, .header{ border-bottom:none !important; box-shadow:none !important; }
-
-  /* === NO-RELOAD LANGUAGE TOGGLE (widoczność bloków) === */
+  /* Języki: pokazuj tylko aktywny */
   html[data-lang="pl"] .lang-en{ display:none !important; }
   html[data-lang="en"] .lang-pl{ display:none !important; }
   .language-switcher a[aria-current="true"]{ font-weight:700; text-decoration:underline; }
 
-  /* === AI|IA — wersja jak wcześniej (różowo‑czarne, duże) === */
+  /* AI|IA (różowo‑czarne, duże) — jak wcześniej */
   :root{ --pink:#DF1995; --ink:#111; }
   .ai-lockup{ display:inline-grid; grid-auto-flow:column; align-items:center; gap: clamp(8px, 1.2vw, 16px); }
   .ai-lockup .ch{ line-height:1; font-weight:300; letter-spacing:0; font-size: clamp(64px, 8.5vw, 140px); }
@@ -28,7 +23,6 @@ permalink: /
   .ai-lockup .ink{ color: var(--ink); }
   .ai-lockup .bar{ width: 2px; height: clamp(80px, 10vw, 150px); background: var(--ink); display:block; }
 
-  /* Drobna kosmetyka na mobile (nic agresywnego) */
   @media (max-width: 1023px){
     .ai-lockup{ gap: clamp(6px, 2.5vw, 10px); }
     .ai-lockup .ch{ font-size: clamp(36px, 12vw, 64px); }
@@ -39,7 +33,6 @@ permalink: /
 <main id="home" class="home">
   <!-- ================== POLSKI ================== -->
   <div class="lang-pl" lang="pl">
-    <!-- Sekcja logotypów AI | IA oraz logotypu KT Development -->
     <section class="hero-logos">
       <div class="ai-lockup" role="img" aria-label="AI | IA">
         <span class="ch pink">A</span>
@@ -50,24 +43,22 @@ permalink: /
       </div>
       <div class="kt-logo">
         <img src="/base_logo_white_background.png" alt="Logo KT Development" />
+        <h2>Kacper Turczyński Development</h2>
       </div>
     </section>
 
-    <!-- Hasło i CTA -->
     <section class="hero">
       <h2>Decyzje, które zakrzywiają rzeczywistość</h2>
       <p>KT DEVELOPMENT to firma doradczo‑strategiczna, która łączy technologię, AI i ludzką świadomość w jednym celu – by rzeczy działały lepiej, szybciej i mądrzej.</p>
       <a href="/pl/kontakt/" class="cta-button">Skontaktuj się</a>
     </section>
 
-    <!-- Kim jesteśmy -->
     <section id="about">
       <h3>Kim jesteśmy</h3>
       <p>Twórca: Kacper Turczyński – doradca strategiczny, operator rzeczywistości, człowiek, który nie tylko rozumie AI, ale potrafi je zastosować w życiu i biznesie.</p>
       <p>Wartości: Prawda, efektywność, wolność.  Rola AI: partner, nie narzędzie.</p>
     </section>
 
-    <!-- Oferta -->
     <section id="offer">
       <h3>Oferta</h3>
       <ul>
@@ -78,7 +69,6 @@ permalink: /
       </ul>
     </section>
 
-    <!-- Projekty -->
     <section id="projects">
       <h3>Wybrane projekty</h3>
       <ul>
@@ -88,13 +78,11 @@ permalink: /
       </ul>
     </section>
 
-    <!-- Blog -->
     <section id="blog">
       <h3>Blog &amp; Publikacje</h3>
       <p>Tutaj pojawią się treści o AI, strategii i podejmowaniu decyzji w XXI wieku.</p>
     </section>
 
-    <!-- Kontakt -->
     <section id="contact">
       <h3>Kontakt</h3>
       <p>Masz projekt lub potrzebujesz partnera do rozmowy strategicznej?  Napisz:
@@ -108,7 +96,6 @@ permalink: /
 
   <!-- ================== ENGLISH ================== -->
   <div class="lang-en" lang="en">
-    <!-- Logos section -->
     <section class="hero-logos">
       <div class="ai-lockup" role="img" aria-label="AI | IA">
         <span class="ch pink">A</span>
@@ -119,24 +106,22 @@ permalink: /
       </div>
       <div class="kt-logo">
         <img src="/base_logo_white_background.png" alt="KT Development logo" />
+        <h2>Kacper Turczyński Development</h2>
       </div>
     </section>
 
-    <!-- Hero -->
     <section class="hero">
       <h2>Decisions that bend reality</h2>
       <p>KT DEVELOPMENT is a strategy & advisory company combining technology, AI and human awareness — so things work better, faster and smarter.</p>
       <a href="/en/contact/" class="cta-button">Contact us</a>
     </section>
 
-    <!-- About -->
     <section id="about-en">
       <h3>Who we are</h3>
       <p>Founder: Kacper Turczyński — strategic advisor, operator of reality, a person who not only understands AI but applies it in life and business.</p>
       <p>Values: Truth, efficiency, freedom. Role of AI: a partner, not a tool.</p>
     </section>
 
-    <!-- Offer -->
     <section id="offer-en">
       <h3>Offer</h3>
       <ul>
@@ -147,7 +132,6 @@ permalink: /
       </ul>
     </section>
 
-    <!-- Projects -->
     <section id="projects-en">
       <h3>Selected projects</h3>
       <ul>
@@ -157,13 +141,11 @@ permalink: /
       </ul>
     </section>
 
-    <!-- Blog -->
     <section id="blog-en">
       <h3>Blog &amp; Publications</h3>
       <p>Articles on AI, strategy and decision‑making in the 21st century will appear here.</p>
     </section>
 
-    <!-- Contact -->
     <section id="contact-en">
       <h3>Contact</h3>
       <p>Have a project or need a strategic sparring partner? Write to:
@@ -189,11 +171,9 @@ permalink: /
     lang = newLang;
     document.documentElement.setAttribute('data-lang', lang);
     localStorage.setItem(LS_KEY, lang);
-    // Podmień ?lang= w URL bez przeładowania
     const params = new URLSearchParams(location.search);
     params.set('lang', lang);
     history.replaceState({}, '', location.pathname + '?' + params.toString() + location.hash);
-    // aria-current/pressed w przełączniku nagłówka
     document.querySelectorAll('.language-switcher a').forEach(a=>{
       const code = (a.textContent||'').trim().toLowerCase();
       a.setAttribute('aria-current', code===lang ? 'true':'false');
@@ -201,10 +181,11 @@ permalink: /
     });
   }
 
-  // Init
+  // Inicjalizacja i zapis „widoku początkowego”
   applyLang(lang);
+  const initialLang = lang; // <- to chcemy odtwarzać po kliknięciu "Strona główna"
 
-  // Przechwyć klik w istniejącym przełączniku języka
+  // Klik w przełącznik języka (no‑reload)
   const switcher = document.querySelector('.language-switcher');
   if(switcher){
     switcher.addEventListener('click', function(e){
@@ -217,5 +198,27 @@ permalink: /
       }
     }, true);
   }
+
+  // HOME NO‑RELOAD — "Strona główna" zawsze przywraca widok początkowy
+  function handleHomeClick(e, a){
+    e.preventDefault();
+    applyLang(initialLang);
+    // reset URL do root + ?lang=initialLang
+    history.pushState({}, '', '/' + '?lang=' + initialLang);
+    // zamknij ewentualne menu mobilne
+    const cb = document.getElementById('menu-toggle');
+    if(cb){ cb.checked = false; }
+    // przewiń na górę
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.addEventListener('click', function(e){
+    const a = e.target.closest('a');
+    if(!a) return;
+    const text = (a.textContent||'').trim().toLowerCase();
+    const href = (a.getAttribute('href')||'').trim();
+    const isHome = text === 'strona główna' || /^(\/|\/pl\/index\/?|\/pl\/?|#home)$/.test(href);
+    if(isHome){ handleHomeClick(e, a); }
+  }, true);
 })();
 </script>
