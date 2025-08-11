@@ -4,21 +4,18 @@ layout: layout.njk
 permalink: /
 ---
 
-<!-- Styl lokalny tylko dla TEJ strony:
-     • układ jak w referencji (AI||IA po lewej, duże logo po prawej, „kartonik” z hasłem)
-     • hamburger tylko na mobile (≤768px), bez ruszania innych podstron -->
+<!-- Lokalny styl tylko dla TEJ strony: cieńsze AI|IA + JEDEN czarny separator,
+     układ jak w referencji, hamburger tylko na mobile. -->
 <style>
   :root{ --pink:#DF1995; --ink:#111; --page-max:1200px; --gutter:32px; }
   .hero-logos, .hero, section{ max-width: var(--page-max); margin-left:auto; margin-right:auto; }
 
-  /* ===== AI||IA — litery + dwie pionowe kreski ===== */
+  /* ===== AI|IA — litery cieńsze + JEDEN czarny separator ===== */
   .ai-lockup{ display:inline-grid; grid-auto-flow:column; align-items:center; gap: clamp(14px, 1.8vw, 26px); }
-  .ai-lockup .ch{ line-height:1; letter-spacing:.02em; }
-  .ai-lockup .ch.a{ font-weight:800; }
-  .ai-lockup .ch.i{ font-weight:600; }
-  .ai-lockup .bar{ width:3px; display:block; }
-  .ai-lockup .bar.ink{ background: var(--ink); }
-  .ai-lockup .bar.pink{ background: var(--pink); margin-left:-6px; } /* zbliżenie kresek */
+  .ai-lockup .ch{ line-height:1; letter-spacing:.02em; font-weight: 400; } /* cieńsze */
+  .ai-lockup .ch.a{ /* opcjonalnie delikatnie mocniej dla A */ font-weight: 400; }
+  .ai-lockup .ch.i{ font-weight: 400; }
+  .ai-lockup .bar{ width:3px; height: clamp(90px, 11vw, 160px); background: var(--ink); display:block; }
   .ai-lockup .pink{ color: var(--pink); }
   .ai-lockup .ink{ color: var(--ink); }
 
@@ -26,7 +23,6 @@ permalink: /
   @media (min-width: 1024px){
     .hero-logos{ display:grid; grid-template-columns: 1fr 1.25fr; align-items:center; gap:40px; margin-top:24px; padding:0 var(--gutter); }
     .ai-lockup .ch{ font-size: clamp(72px, 9vw, 140px); }
-    .ai-lockup .bar{ height: clamp(90px, 11vw, 160px); }
 
     .kt-logo{ display:flex; justify-content:center; align-items:center; }
     .kt-logo img{ width:100%; max-width: 640px; height:auto; display:block; }
@@ -40,7 +36,7 @@ permalink: /
     h3{ color:var(--pink); }
   }
 
-  /* ===== Mobile (bezpieczne skalowanie) ===== */
+  /* ===== Mobile (skalowanie) ===== */
   @media (max-width: 1023px){
     .hero-logos{ display:flex; flex-direction:column; gap:24px; align-items:center; margin-top:16px; padding:0 16px; }
     .ai-lockup .ch{ font-size: clamp(36px, 12vw, 64px); }
@@ -50,39 +46,21 @@ permalink: /
     section{ padding:0 16px; }
   }
 
-  /* ===== HAMBURGER tylko na mobile (≤768px) ===== */
+  /* ===== HAMBURGER tylko na mobile (≤768px) — ukryj poziome menu headera ===== */
   @media (min-width: 769px){
     .hamburger, .mobile-drawer, .mobile-drawer-backdrop{ display:none !important; }
   }
   @media (max-width: 768px){
-    /* Ukryj poziome menu z headera na telefonach */
     header .nav{ display:none !important; }
-
     .hamburger{
       position: fixed; left: max(16px, env(safe-area-inset-left)); top: max(16px, env(safe-area-inset-top));
       width:50px; height:50px; display:flex; align-items:center; justify-content:center; flex-direction:column;
       background:var(--pink); color:#fff; border-radius:8px; box-shadow:0 4px 20px rgba(223,25,149,.3); z-index:12090;
-      -webkit-tap-highlight-color: transparent; touch-action: manipulation;
     }
     .hamburger span{ display:block; width:20px; height:2px; background:#fff; border-radius:2px; transition:all .3s ease; }
     .hamburger span+span{ margin-top:6px; }
-
-    .mobile-drawer{
-      position:fixed; top:0; left:0; height:100dvh; width:80vw; max-width:320px; background:#fff;
-      transform:translateX(-100%); transition:transform .25s ease; z-index:12095; padding:20px; box-shadow:2px 0 20px rgba(0,0,0,.12);
-      display:block; overflow-y:auto;
-    }
-    .mobile-drawer header{ display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
-    .mobile-drawer .close{ font-size:24px; background:none; border:0; padding:8px; cursor:pointer; }
-    .mobile-drawer nav{ display:flex; flex-direction:column; gap:14px; }
-    .mobile-drawer a{ text-decoration:none; color:#333; font-weight:500; padding:12px 8px; border-bottom:1px solid #eee; }
-
-    .mobile-drawer-backdrop{
-      position:fixed; inset:0; background:rgba(0,0,0,.3); backdrop-filter:blur(2px);
-      opacity:0; pointer-events:none; transition:opacity .2s ease; z-index:12085; display:block;
-    }
-
-    /* Interakcje (checkbox steruje) */
+    .mobile-drawer{ position:fixed; top:0; left:0; height:100dvh; width:80vw; max-width:320px; background:#fff; transform:translateX(-100%); transition:transform .25s ease; z-index:12095; padding:20px; box-shadow:2px 0 20px rgba(0,0,0,.12); display:block; overflow-y:auto; }
+    .mobile-drawer-backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.3); backdrop-filter:blur(2px); opacity:0; pointer-events:none; transition:opacity .2s ease; z-index:12085; display:block; }
     #menu-toggle:checked + .hamburger span:nth-child(1){ transform:rotate(45deg) translate(6px,6px); }
     #menu-toggle:checked + .hamburger span:nth-child(2){ opacity:0; }
     #menu-toggle:checked + .hamburger span:nth-child(3){ transform:rotate(-45deg) translate(6px,-6px); }
@@ -114,12 +92,11 @@ permalink: /
 <!-- ===== HERO / LOGA ===== -->
 <section class="hero-logos">
   <div class="ai-lockup" role="img" aria-label="AI | IA">
-    <span class="ch a" style="color:var(--pink)">A</span>
-    <span class="ch i" style="color:var(--ink)">I</span>
-    <span class="bar ink" aria-hidden="true"></span>
-    <span class="bar pink" aria-hidden="true"></span>
-    <span class="ch i" style="color:var(--pink)">I</span>
-    <span class="ch a" style="color:var(--ink)">A</span>
+    <span class="ch a pink">A</span>
+    <span class="ch i ink">I</span>
+    <span class="bar" aria-hidden="true"></span>
+    <span class="ch i pink">I</span>
+    <span class="ch a ink">A</span>
   </div>
   <div class="kt-logo">
     <img src="/base_logo_white_background.png" alt="Kacper Turczyński Development — logo" />
