@@ -6,10 +6,10 @@ permalink: /
 
 <!-- Lokalny styl tylko dla TEJ strony:
      • AI|IA cieńsze (300) + JEDEN czarny separator (2px)
-     • Odstępy PO RÓWNO między A–I–|–I–A (stały gap)
-     • AI|IA i logo bliżej siebie (1fr/1fr, mniejszy gap kolumn)
+     • Odstępy PO RÓWNO między A–I–|–I–A, MOCNO zmniejszone
+     • AI|IA i logo bliżej siebie (kolumny 1fr/1fr, mniejszy gap kolumn)
      • Szary „kartonik” pod spodem węższy
-     • Na mobile ukryjemy poziome .nav (hamburger z layoutu zostaje)
+     • Na mobile ukryte poziome .nav (hamburger z layoutu zostaje)
 -->
 <style>
   :root{
@@ -17,32 +17,30 @@ permalink: /
     --page-max:1200px; --gutter:32px;
     --ai-weight:300;         /* grubość liter AI|IA */
     --bar:2px;               /* grubość separatora */
-    --ai-gap:16px;           /* równy odstęp między A, I, separatorem (desktop) */
+    --ai-gap:8px;            /* RÓWNY odstęp między A, I i separatorem (desktop) — ULTRA TIGHT */
     --hero-narrow:860px;     /* szerokość „kartonika” z hasłem */
   }
 
-  /* Na mobile rób odrobinkę ciaśniej */
-  @media (max-width:1023px){ :root{ --ai-gap:12px; } }
+  /* Na mobile jeszcze ciaśniej */
+  @media (max-width:1023px){ :root{ --ai-gap:6px; } }
 
   /* Spójna max-szerokość sekcji na tej stronie */
   .hero-logos, .hero, section{ max-width: var(--page-max); margin-left:auto; margin-right:auto; }
 
-  /* ===== AI|IA — litery + jeden separator, równe odstępy ===== */
-  .ai-lockup{
-    display:inline-grid; grid-auto-flow:column; align-items:center; gap: var(--ai-gap);
-  }
-  .ai-lockup .ch{ line-height:1; letter-spacing:.005em; font-weight: var(--ai-weight); }
+  /* ===== AI|IA — litery + jeden separator, równe i bardzo małe odstępy ===== */
+  .ai-lockup{ display:inline-grid; grid-auto-flow:column; align-items:center; gap: var(--ai-gap); }
+  .ai-lockup .ch{ line-height:1; letter-spacing:0; font-weight: var(--ai-weight); }
   .ai-lockup .pink{ color: var(--pink); }
   .ai-lockup .ink{ color: var(--ink); }
   .ai-lockup .bar{ width: var(--bar); background: var(--ink); display:block; }
 
-  /* ===== Desktop (zbliżenie kolumn + węższy hero) ===== */
+  /* ===== Desktop (zbliżone kolumny + węższy hero) ===== */
   @media (min-width: 1024px){
     .hero-logos{
       display:grid;
-      grid-template-columns: 1fr 1fr; /* kolumny o podobnej szerokości → wizualnie bliżej */
+      grid-template-columns: 1fr 1fr; /* kolumny o podobnej szerokości */
       align-items:center;
-      gap:22px;               /* mniejsza szczelina między AI|IA a logo */
+      gap:12px;               /* JESZCZE mniej między AI|IA a logo */
       margin-top:24px;
       padding-left:16px; padding-right:16px;
     }
@@ -66,7 +64,7 @@ permalink: /
 
   /* ===== Mobile (bezpieczne skalowanie) ===== */
   @media (max-width: 1023px){
-    .hero-logos{ display:flex; flex-direction:column; gap:24px; align-items:center; margin-top:16px; padding:0 16px; }
+    .hero-logos{ display:flex; flex-direction:column; gap:20px; align-items:center; margin-top:16px; padding:0 16px; }
     .ai-lockup .ch{ font-size: clamp(34px, 12vw, 60px); }
     .ai-lockup .bar{ height: clamp(42px, 14vw, 76px); }
     .kt-logo img{ max-width: clamp(240px, 80vw, 480px); height:auto; }
