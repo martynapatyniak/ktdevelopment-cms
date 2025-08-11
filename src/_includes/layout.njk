@@ -1,56 +1,105 @@
 <!DOCTYPE html>
 <html lang="pl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ title or "KT Development" }}</title>
-    <link rel="stylesheet" href="{{ '/styles.css' | url }}" />
-  </head>
-  <body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title or "KT Development" }}</title>
+    <!-- Cache busting, podbijaj numer przy zmianach CSS -->
+    <link rel="stylesheet" href="{{ '/styles.css?v=8' | url }}" />
+  </head>
+  <body>
 
-        <input type="checkbox" id="menu-toggle" class="menu-toggle" />
-    <label for="menu-toggle" class="hamburger" aria-label="Otwórz menu" aria-controls="mobile-drawer" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </label>
+    <header>
+      <!-- === HAMBURGER + DRAWER (MOBILE) === -->
+      <input type="checkbox" id="menu-toggle" class="menu-toggle" />
+      <label
+        for="menu-toggle"
+        class="hamburger"
+        aria-label="Otwórz menu"
+        aria-controls="mobile-drawer"
+        aria-expanded="false"
+      >
+        <span></span><span></span><span></span>
+      </label>
 
-    <div class="mobile-drawer-backdrop" onclick="document.getElementById('menu-toggle').checked=false"></div>
-    <aside id="mobile-drawer" class="mobile-drawer" role="navigation" aria-label="Główne">
-      <header>
-        <h2>Menu</h2>
-        <button class="close" aria-label="Zamknij" onclick="document.getElementById('menu-toggle').checked=false">×</button>
-      </header>
-      <nav>
-        <a href="/pl/index/" onclick="document.getElementById('menu-toggle').checked=false">Strona główna</a>
-        <a href="/pl/oferta/" onclick="document.getElementById('menu-toggle').checked=false">Oferta</a>
-        <a href="/pl/projekty/" onclick="document.getElementById('menu-toggle').checked=false">Projekty</a>
-        <a href="/blog/" onclick="document.getElementById('menu-toggle').checked=false">Blog</a>
-        <a href="/pl/kontakt/" onclick="document.getElementById('menu-toggle').checked=false">Kontakt</a>
-      </nav>
-    </aside>
+      <div class="mobile-drawer-backdrop" id="menu-backdrop"></div>
 
-    <header>
-      <div class="container-column">
-                <div class="logo-title">
-          <img src="/base_icon_white_background.png" alt="KT Logo" class="logo" />
-          <h1>KT DEVELOPMENT</h1>
-        </div>
+      <aside id="mobile-drawer" class="mobile-drawer" role="navigation" aria-label="Główne">
+        <header>
+          <h2>Menu</h2>
+          <button class="close" id="menu-close" aria-label="Zamknij">×</button>
+        </header>
+        <nav>
+          <a href="/pl/index/">Strona główna</a>
+          <a href="/pl/oferta/">Oferta</a>
+          <a href="/pl/projekty/">Projekty</a>
+          <a href="/blog/">Blog</a>
+          <a href="/pl/kontakt/">Kontakt</a>
+        </nav>
+      </aside>
+      <!-- === /HAMBURGER === -->
 
-                <nav class="nav">
-          <a href="/pl/index/">Strona główna</a>
-          <a href="/pl/oferta/">Oferta</a>
-          <a href="/pl/projekty/">Projekty</a>
-          <a href="/blog/">Blog</a>
-          <a href="/pl/kontakt/">Kontakt</a>
-        </nav>
+      <div class="container-column">
+        <div class="logo-title">
+          <img src="/base_icon_white_background.png" alt="KT Logo" class="logo" />
+          <h1>KT DEVELOPMENT</h1>
+        </div>
 
-                <div class="language-switcher">
-          <a href="/pl/index/">PL</a> | <a href="/en/">EN</a>
-        </div>
-      </div>
-    </header>
+        <nav class="nav">
+          <a href="/pl/index/">Strona główna</a>
+          <a href="/pl/oferta/">Oferta</a>
+          <a href="/pl/projekty/">Projekty</a>
+          <a href="/blog/">Blog</a>
+          <a href="/pl/kontakt/">Kontakt</a>
+        </nav>
 
-    <main>
-      {{ content | safe }}
-    </main>
-  </body>
+        <div class="language-switcher">
+          <a href="/pl/index/">PL</a> | <a href="/en/">EN</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content">
+      {{ content | safe }}
+    </main>
+
+    <!-- JS: aria-expanded, Esc, backdrop click, blokada scrolla, cleanup na desktopie -->
+    <script>
+      (function () {
+        const cb = document.getElementById('menu-toggle');
+        const trigger = document.querySelector('label[for="menu-toggle"]');
+        const drawer = document.getElementById('mobile-drawer');
+        const backdrop = document.getElementById('menu-backdrop');
+        const closeBtn = document.getElementById('menu-close');
+
+        function sync() {
+          const open = cb.checked;
+          trigger && trigger.setAttribute('aria-expanded', String(open));
+          document.body.style.overflow = open ? 'hidden' : '';
+        }
+
+        // Zmiana stanu
+        cb.addEventListener('change', sync);
+        sync();
+
+        // Zamknij: backdrop, X, Esc
+        backdrop.addEventListener('click', () => { cb.checked = false; sync(); });
+        closeBtn.addEventListener('click', () => { cb.checked = false; sync(); });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') { cb.checked = false; sync(); }
+        });
+
+        // Zamknij po kliknięciu linku w szufladzie
+        drawer.addEventListener('click', (e) => {
+          if (e.target.tagName === 'A') { cb.checked = false; sync(); }
+        });
+
+        // Sprzątanie po przejściu na desktop
+        const mq = window.matchMedia('(min-width: 992px)');
+        mq.addEventListener('change', (e) => {
+          if (e.matches) { cb.checked = false; sync(); }
+        });
+      })();
+    </script>
+  </body>
 </html>
