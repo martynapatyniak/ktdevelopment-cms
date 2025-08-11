@@ -5,6 +5,7 @@ permalink: /
 ---
 
 <!-- Lokalny styl TYLKO dla TEJ strony:
+     • usuwa szarą linię pod nagłówkiem (header)
      • AI|IA cienkie (300) + JEDEN separator (2px)
      • równe, małe odstępy A–I–|–I–A (desktop 8px, mobile 6px)
      • AI|IA i logo bliżej siebie (1fr/1fr, mały gap kolumn)
@@ -21,6 +22,9 @@ permalink: /
     --ai-gap:8px;        /* równy odstęp między A, I i separatorem (desktop) */
     --hero-narrow:860px; /* max-szerokość „kartonika” (desktop) */
   }
+
+  /* Usuń szarą kreskę/cień w nagłówku */
+  header, .header{ border-bottom:none !important; box-shadow:none !important; }
 
   /* Mobile: odrobinę ciaśniej */
   @media (max-width:1023px){ :root{ --ai-gap:6px; } }
@@ -145,7 +149,8 @@ permalink: /
 <!-- ===== KONTAKT ===== -->
 <section id="contact">
   <h3>Kontakt</h3>
-  <p>Masz projekt? Napisz: <a href="mailto:kontakt@ktdevelopment.pl">kontakt@ktdevelopment.pl</a></p>
+  <p>Masz projekt lub potrzebujesz partnera do rozmowy strategicznej?  Napisz:
+    <a href="mailto:kontakt@ktdevelopment.pl">kontakt@ktdevelopment.pl</a></p>
 </section>
 
 <footer>
