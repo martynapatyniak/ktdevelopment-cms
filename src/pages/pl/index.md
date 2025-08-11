@@ -1,224 +1,146 @@
----
-title: Strona główna
-layout: layout.njk
-permalink: /
----
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title or "KT Development" }}</title>
+    <!-- Podbij numer po zmianach CSS -->
+    <link rel="stylesheet" href="{{ '/styles.css?v=12' | url }}" />
+  </head>
+  <body>
 
-<!--
-  HOME NO-RELOAD: klik „Strona główna” pokazuje DOKŁADNIE widok z pierwszego wejścia,
-  bez przeładowania. Działa razem z przełącznikiem PL/EN (no‑reload).
--->
+    <header>
+      <!-- === HAMBURGER + DRAWER (MOBILE) === -->
+      <input type="checkbox" id="menu-toggle" class="menu-toggle" />
 
-<style>
-  /* Języki: pokazuj tylko aktywny */
-  html[data-lang="pl"] .lang-en{ display:none !important; }
-  html[data-lang="en"] .lang-pl{ display:none !important; }
-  .language-switcher a[aria-current="true"]{ font-weight:700; text-decoration:underline; }
+      <label
+        for="menu-toggle"
+        class="hamburger"
+        aria-label="Otwórz menu"
+        aria-controls="mobile-drawer"
+        aria-expanded="false"
+      >
+        <span></span><span></span><span></span>
+      </label>
 
-  /* AI|IA (różowo‑czarne, duże) — jak wcześniej */
-  :root{ --pink:#DF1995; --ink:#111; }
-  .ai-lockup{ display:inline-grid; grid-auto-flow:column; align-items:center; gap: clamp(8px, 1.2vw, 16px); }
-  .ai-lockup .ch{ line-height:1; font-weight:300; letter-spacing:0; font-size: clamp(64px, 8.5vw, 140px); }
-  .ai-lockup .pink{ color: var(--pink); }
-  .ai-lockup .ink{ color: var(--ink); }
-  .ai-lockup .bar{ width: 2px; height: clamp(80px, 10vw, 150px); background: var(--ink); display:block; }
+      <div class="mobile-drawer-backdrop" id="menu-backdrop"></div>
 
-  @media (max-width: 1023px){
-    .ai-lockup{ gap: clamp(6px, 2.5vw, 10px); }
-    .ai-lockup .ch{ font-size: clamp(36px, 12vw, 64px); }
-    .ai-lockup .bar{ height: clamp(42px, 14vw, 76px); }
-  }
-</style>
+      <aside id="mobile-drawer" class="mobile-drawer" role="navigation" aria-label="Główne">
+        <header>
+          <h2>Menu</h2>
+          <button class="close" id="menu-close" aria-label="Zamknij">×</button>
+        </header>
+        <nav>
+          <!-- HOME → zawsze na /, a JS dopisze ?lang=... -->
+          <a href="/" data-home>Strona główna</a>
+          <a href="/pl/oferta/">Oferta</a>
+          <a href="/pl/projekty/">Projekty</a>
+          <a href="/blog/">Blog</a>
+          <a href="/pl/kontakt/">Kontakt</a>
+        </nav>
+      </aside>
+      <!-- === /HAMBURGER === -->
 
-<main id="home" class="home">
-  <!-- ================== POLSKI ================== -->
-  <div class="lang-pl" lang="pl">
-    <section class="hero-logos">
-      <div class="ai-lockup" role="img" aria-label="AI | IA">
-        <span class="ch pink">A</span>
-        <span class="ch ink">I</span>
-        <span class="bar" aria-hidden="true"></span>
-        <span class="ch pink">I</span>
-        <span class="ch ink">A</span>
+      <div class="container-column">
+        <div class="logo-title">
+          <img src="/base_icon_white_background.png" alt="KT Logo" class="logo" />
+          <h1>KT DEVELOPMENT</h1>
+        </div>
+
+        <nav class="nav">
+          <!-- HOME → zawsze na /, a JS dopisze ?lang=... -->
+          <a href="/" data-home>Strona główna</a>
+          <a href="/pl/oferta/">Oferta</a>
+          <a href="/pl/projekty/">Projekty</a>
+          <a href="/blog/">Blog</a>
+          <a href="/pl/kontakt/">Kontakt</a>
+        </nav>
+
+        <div class="language-switcher">
+          <!-- Fallback (bez JS): prowadzą na klasyczne ścieżki -->
+          <a href="/pl/index/">PL</a> | <a href="/en/">EN</a>
+        </div>
       </div>
-      <div class="kt-logo">
-        <img src="/base_logo_white_background.png" alt="Logo KT Development" />
-        <h2>Kacper Turczyński Development</h2>
-      </div>
-    </section>
+    </header>
 
-    <section class="hero">
-      <h2>Decyzje, które zakrzywiają rzeczywistość</h2>
-      <p>KT DEVELOPMENT to firma doradczo‑strategiczna, która łączy technologię, AI i ludzką świadomość w jednym celu – by rzeczy działały lepiej, szybciej i mądrzej.</p>
-      <a href="/pl/kontakt/" class="cta-button">Skontaktuj się</a>
-    </section>
+    <main id="main-content">
+      {{ content | safe }}
+    </main>
 
-    <section id="about">
-      <h3>Kim jesteśmy</h3>
-      <p>Twórca: Kacper Turczyński – doradca strategiczny, operator rzeczywistości, człowiek, który nie tylko rozumie AI, ale potrafi je zastosować w życiu i biznesie.</p>
-      <p>Wartości: Prawda, efektywność, wolność.  Rola AI: partner, nie narzędzie.</p>
-    </section>
+    <!-- JS: aria-expanded, Esc, klik w backdrop/X, zamykanie po kliknięciu linku, cleanup na desktopie -->
+    <script>
+      (function () {
+        const cb = document.getElementById('menu-toggle');
+        const trigger = document.querySelector('label[for="menu-toggle"]');
+        const drawer = document.getElementById('mobile-drawer');
+        const backdrop = document.getElementById('menu-backdrop');
+        const closeBtn = document.getElementById('menu-close');
 
-    <section id="offer">
-      <h3>Oferta</h3>
-      <ul>
-        <li><strong>Konsulting strategiczny</strong> — Transformujemy chaos w strukturę i cele.</li>
-        <li><strong>Integracja AI</strong> — Wdrażamy AI nie dla mody, ale dla wyniku.</li>
-        <li><strong>Systemy decyzyjne</strong> — Tworzymy modele, które wspierają ludzi, nie ich zastępują.</li>
-        <li><strong>Transformacja firm</strong> — Nowe ramy dla starego świata.  Bez bullshitu.</li>
-      </ul>
-    </section>
+        function sync() {
+          const open = cb.checked;
+          if (trigger) trigger.setAttribute('aria-expanded', String(open));
+          document.body.style.overflow = open ? 'hidden' : '';
+        }
 
-    <section id="projects">
-      <h3>Wybrane projekty</h3>
-      <ul>
-        <li><strong>CANAL++ WizzAir</strong> — partnerstwo strategiczne w branży medialno‑lotniczej.</li>
-        <li><strong>MODUS</strong> — zakończona współpraca z największym dostawcą dla WizzAir.</li>
-        <li><strong>In progress</strong> — nowe kierunki na styku AI, consultingu i decyzji.</li>
-      </ul>
-    </section>
+        cb.addEventListener('change', sync);
+        sync();
 
-    <section id="blog">
-      <h3>Blog &amp; Publikacje</h3>
-      <p>Tutaj pojawią się treści o AI, strategii i podejmowaniu decyzji w XXI wieku.</p>
-    </section>
+        backdrop.addEventListener('click', () => { cb.checked = false; sync(); });
+        closeBtn.addEventListener('click', () => { cb.checked = false; sync(); });
 
-    <section id="contact">
-      <h3>Kontakt</h3>
-      <p>Masz projekt lub potrzebujesz partnera do rozmowy strategicznej?  Napisz:
-        <a href="mailto:kontakt@ktdevelopment.pl">kontakt@ktdevelopment.pl</a></p>
-    </section>
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') { cb.checked = false; sync(); }
+        });
 
-    <footer>
-      <p>© 2025 KT DEVELOPMENT. Wszystkie prawa zastrzeżone.</p>
-    </footer>
-  </div>
+        drawer.addEventListener('click', (e) => {
+          if (e.target.tagName === 'A') { cb.checked = false; sync(); }
+        });
 
-  <!-- ================== ENGLISH ================== -->
-  <div class="lang-en" lang="en">
-    <section class="hero-logos">
-      <div class="ai-lockup" role="img" aria-label="AI | IA">
-        <span class="ch pink">A</span>
-        <span class="ch ink">I</span>
-        <span class="bar" aria-hidden="true"></span>
-        <span class="ch pink">I</span>
-        <span class="ch ink">A</span>
-      </div>
-      <div class="kt-logo">
-        <img src="/base_logo_white_background.png" alt="KT Development logo" />
-        <h2>Kacper Turczyński Development</h2>
-      </div>
-    </section>
+        // Porządek po przejściu na desktop (spójnie z CSS ≤768px)
+        const mq = window.matchMedia('(min-width: 769px)');
+        mq.addEventListener('change', (e) => {
+          if (e.matches) { cb.checked = false; sync(); }
+        });
+      })();
+    </script>
 
-    <section class="hero">
-      <h2>Decisions that bend reality</h2>
-      <p>KT DEVELOPMENT is a strategy & advisory company combining technology, AI and human awareness — so things work better, faster and smarter.</p>
-      <a href="/en/contact/" class="cta-button">Contact us</a>
-    </section>
+    <!-- JS: HOME zawsze na / z dopiętym ?lang=... (zgodnie z ostatnim wyborem użytkownika) -->
+    <script>
+      (function(){
+        const LS_KEY = 'site_lang';
+        const getLang = () => localStorage.getItem(LS_KEY) || 'pl';
 
-    <section id="about-en">
-      <h3>Who we are</h3>
-      <p>Founder: Kacper Turczyński — strategic advisor, operator of reality, a person who not only understands AI but applies it in life and business.</p>
-      <p>Values: Truth, efficiency, freedom. Role of AI: a partner, not a tool.</p>
-    </section>
+        // Ustaw docelowe href na wszystkich linkach HOME
+        function updateHomeHrefs(){
+          document.querySelectorAll('a[data-home]').forEach(a => {
+            a.setAttribute('href', '/?lang=' + getLang());
+          });
+        }
 
-    <section id="offer-en">
-      <h3>Offer</h3>
-      <ul>
-        <li><strong>Strategic consulting</strong> — We turn chaos into structure and goals.</li>
-        <li><strong>AI integration</strong> — Implementing AI for outcomes, not hype.</li>
-        <li><strong>Decision systems</strong> — Models that support people rather than replace them.</li>
-        <li><strong>Business transformation</strong> — New frames for the old world. No nonsense.</li>
-      </ul>
-    </section>
+        updateHomeHrefs();
 
-    <section id="projects-en">
-      <h3>Selected projects</h3>
-      <ul>
-        <li><strong>CANAL++ × WizzAir</strong> — strategic partnership across media & aviation.</li>
-        <li><strong>MODUS</strong> — completed cooperation with the largest WizzAir supplier.</li>
-        <li><strong>In progress</strong> — new directions at the intersection of AI, consulting and decisions.</li>
-      </ul>
-    </section>
+        // Jeśli użytkownik przełączy język gdziekolwiek, zaktualizuj HOME hrefy
+        window.addEventListener('storage', (e)=>{
+          if(e.key === LS_KEY) updateHomeHrefs();
+        });
 
-    <section id="blog-en">
-      <h3>Blog &amp; Publications</h3>
-      <p>Articles on AI, strategy and decision‑making in the 21st century will appear here.</p>
-    </section>
-
-    <section id="contact-en">
-      <h3>Contact</h3>
-      <p>Have a project or need a strategic sparring partner? Write to:
-        <a href="mailto:kontakt@ktdevelopment.pl">kontakt@ktdevelopment.pl</a></p>
-    </section>
-
-    <footer>
-      <p>© 2025 KT DEVELOPMENT. All rights reserved.</p>
-    </footer>
-  </div>
-</main>
-
-<script>
-(function(){
-  const LS_KEY = 'site_lang';
-  const qs = new URLSearchParams(location.search);
-  const urlLang = qs.get('lang');
-  const saved = localStorage.getItem(LS_KEY);
-  const navLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase().startsWith('pl') ? 'pl' : 'en';
-  let lang = (urlLang==='pl'||urlLang==='en') ? urlLang : (saved || navLang);
-
-  function applyLang(newLang){
-    lang = newLang;
-    document.documentElement.setAttribute('data-lang', lang);
-    localStorage.setItem(LS_KEY, lang);
-    const params = new URLSearchParams(location.search);
-    params.set('lang', lang);
-    history.replaceState({}, '', location.pathname + '?' + params.toString() + location.hash);
-    document.querySelectorAll('.language-switcher a').forEach(a=>{
-      const code = (a.textContent||'').trim().toLowerCase();
-      a.setAttribute('aria-current', code===lang ? 'true':'false');
-      a.setAttribute('aria-pressed', code===lang ? 'true':'false');
-    });
-  }
-
-  // Inicjalizacja i zapis „widoku początkowego”
-  applyLang(lang);
-  const initialLang = lang; // <- to chcemy odtwarzać po kliknięciu "Strona główna"
-
-  // Klik w przełącznik języka (no‑reload)
-  const switcher = document.querySelector('.language-switcher');
-  if(switcher){
-    switcher.addEventListener('click', function(e){
-      const a = e.target.closest('a');
-      if(!a) return;
-      const code = (a.textContent||'').trim().toLowerCase();
-      if(code==='pl' || code==='en'){
-        e.preventDefault();
-        applyLang(code);
-      }
-    }, true);
-  }
-
-  // HOME NO‑RELOAD — "Strona główna" zawsze przywraca widok początkowy
-  function handleHomeClick(e, a){
-    e.preventDefault();
-    applyLang(initialLang);
-    // reset URL do root + ?lang=initialLang
-    history.pushState({}, '', '/' + '?lang=' + initialLang);
-    // zamknij ewentualne menu mobilne
-    const cb = document.getElementById('menu-toggle');
-    if(cb){ cb.checked = false; }
-    // przewiń na górę
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  document.addEventListener('click', function(e){
-    const a = e.target.closest('a');
-    if(!a) return;
-    const text = (a.textContent||'').trim().toLowerCase();
-    const href = (a.getAttribute('href')||'').trim();
-    const isHome = text === 'strona główna' || /^(\/|\/pl\/index\/?|\/pl\/?|#home)$/.test(href);
-    if(isHome){ handleHomeClick(e, a); }
-  }, true);
-})();
-</script>
+        // Dodatkowo, przechwyć klik i wymuś przejście na /?lang=...
+        document.addEventListener('click', function(e){
+          const a = e.target.closest('a[data-home]');
+          if(!a) return;
+          e.preventDefault();
+          const url = '/?lang=' + getLang();
+          // jeśli już jesteśmy na /, tylko podmień param i przewiń do góry
+          if(location.pathname === '/'){
+            const params = new URLSearchParams(location.search);
+            params.set('lang', getLang());
+            history.pushState({}, '', '/?'+params.toString());
+            window.scrollTo({top:0, behavior:'smooth'});
+          }else{
+            location.assign(url);
+          }
+        }, true);
+      })();
+    </script>
+  </body>
+</html>
