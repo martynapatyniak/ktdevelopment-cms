@@ -6,19 +6,32 @@ permalink: /
 
 <!-- Lokalny styl tylko dla TEJ strony:
      • AI|IA cieńsze (300) + JEDEN czarny separator (2px)
-     • AI|IA i logo bliżej siebie (mniejszy gap, kolumny 1fr/1fr)
-     • szary „kartonik” z hasłem węższy (ucięte boki)
-     • hamburger tylko na mobile zostaje w layoutcie; tutaj tylko chowamy poziome .nav na telefonach
+     • Odstępy PO RÓWNO między A–I–|–I–A (stały gap)
+     • AI|IA i logo bliżej siebie (1fr/1fr, mniejszy gap kolumn)
+     • Szary „kartonik” pod spodem węższy
+     • Na mobile ukryjemy poziome .nav (hamburger z layoutu zostaje)
 -->
 <style>
-  :root{ --pink:#DF1995; --ink:#111; --page-max:1200px; --gutter:32px; --ai-weight:300; --bar:2px; --hero-narrow:860px; }
+  :root{
+    --pink:#DF1995; --ink:#111;
+    --page-max:1200px; --gutter:32px;
+    --ai-weight:300;         /* grubość liter AI|IA */
+    --bar:2px;               /* grubość separatora */
+    --ai-gap:16px;           /* równy odstęp między A, I, separatorem (desktop) */
+    --hero-narrow:860px;     /* szerokość „kartonika” z hasłem */
+  }
+
+  /* Na mobile rób odrobinkę ciaśniej */
+  @media (max-width:1023px){ :root{ --ai-gap:12px; } }
 
   /* Spójna max-szerokość sekcji na tej stronie */
   .hero-logos, .hero, section{ max-width: var(--page-max); margin-left:auto; margin-right:auto; }
 
-  /* ===== AI|IA – litery cieńsze + jeden separator ===== */
-  .ai-lockup{ display:inline-grid; grid-auto-flow:column; align-items:center; gap: clamp(12px, 1.5vw, 22px); }
-  .ai-lockup .ch{ line-height:1; letter-spacing:.01em; font-weight: var(--ai-weight); }
+  /* ===== AI|IA — litery + jeden separator, równe odstępy ===== */
+  .ai-lockup{
+    display:inline-grid; grid-auto-flow:column; align-items:center; gap: var(--ai-gap);
+  }
+  .ai-lockup .ch{ line-height:1; letter-spacing:.005em; font-weight: var(--ai-weight); }
   .ai-lockup .pink{ color: var(--pink); }
   .ai-lockup .ink{ color: var(--ink); }
   .ai-lockup .bar{ width: var(--bar); background: var(--ink); display:block; }
@@ -27,14 +40,13 @@ permalink: /
   @media (min-width: 1024px){
     .hero-logos{
       display:grid;
-      grid-template-columns: 1fr 1fr; /* kolumny bliżej tej samej szerokości */
+      grid-template-columns: 1fr 1fr; /* kolumny o podobnej szerokości → wizualnie bliżej */
       align-items:center;
       gap:22px;               /* mniejsza szczelina między AI|IA a logo */
       margin-top:24px;
-      padding-left:16px;      /* ciaśniej przy krawędzi */
-      padding-right:16px;
+      padding-left:16px; padding-right:16px;
     }
-    .ai-lockup .ch{ font-size: clamp(68px, 8.6vw, 132px); }
+    .ai-lockup .ch{ font-size: clamp(64px, 8.2vw, 128px); }
     .ai-lockup .bar{ height: clamp(88px, 10.8vw, 154px); }
 
     .kt-logo{ display:flex; justify-content:center; align-items:center; }
