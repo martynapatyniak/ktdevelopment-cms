@@ -1,68 +1,77 @@
----
-title: Strona główna
-layout: layout.njk
-permalink: /
----
+/* === MOBILE POLISH (≤768px) — dopasowanie do screena === */
+@media (max-width: 768px){
+  /* Header: logo nad tytułem, wyśrodkowane */
+  .container-column{ align-items:center; text-align:center; padding: 0 16px; }
+  .logo-title{ flex-direction:column; align-items:center; gap:8px; margin: 8px 0 0; }
+  .logo{ height: 56px; width:auto; margin:0; }
+  .logo-title h1{ margin:0; font-weight:800; font-size: clamp(28px, 7.2vw, 40px); letter-spacing: .2px; }
 
-<!-- Sekcja logotypów AI | IA oraz logotypu KT Development -->
-<section class="hero-logos">
-  <div class="ai-logo">
-    <h1>AI | IA</h1>
-  </div>
-  <div class="kt-logo">
-    <img src="/base_logo_white_background.png" alt="Logo KT Development" />
-    <h2>Kacper Turczyński Development</h2>
-  </div>
-</section>
+  /* Przełącznik języka w prawym górnym rogu */
+  .language-switcher{ position: fixed; right: 16px; top: 16px; z-index: 12080; font-size: 14px; }
+  .language-switcher span{ padding: 0 6px; }
 
-<!-- Hasło i CTA -->
-<section class="hero">
-  <h2>Decyzje, które zakrzywiają rzeczywistość</h2>
-  <p>KT DEVELOPMENT to firma doradczo‑strategyczna, która łączy technologię, AI i ludzką świadomość w jednym celu – by rzeczy działały lepiej, szybciej i mądrzej.</p>
-  <a href="/pl/kontakt/" class="cta-button">Skontaktuj się</a>
-</section>
+  /* Sekcja z logotypami AI | IA + duże koło po prawej  */
+  .hero-logos{ 
+    display: grid; 
+    grid-template-columns: 1fr 2fr; 
+    align-items: center; 
+    gap: clamp(12px, 4vw, 24px); 
+    max-width: 680px; 
+    margin: 20px auto 8px; 
+    padding: 0 12px;
+  }
+  .ai-logo{ display:flex; align-items:center; justify-content:flex-start; }
+  .ai-logo h1{ 
+    margin:0; 
+    font-size: clamp(22px, 7vw, 32px); 
+    font-weight: 700; 
+    letter-spacing: .08em; 
+  }
+  .kt-logo{ display:flex; justify-content:center; align-items:center; }
+  .kt-logo img{ 
+    width: 100%; 
+    max-width: clamp(240px, 70vw, 420px);
+    height: auto; 
+    display:block; 
+  }
 
-<!-- Kim jesteśmy -->
-<section id="about">
-  <h3>Kim jesteśmy</h3>
-  <p>Twórca: Kacper Turczyński – doradca strategiczny, operator rzeczywistości, człowiek, który nie tylko rozumie AI, ale potrafi je zastosować w życiu i biznesie.</p>
-  <p>Wartości: Prawda, efektywność, wolność.  Rola AI: partner, nie narzędzie.</p>
-</section>
+  /* Hero (hasło + CTA) */
+  .hero{ 
+    padding: clamp(20px, 6vw, 32px) 16px; 
+    background: #f7f7f7; 
+    border-radius: 16px 16px 0 0; 
+  }
+  .hero h2{ 
+    text-align:center; 
+    font-size: clamp(22px, 6.4vw, 28px); 
+    margin: 0 0 8px; 
+  }
+  .hero p{ 
+    max-width: 640px; 
+    margin: 0 auto 16px; 
+    text-align:center; 
+    color:#555; 
+    line-height: 1.55; 
+  }
+  .cta-button{ 
+    display:inline-block; 
+    margin: 0 auto; 
+    border-radius: 12px; 
+    padding: 12px 18px; 
+    font-weight: 600; 
+  }
 
-<!-- Oferta -->
-<section id="offer">
-  <h3>Oferta</h3>
-  <ul>
-    <li><strong>Konsulting strategiczny</strong> — Transformujemy chaos w strukturę i cele.</li>
-    <li><strong>Integracja AI</strong> — Wdrażamy AI nie dla mody, ale dla wyniku.</li>
-    <li><strong>Systemy decyzyjne</strong> — Tworzymy modele, które wspierają ludzi, nie ich zastępują.</li>
-    <li><strong>Transformacja firm</strong> — Nowe ramy dla starego świata.  Bez bullshitu.</li>
-  </ul>
-</section>
+  /* Hamburger: lewy górny róg, nad wszystkim */
+  .hamburger{
+    position: fixed !important;
+    left: max(16px, env(safe-area-inset-left)) !important;
+    top:  max(16px, env(safe-area-inset-top)) !important;
+    display: flex !important;
+    z-index: 12090 !important;
+  }
+  .mobile-drawer-backdrop{ z-index: 12085 !important; }
+  .mobile-drawer{ z-index: 12095 !important; }
 
-<!-- Projekty -->
-<section id="projects">
-  <h3>Wybrane projekty</h3>
-  <ul>
-    <li><strong>CANAL++ WizzAir</strong> — partnerstwo strategiczne w branży medialno‑lotniczej.</li>
-    <li><strong>MODUS</strong> — zakończona współpraca z największym dostawcą dla WizzAir.</li>
-    <li><strong>In progress</strong> — nowe kierunki na styku AI, consultingu i decyzji.</li>
-  </ul>
-</section>
-
-<!-- Blog -->
-<section id="blog">
-  <h3>Blog &amp; Publikacje</h3>
-  <p>Tutaj pojawią się treści o AI, strategii i podejmowaniu decyzji w XXI wieku.</p>
-</section>
-
-<!-- Kontakt -->
-<section id="contact">
-  <h3>Kontakt</h3>
-  <p>Masz projekt lub potrzebujesz partnera do rozmowy strategicznej?  Napisz:
-    <a href="mailto:kontakt@ktdevelopment.pl">kontakt@ktdevelopment.pl</a></p>
-</section>
-
-<footer>
-  <p>© 2025 KT DEVELOPMENT. Wszystkie prawa zastrzeżone.</p>
-</footer>
+  /* Drobne spacingi dalej na stronie */
+  section{ padding: 20px 16px; }
+}
