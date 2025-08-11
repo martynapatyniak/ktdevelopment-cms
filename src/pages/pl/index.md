@@ -1,7 +1,7 @@
 ---
 title: Strona główna
 layout: layout.njk
-permalink: /pl/index/
+permalink: /
 ---
 
 <!-- Sekcja logotypów AI | IA oraz logotypu KT Development -->
