@@ -177,20 +177,19 @@ footer{ text-align:center; padding:2rem; font-size:.875rem; color:#888; }
     transition:none !important;
   }
 }
-```css
-/* Desktop (≥769px): wyłącz hamburger i drawer, włącz poziome menu */
-@media (min-width: 769px){
-  .hamburger,
-  .mobile-drawer,
-  .mobile-drawer-backdrop{ display:none !important; }
-  .nav{ display:block !important; }
-}
-
-/* Mobile (≤768px): ukryj poziome menu, pokaż hamburger + drawer */
+/* Wymuś pozycję hamburgera w lewym górnym rogu na mobile */
 @media (max-width: 768px){
-  .nav{ display:none !important; }
-  .hamburger{ display:flex !important; }
-  .mobile-drawer,
-  .mobile-drawer-backdrop{ display:block !important; }
+  .hamburger{
+    position: fixed !important;
+    left: max(16px, env(safe-area-inset-left)) !important;
+    top:  max(16px, env(safe-area-inset-top)) !important;
+    display: flex !important;      /* upewnij się, że jest widoczny */
+    z-index: 12050 !important;     /* ponad większością overlayów */
+  }
+
+  /* kreski w przycisku (na wszelki wypadek) */
+  .hamburger span{
+    display:block; width:20px; height:2px; background:#fff; border-radius:2px;
+  }
+  .hamburger span + span{ margin-top:6px; }
 }
-```
