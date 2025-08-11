@@ -4,6 +4,73 @@ layout: layout.njk
 permalink: /
 ---
 
+<!-- ✅ HAMBURGER (mobile-only) — minimalistyczny, nie rusza reszty layoutu -->
+<style>
+  /* Desktop: ukryj elementy hamburgera z tej strony */
+  @media (min-width: 769px){
+    .hamburger, .mobile-drawer, .mobile-drawer-backdrop { display: none !important; }
+  }
+  /* Mobile: pokaż hamburger + drawer i ukryj poziome menu z layoutu */
+  @media (max-width: 768px){
+    header .nav{ display:none !important; }
+
+    /* Przycisk w lewym górnym rogu */
+    .hamburger{
+      position: fixed; left: max(16px, env(safe-area-inset-left)); top: max(16px, env(safe-area-inset-top));
+      width:50px; height:50px; display:flex; align-items:center; justify-content:center; flex-direction:column;
+      background:#DF1995; color:#fff; border-radius:8px; box-shadow:0 4px 20px rgba(223,25,149,.3); z-index:12090;
+      -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+    }
+    .hamburger span{ display:block; width:20px; height:2px; background:#fff; border-radius:2px; transition:all .3s ease; }
+    .hamburger span + span{ margin-top:6px; }
+
+    /* Drawer + backdrop */
+    .mobile-drawer{
+      position:fixed; top:0; left:0; height:100dvh; width:80vw; max-width:320px; background:#fff;
+      transform:translateX(-100%); transition:transform .25s ease; z-index:12095; padding:20px; box-shadow:2px 0 20px rgba(0,0,0,.12);
+      display:block; overflow-y:auto;
+    }
+    .mobile-drawer header{ display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+    .mobile-drawer .close{ font-size:24px; background:none; border:0; padding:8px; cursor:pointer; }
+    .mobile-drawer nav{ display:flex; flex-direction:column; gap:14px; }
+    .mobile-drawer a{ text-decoration:none; color:#333; font-weight:500; padding:12px 8px; border-bottom:1px solid #eee; }
+
+    .mobile-drawer-backdrop{
+      position:fixed; inset:0; background:rgba(0,0,0,.3); backdrop-filter:blur(2px);
+      opacity:0; pointer-events:none; transition:opacity .2s ease; z-index:12085; display:block;
+    }
+
+    /* Interakcje (checkbox steruje) */
+    #menu-toggle:checked + .hamburger span:nth-child(1){ transform:rotate(45deg) translate(6px,6px); }
+    #menu-toggle:checked + .hamburger span:nth-child(2){ opacity:0; }
+    #menu-toggle:checked + .hamburger span:nth-child(3){ transform:rotate(-45deg) translate(6px,-6px); }
+    #menu-toggle:checked ~ .mobile-drawer{ transform:translateX(0); }
+    #menu-toggle:checked ~ .mobile-drawer-backdrop{ opacity:1; pointer-events:auto; }
+  }
+</style>
+
+<!-- Ważna kolejność rodzeństwa: input → label.hamburger → aside.drawer → label.backdrop -->
+<input type="checkbox" id="menu-toggle" class="menu-toggle" style="position:absolute;left:-9999px;top:-9999px" />
+<label for="menu-toggle" class="hamburger" aria-label="Otwórz menu" aria-controls="mobile-drawer" aria-expanded="false">
+  <span></span><span></span><span></span>
+</label>
+<aside id="mobile-drawer" class="mobile-drawer" role="navigation" aria-label="Menu">
+  <header>
+    <h2>Menu</h2>
+    <label for="menu-toggle" class="close" aria-label="Zamknij">×</label>
+  </header>
+  <nav>
+    <a href="#about">O nas</a>
+    <a href="#offer">Oferta</a>
+    <a href="#projects">Projekty</a>
+    <a href="#blog">Blog</a>
+    <a href="#contact">Kontakt</a>
+  </nav>
+</aside>
+<label for="menu-toggle" class="mobile-drawer-backdrop" aria-hidden="true"></label>
+
+<!-- ——— Poniżej Twój dotychczasowy content (bez zmian) ——— -->
+
 <!-- Sekcja logotypów AI | IA oraz logotypu KT Development -->
 <section class="hero-logos">
   <div class="ai-logo">
