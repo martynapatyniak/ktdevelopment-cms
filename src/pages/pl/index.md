@@ -1,41 +1,58 @@
 ---
-title: Strona główna
+title: KT DEVELOPMENT
 layout: layout.njk
 permalink: /
 ---
 
-<!-- Lokalny styl tylko dla TEJ strony: AI|IA cieńsze (300) + JEDEN czarny separator (2px).
-     Dodatkowo lekki układ jak w referencji: AI|IA po lewej, duże logo po prawej; mobile skaluje się bezpiecznie. -->
+<!-- Lokalny styl tylko dla TEJ strony:
+     • AI|IA cieńsze (300) + JEDEN czarny separator (2px)
+     • AI|IA i logo bliżej siebie (mniejszy gap, kolumny 1fr/1fr)
+     • szary „kartonik” z hasłem węższy (ucięte boki)
+     • hamburger tylko na mobile zostaje w layoutcie; tutaj tylko chowamy poziome .nav na telefonach
+-->
 <style>
-  :root{ --pink:#DF1995; --ink:#111; --page-max:1200px; --gutter:32px; --ai-weight:300; --bar:2px; }
+  :root{ --pink:#DF1995; --ink:#111; --page-max:1200px; --gutter:32px; --ai-weight:300; --bar:2px; --hero-narrow:860px; }
+
+  /* Spójna max-szerokość sekcji na tej stronie */
   .hero-logos, .hero, section{ max-width: var(--page-max); margin-left:auto; margin-right:auto; }
 
-  /* ===== AI|IA – litery cieńsze + 1 separator ===== */
-  .ai-lockup{ display:inline-grid; grid-auto-flow:column; align-items:center; gap: clamp(14px, 1.8vw, 26px); }
+  /* ===== AI|IA – litery cieńsze + jeden separator ===== */
+  .ai-lockup{ display:inline-grid; grid-auto-flow:column; align-items:center; gap: clamp(12px, 1.5vw, 22px); }
   .ai-lockup .ch{ line-height:1; letter-spacing:.01em; font-weight: var(--ai-weight); }
   .ai-lockup .pink{ color: var(--pink); }
   .ai-lockup .ink{ color: var(--ink); }
   .ai-lockup .bar{ width: var(--bar); background: var(--ink); display:block; }
 
-  /* ===== Desktop (jak na zrzucie) ===== */
+  /* ===== Desktop (zbliżenie kolumn + węższy hero) ===== */
   @media (min-width: 1024px){
-    .hero-logos{ display:grid; grid-template-columns: 1fr 1.25fr; align-items:center; gap:40px; margin-top:24px; padding:0 var(--gutter); }
+    .hero-logos{
+      display:grid;
+      grid-template-columns: 1fr 1fr; /* kolumny bliżej tej samej szerokości */
+      align-items:center;
+      gap:22px;               /* mniejsza szczelina między AI|IA a logo */
+      margin-top:24px;
+      padding-left:16px;      /* ciaśniej przy krawędzi */
+      padding-right:16px;
+    }
     .ai-lockup .ch{ font-size: clamp(68px, 8.6vw, 132px); }
     .ai-lockup .bar{ height: clamp(88px, 10.8vw, 154px); }
 
     .kt-logo{ display:flex; justify-content:center; align-items:center; }
-    .kt-logo img{ width:100%; max-width: 640px; height:auto; display:block; }
+    .kt-logo img{ width:100%; max-width:640px; height:auto; display:block; }
 
-    .hero{ margin-top:48px; padding:32px; background:#f5f5f5; border-radius:16px; text-align:center; }
+    .hero{
+      max-width: min(92vw, var(--hero-narrow)); /* węższy kartonik */
+      margin-top:48px; padding:32px; background:#f5f5f5; border-radius:16px; text-align:center;
+    }
     .hero h2{ margin:0 0 12px; font-size:28px; }
     .hero p{ max-width:760px; margin:0 auto 16px; color:#555; line-height:1.55; }
-    .cta-button{ border-radius:12px; padding:12px 22px; font-weight:600; background:var(--pink); color:#fff; text-decoration:none; }
+    .cta-button{ display:inline-block; border-radius:12px; padding:12px 22px; font-weight:600; background:var(--pink); color:#fff; text-decoration:none; }
 
-    section{ padding-left:var(--gutter); padding-right:var(--gutter); }
+    section{ padding-left: var(--gutter); padding-right: var(--gutter); }
     h3{ color: var(--pink); }
   }
 
-  /* ===== Mobile (skalowanie) ===== */
+  /* ===== Mobile (bezpieczne skalowanie) ===== */
   @media (max-width: 1023px){
     .hero-logos{ display:flex; flex-direction:column; gap:24px; align-items:center; margin-top:16px; padding:0 16px; }
     .ai-lockup .ch{ font-size: clamp(34px, 12vw, 60px); }
@@ -44,6 +61,9 @@ permalink: /
     .hero{ padding:24px 16px; background:#f7f7f7; border-radius:16px 16px 0 0; text-align:center; }
     section{ padding:0 16px; }
   }
+
+  /* ===== Hamburger tylko na mobile – ukryj poziome menu headera ===== */
+  @media (max-width: 768px){ header .nav{ display:none !important; } }
 </style>
 
 <!-- ===== HERO / LOGA ===== -->
