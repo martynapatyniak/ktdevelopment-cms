@@ -5,32 +5,16 @@ body{
   background:#fff;
   color:#333;
 }
-
-/* nagłówek: działa i dla .header i dla <header> */
-.header,
-header{
+.header{
   position:relative;
   border-bottom:1px solid #eee;
   padding:1rem;
 }
-
 .container{ display:flex; align-items:center; flex-wrap:wrap; }
 .logo{ height:48px; margin-right:1rem; }
 
 .nav{ margin-top:.5rem; text-align:center; }
 .nav a{ margin-right:1rem; text-decoration:none; color:#DF1995; }
-
-/* Focus & dostępność */
-a:focus-visible,
-button:focus-visible,
-.hamburger:focus-visible{
-  outline:2px solid #111;
-  outline-offset:3px;
-}
-.nav a:focus-visible,
-.mobile-drawer a:focus-visible{
-  outline-color:#DF1995;
-}
 
 /* ====== HERO / TOP ====== */
 .hero-logos{ display:flex; justify-content:center; align-items:center; gap:3rem; flex-wrap:nowrap; margin:2rem auto; }
@@ -82,7 +66,6 @@ footer{ text-align:center; padding:2rem; font-size:.875rem; color:#888; }
   align-items:center; justify-content:center; flex-direction:column;
   box-shadow:0 4px 20px rgba(223,25,149,.3);
   -webkit-tap-highlight-color:transparent;
-  touch-action:manipulation;
 }
 .hamburger span{
   display:block; width:20px; height:2px; background:#fff;
@@ -135,7 +118,7 @@ footer{ text-align:center; padding:2rem; font-size:.875rem; color:#888; }
   /* drobne mobilne dostosowania */
   *{ box-sizing:border-box; }
   body{ overflow-x:hidden; font-size:16px; }
-  .header, header{ padding:1rem .5rem; }
+  .header{ padding:1rem .5rem; }
   .container{ flex-direction:column; align-items:center; width:100%; }
   .container-column{ padding:0 1rem; align-items:center; text-align:center; width:100%; }
   .logo-title{ flex-direction:column; align-items:center; gap:1rem; width:100%; text-align:center; }
@@ -161,30 +144,3 @@ footer{ text-align:center; padding:2rem; font-size:.875rem; color:#888; }
   .hero{ padding:1.5rem .5rem; }
   section{ padding:1.5rem .5rem; }
 }
-
-/* Preferencje ograniczonego ruchu */
-@media (prefers-reduced-motion: reduce){
-  .hamburger span,
-  .mobile-drawer,
-  .mobile-drawer-backdrop,
-  .nav a,
-  .cta-button{
-    transition:none !important;
-  }
-}
-/* === DEBUG: pokaż hamburgera wszędzie i daj go w prawy górny róg === */
-label.hamburger{
-  display:flex !important;
-  position:fixed !important;
-  right:16px !important;
-  top:16px !important;
-  width:56px !important;
-  height:56px !important;
-  z-index:999999 !important;
-  background:#DF1995 !important;
-  align-items:center !important;
-  justify-content:center !important;
-}
-label.hamburger span{ width:24px !important; height:2px !important; background:#fff !important; }
-.mobile-drawer, .mobile-drawer-backdrop{ display:block !important; }  /* żeby panel też był dostępny */
-.nav{ display:none !important; } /* ukryj poziome menu na czas testu */
