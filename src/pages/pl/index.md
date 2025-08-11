@@ -1,30 +1,30 @@
 ---
-title: KT DEVELOPMENT
+title: Strona główna
 layout: layout.njk
 permalink: /
 ---
 
-<!-- Lokalny styl tylko dla TEJ strony:
-     • AI|IA cieńsze (300) + JEDEN czarny separator (2px)
-     • Odstępy PO RÓWNO między A–I–|–I–A, MOCNO zmniejszone
-     • AI|IA i logo bliżej siebie (kolumny 1fr/1fr, mniejszy gap kolumn)
-     • Szary „kartonik” pod spodem węższy
-     • Na mobile ukryte poziome .nav (hamburger z layoutu zostaje)
+<!-- Lokalny styl TYLKO dla TEJ strony:
+     • AI|IA cieńsze (300) + JEDEN separator (2px)
+     • równe, bardzo małe odstępy A–I–|–I–A (desktop 8px, mobile 6px)
+     • AI|IA i logo bliżej siebie (1fr/1fr, mały gap kolumn)
+     • szary hero węższy (ucięte boki)
+     • #about, #offer, #contact wyrównane szerokością i paddingiem do hero
 -->
 <style>
   :root{
     --pink:#DF1995; --ink:#111;
     --page-max:1200px; --gutter:32px;
-    --ai-weight:300;         /* grubość liter AI|IA */
-    --bar:2px;               /* grubość separatora */
-    --ai-gap:8px;            /* RÓWNY odstęp między A, I i separatorem (desktop) — ULTRA TIGHT */
-    --hero-narrow:860px;     /* szerokość „kartonika” z hasłem */
+    --ai-weight:300;     /* grubość liter AI|IA */
+    --bar:2px;           /* grubość separatora */
+    --ai-gap:8px;        /* równy odstęp między A, I i separatorem (desktop) */
+    --hero-narrow:860px; /* szerokość „kartonika” z hasłem (desktop) */
   }
 
-  /* Na mobile jeszcze ciaśniej */
+  /* Mobile: odrobinę ciaśniej */
   @media (max-width:1023px){ :root{ --ai-gap:6px; } }
 
-  /* Spójna max-szerokość sekcji na tej stronie */
+  /* globalna szerokość sekcji na tej stronie */
   .hero-logos, .hero, section{ max-width: var(--page-max); margin-left:auto; margin-right:auto; }
 
   /* ===== AI|IA — litery + jeden separator, równe i bardzo małe odstępy ===== */
@@ -34,13 +34,13 @@ permalink: /
   .ai-lockup .ink{ color: var(--ink); }
   .ai-lockup .bar{ width: var(--bar); background: var(--ink); display:block; }
 
-  /* ===== Desktop (zbliżone kolumny + węższy hero) ===== */
+  /* ===== Desktop układ + węższy hero ===== */
   @media (min-width: 1024px){
     .hero-logos{
       display:grid;
       grid-template-columns: 1fr 1fr; /* kolumny o podobnej szerokości */
       align-items:center;
-      gap:12px;               /* JESZCZE mniej między AI|IA a logo */
+      gap:12px;             /* minimalna szczelina między AI|IA a logo */
       margin-top:24px;
       padding-left:16px; padding-right:16px;
     }
@@ -51,7 +51,7 @@ permalink: /
     .kt-logo img{ width:100%; max-width:640px; height:auto; display:block; }
 
     .hero{
-      max-width: min(92vw, var(--hero-narrow)); /* węższy kartonik */
+      max-width: min(92vw, var(--hero-narrow)); /* węższy „kartonik” */
       margin-top:48px; padding:32px; background:#f5f5f5; border-radius:16px; text-align:center;
     }
     .hero h2{ margin:0 0 12px; font-size:28px; }
@@ -60,6 +60,13 @@ permalink: /
 
     section{ padding-left: var(--gutter); padding-right: var(--gutter); }
     h3{ color: var(--pink); }
+
+    /* Wyrównanie #about, #offer, #contact do szerokości hero i jego paddingu */
+    #about, #offer, #contact{
+      max-width: min(92vw, var(--hero-narrow));
+      margin-left:auto; margin-right:auto;
+      padding-left:32px; padding-right:32px; /* jak .hero */
+    }
   }
 
   /* ===== Mobile (bezpieczne skalowanie) ===== */
@@ -70,9 +77,12 @@ permalink: /
     .kt-logo img{ max-width: clamp(240px, 80vw, 480px); height:auto; }
     .hero{ padding:24px 16px; background:#f7f7f7; border-radius:16px 16px 0 0; text-align:center; }
     section{ padding:0 16px; }
+
+    /* dopasuj boczne odstępy sekcji do hero na mobile */
+    #about, #offer, #contact{ padding-left:16px; padding-right:16px; }
   }
 
-  /* ===== Hamburger tylko na mobile – ukryj poziome menu headera ===== */
+  /* ===== Ukryj poziome menu headera na mobile (hamburger w layoucie) ===== */
   @media (max-width: 768px){ header .nav{ display:none !important; } }
 </style>
 
@@ -101,21 +111,41 @@ permalink: /
 <section id="about">
   <h3>Kim jesteśmy</h3>
   <p>Twórca: Kacper Turczyński – doradca strategiczny, operator rzeczywistości, człowiek, który nie tylko rozumie AI, ale potrafi je zastosować w życiu i biznesie.</p>
+  <p>Wartości: Prawda, efektywność, wolność.  Rola AI: partner, nie narzędzie.</p>
 </section>
 
 <!-- ===== OFERTA ===== -->
 <section id="offer">
   <h3>Oferta</h3>
   <ul>
-    <li><strong>Konsulting strategiczny</strong> – Transformujemy chaos w strukturę i cele.</li>
-    <li><strong>Integracja AI</strong> – Wdrażamy AI nie dla mody, ale dla wyniku.</li>
+    <li><strong>Konsulting strategiczny</strong> — Transformujemy chaos w strukturę i cele.</li>
+    <li><strong>Integracja AI</strong> — Wdrażamy AI nie dla mody, ale dla wyniku.</li>
+    <li><strong>Systemy decyzyjne</strong> — Tworzymy modele, które wspierają ludzi, nie ich zastępują.</li>
+    <li><strong>Transformacja firm</strong> — Nowe ramy dla starego świata.  Bez bullshitu.</li>
   </ul>
+</section>
+
+<!-- ===== PROJEKTY ===== -->
+<section id="projects">
+  <h3>Wybrane projekty</h3>
+  <ul>
+    <li><strong>CANAL++ WizzAir</strong> — partnerstwo strategiczne w branży medialno‑lotniczej.</li>
+    <li><strong>MODUS</strong> — zakończona współpraca z największym dostawcą dla WizzAir.</li>
+    <li><strong>In progress</strong> — nowe kierunki na styku AI, consultingu i decyzji.</li>
+  </ul>
+</section>
+
+<!-- ===== BLOG ===== -->
+<section id="blog">
+  <h3>Blog &amp; Publikacje</h3>
+  <p>Tutaj pojawią się treści o AI, strategii i podejmowaniu decyzji w XXI wieku.</p>
 </section>
 
 <!-- ===== KONTAKT ===== -->
 <section id="contact">
   <h3>Kontakt</h3>
-  <p>Masz projekt? Napisz: <a href="mailto:kontakt@ktdevelopment.pl">kontakt@ktdevelopment.pl</a></p>
+  <p>Masz projekt lub potrzebujesz partnera do rozmowy strategicznej?  Napisz:
+    <a href="mailto:kontakt@ktdevelopment.pl">kontakt@ktdevelopment.pl</a></p>
 </section>
 
 <footer>
