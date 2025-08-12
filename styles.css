@@ -225,4 +225,6 @@ footer{ text-align:center; padding:2rem; font-size:.875rem; color:#888; }
 .blog-container ol {
   text-align: left; /* tekst w środku bloku, ale blok na środku strony */
 }
-
+.blog-container p {
+  text-align: justify;
+}
