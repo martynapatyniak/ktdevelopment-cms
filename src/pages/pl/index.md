@@ -112,7 +112,7 @@ permalink: /
     <section class="hero">
       <h2>Decisions that bend reality</h2>
       <p>KT DEVELOPMENT is a strategy & advisory company combining technology, AI and human awareness — so things work better, faster and smarter.</p>
-      <a href="/en/contact/" class="cta-button">Contact us</a>
+      <a href="https://calendly.com/kacper-turczynski-ktdevelopment/45-minute-meeting-spotkanie?back=1" class="cta-button">Book a consultation</a>
     </section>
 
     <!-- About -->
@@ -156,6 +156,7 @@ permalink: /
   </div>
 </main>
 
+<!-- Skrypty językowe i nawigacyjne bez zmian -->
 <script>
 (function(){
   const LS_KEY = 'site_lang';
