@@ -37,10 +37,10 @@ RÓWNANIE GRAWITACJI DECYZYJNEJ
 
 M = E × I × N
 
-    M – masa decyzji (realna siła zakrzywiania pola wokół Ciebie)
-    E – emocjonalna intensywność: czy to naprawdę Twoje, czy tylko coś, co „tak wypada”
-    I – czystość intencji: kierunek bez wewnętrznych sprzeczności
-    N – natychmiastowość ruchu: czy ruszasz od razu, czy czekasz na „idealny moment”
+M – masa decyzji (realna siła zakrzywiania pola wokół Ciebie)
+E – emocjonalna intensywność: czy to naprawdę Twoje, czy tylko coś, co „tak wypada”
+I – czystość intencji: kierunek bez wewnętrznych sprzeczności
+N – natychmiastowość ruchu: czy ruszasz od razu, czy czekasz na „idealny moment”
 
 Im większa masa decyzji, tym mocniej przestrzeń się ugina.
 I to nie jest metafora. To widać w biznesie, w nauce, w każdej interakcji.
@@ -50,17 +50,17 @@ Chcesz przyciągnąć inwestorów do swojego start-upu.
 
 🔹 Scenariusz A:
 
-    E = 10 (czujesz to całym sobą)
-    I = 9 (masz wizję)
-    N = 1 (czekasz na lepszy moment)
-    M = 90 → nic się nie dzieje.
+E = 10 (czujesz to całym sobą)
+I = 9 (masz wizję)
+N = 1 (czekasz na lepszy moment)
+M = 90 → nic się nie dzieje.
 
 🔹 Scenariusz B:
 
-    E = 8 (świadomy entuzjazm)
-    I = 8 (czysta intencja)
-    N = 9 (natychmiastowy ruch)
-    M = 576 → przestrzeń reaguje.
+E = 8 (świadomy entuzjazm)
+I = 8 (czysta intencja)
+N = 9 (natychmiastowy ruch)
+M = 576 → przestrzeń reaguje.
 
 To nie jest motywacyjny slogan. To praktyczny model działania.
 Łączy fizykę świadomości, psychologię decyzji i dynamikę rynku.
