@@ -1,36 +1,25 @@
 module.exports = function (eleventyConfig) {
-  // kopiowanie plików statycznych
-  eleventyConfig.addPassthroughCopy("src/styles.css");
-  eleventyConfig.addPassthroughCopy("src/base_icon_white_background.png");
-  eleventyConfig.addPassthroughCopy("src/base_logo_white_background.png");
-  eleventyConfig.addPassthroughCopy("src/logo.png");
-  
-  // alias layoutu
+  // Kopiowanie plików statycznych
+  eleventyConfig.addPassthroughCopy("styles.css");
+  eleventyConfig.addPassthroughCopy("base_icon_white_background.png");
+  eleventyConfig.addPassthroughCopy("base_logo_white_background.png");
+  eleventyConfig.addPassthroughCopy("logo.png");
+
+  // Alias layoutu
   eleventyConfig.addLayoutAlias("layout", "layout.njk");
-  
-  // kolekcja postów - poprawiona ścieżka
+
+  // Kolekcja postów z folderu src/blog
   eleventyConfig.addCollection("posts", function (collectionApi) {
-    return collectionApi.getFilteredByGlob("src/content/blog/*.md").reverse();
-  });
-
-  // filtry dla dat
-  eleventyConfig.addFilter("readableDate", dateObj => {
-    return new Date(dateObj).toLocaleDateString('pl-PL', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  });
-
-  eleventyConfig.addFilter("htmlDateString", (dateObj) => {
-    return new Date(dateObj).toISOString().split('T')[0];
+    return collectionApi.getFilteredByGlob("src/blog/*.md").reverse();
   });
 
   return {
     dir: {
-      input: "src",
-      includes: "_includes",
+      input: "src",         // katalog z treścią
+      includes: "_includes",// katalog z szablonami
       output: "_site"
-    }
+    },
+    markdownTemplateEngine: "njk", // pozwala używać {% ... %} w .md
+    htmlTemplateEngine: "njk"
   };
 };
