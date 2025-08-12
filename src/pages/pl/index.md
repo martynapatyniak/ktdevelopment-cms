@@ -4,13 +4,6 @@ layout: layout.njk
 permalink: /
 ---
 
-<!--
-  PL/EN bez przeładowania + AI|IA (różowo‑czarne, duże, z separatorem)
-  ZMIANY:
-  • usunięty czarny napis "Kacper Turczyński Development" pod logo (PL i EN)
-  • usunięta szara kreska w nagłówku (border-bottom) — nadpisanie CSS
--->
-
 <style>
   /* === USUŃ SZARĄ LINIĘ POD NAGŁÓWKIEM === */
   header, .header{ border-bottom:none !important; box-shadow:none !important; }
@@ -20,7 +13,7 @@ permalink: /
   html[data-lang="en"] .lang-pl{ display:none !important; }
   .language-switcher a[aria-current="true"]{ font-weight:700; text-decoration:underline; }
 
-  /* === AI|IA — wersja jak wcześniej (różowo‑czarne, duże) === */
+  /* === AI|IA — wersja jak wcześniej (różowo-czarne, duże) === */
   :root{ --pink:#DF1995; --ink:#111; }
   .ai-lockup{ display:inline-grid; grid-auto-flow:column; align-items:center; gap: clamp(8px, 1.2vw, 16px); }
   .ai-lockup .ch{ line-height:1; font-weight:300; letter-spacing:0; font-size: clamp(64px, 8.5vw, 140px); }
@@ -28,7 +21,6 @@ permalink: /
   .ai-lockup .ink{ color: var(--ink); }
   .ai-lockup .bar{ width: 2px; height: clamp(80px, 10vw, 150px); background: var(--ink); display:block; }
 
-  /* Drobna kosmetyka na mobile (nic agresywnego) */
   @media (max-width: 1023px){
     .ai-lockup{ gap: clamp(6px, 2.5vw, 10px); }
     .ai-lockup .ch{ font-size: clamp(36px, 12vw, 64px); }
@@ -56,7 +48,7 @@ permalink: /
     <!-- Hasło i CTA -->
     <section class="hero">
       <h2>Decyzje, które zakrzywiają rzeczywistość</h2>
-      <p>KT DEVELOPMENT to firma doradczo‑strategiczna, która łączy technologię, AI i ludzką świadomość w jednym celu – by rzeczy działały lepiej, szybciej i mądrzej.</p>
+      <p>KT DEVELOPMENT to firma doradczo-strategiczna, która łączy technologię, AI i ludzką świadomość w jednym celu – by rzeczy działały lepiej, szybciej i mądrzej.</p>
       <a href="/pl/kontakt/" class="cta-button">Skontaktuj się</a>
     </section>
 
@@ -82,16 +74,10 @@ permalink: /
     <section id="projects">
       <h3>Wybrane projekty</h3>
       <ul>
-        <li><strong>CANAL++ WizzAir</strong> — partnerstwo strategiczne w branży medialno‑lotniczej.</li>
+        <li><strong>CANAL++ WizzAir</strong> — partnerstwo strategiczne w branży medialno-lotniczej.</li>
         <li><strong>MODUS</strong> — zakończona współpraca z największym dostawcą dla WizzAir.</li>
         <li><strong>In progress</strong> — nowe kierunki na styku AI, consultingu i decyzji.</li>
       </ul>
-    </section>
-
-    <!-- Blog -->
-    <section id="blog">
-      <h3>Blog &amp; Publikacje</h3>
-      <p>Tutaj pojawią się treści o AI, strategii i podejmowaniu decyzji w XXI wieku.</p>
     </section>
 
     <!-- Kontakt -->
@@ -157,12 +143,6 @@ permalink: /
       </ul>
     </section>
 
-    <!-- Blog -->
-    <section id="blog-en">
-      <h3>Blog &amp; Publications</h3>
-      <p>Articles on AI, strategy and decision‑making in the 21st century will appear here.</p>
-    </section>
-
     <!-- Contact -->
     <section id="contact-en">
       <h3>Contact</h3>
@@ -189,22 +169,17 @@ permalink: /
     lang = newLang;
     document.documentElement.setAttribute('data-lang', lang);
     localStorage.setItem(LS_KEY, lang);
-    // Podmień ?lang= w URL bez przeładowania
     const params = new URLSearchParams(location.search);
     params.set('lang', lang);
     history.replaceState({}, '', location.pathname + '?' + params.toString() + location.hash);
-    // aria-current/pressed w przełączniku nagłówka
     document.querySelectorAll('.language-switcher a').forEach(a=>{
       const code = (a.textContent||'').trim().toLowerCase();
       a.setAttribute('aria-current', code===lang ? 'true':'false');
       a.setAttribute('aria-pressed', code===lang ? 'true':'false');
     });
   }
-
-  // Init
   applyLang(lang);
 
-  // Przechwyć klik w istniejącym przełączniku języka
   const switcher = document.querySelector('.language-switcher');
   if(switcher){
     switcher.addEventListener('click', function(e){
@@ -220,14 +195,12 @@ permalink: /
 })();
 </script>
 
-<!-- Nav labels auto-translate with data-lang (no reload) -->
 <script>
 (function(){
   const labels = {
     pl: { home: 'Strona główna', offer: 'Oferta', projects: 'Projekty', blog: 'Blog', contact: 'Kontakt' },
     en: { home: 'Home',          offer: 'Offer',  projects: 'Projects', blog: 'Blog', contact: 'Contact' }
   };
-
   function normalize(href){
     try{ return new URL(href, location.origin).pathname; }catch(_){ return href||''; }
   }
@@ -245,8 +218,6 @@ permalink: /
     });
   }
   function currentLang(){ return document.documentElement.getAttribute('data-lang') || 'pl'; }
-
-  // init + react to language changes
   setNavLabels(currentLang());
   new MutationObserver(muts=>{
     for(const m of muts){ if(m.type==='attributes' && m.attributeName==='data-lang'){ setNavLabels(currentLang()); break; } }
@@ -254,7 +225,6 @@ permalink: /
 })();
 </script>
 
-<!-- Force HOME to go to real homepage (root) with current lang) -->
 <script>
 (function(){
   function currentLang(){ return document.documentElement.getAttribute('data-lang') || 'pl'; }
@@ -269,14 +239,11 @@ permalink: /
       if(isHomeLink(a)) a.setAttribute('href','/?lang='+currentLang());
     });
   }
-
-  // initial rewrite + react to language changes
   rewriteHomeHrefs();
   new MutationObserver(m=>{
     for(const x of m){ if(x.type==='attributes' && x.attributeName==='data-lang'){ rewriteHomeHrefs(); break; }}
   }).observe(document.documentElement,{ attributes:true });
 
-  // Intercept clicks on HOME and navigate to root with current lang
   document.addEventListener('click', function(e){
     const a = e.target.closest('a');
     if(!a || !isHomeLink(a)) return;
