@@ -7,12 +7,9 @@
     <!-- Podbij numer po zmianach CSS -->
     <link rel="stylesheet" href="{{ '/styles.css?v=12' | url }}" />
 
-    <!-- Nadpisanie stylów żeby usunąć szarą kreskę -->
+    <!-- Nadpisanie stylów: usuń szarą kreskę (border/shadow) w nagłówku -->
     <style>
-      header {
-        border: none !important;
-        box-shadow: none !important;
-      }
+      header,
       header .container-column {
         border: none !important;
         box-shadow: none !important;
@@ -43,6 +40,7 @@
           <button class="close" id="menu-close" aria-label="Zamknij">×</button>
         </header>
         <nav>
+          <!-- HOME → zawsze na /, a JS dopisze ?lang=... -->
           <a href="/" data-home>Strona główna</a>
           <a href="/pl/oferta/">Oferta</a>
           <a href="/pl/projekty/">Projekty</a>
@@ -54,10 +52,10 @@
 
       <div class="container-column">
         <div class="logo-title">
-          <!-- Samo logo bez widocznego H1 -->
+          <!-- Samo logo; bez widocznego H1 -->
           <a href="/" data-home aria-label="KT Development">
             <img src="/base_icon_white_background.png" alt="KT Development" class="logo" />
-            <!-- Ukryty tekst dla czytników -->
+            <!-- (opcjonalnie) ukryty tekst dla czytników -->
             <span style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
               KT Development
             </span>
@@ -65,6 +63,7 @@
         </div>
 
         <nav class="nav">
+          <!-- HOME → zawsze na /, a JS dopisze ?lang=... -->
           <a href="/" data-home>Strona główna</a>
           <a href="/pl/oferta/">Oferta</a>
           <a href="/pl/projekty/">Projekty</a>
@@ -73,13 +72,14 @@
         </nav>
 
         <div class="language-switcher">
+          <!-- Fallback (bez JS): klasyczne ścieżki -->
           <a href="/pl/index/">PL</a> | <a href="/en/">EN</a>
         </div>
       </div>
     </header>
 
     <main id="main-content">
-      {{ content | safe }}
+      {{ content }}
     </main>
 
     <!-- JS: aria-expanded, Esc, klik w backdrop/X, zamykanie po kliknięciu linku, cleanup na desktopie -->
@@ -111,6 +111,7 @@
           if (e.target.tagName === 'A') { cb.checked = false; sync(); }
         });
 
+        // Porządek po przejściu na desktop (spójnie z CSS ≤768px)
         const mq = window.matchMedia('(min-width: 769px)');
         mq.addEventListener('change', (e) => {
           if (e.matches) { cb.checked = false; sync(); }
@@ -118,12 +119,13 @@
       })();
     </script>
 
-    <!-- JS: HOME zawsze na / z dopiętym ?lang=... -->
+    <!-- JS: HOME zawsze na / z dopiętym ?lang=... (zgodnie z ostatnim wyborem użytkownika) -->
     <script>
       (function(){
         const LS_KEY = 'site_lang';
         const getLang = () => localStorage.getItem(LS_KEY) || 'pl';
 
+        // Ustaw docelowe href na wszystkich linkach HOME
         function updateHomeHrefs(){
           document.querySelectorAll('a[data-home]').forEach(a => {
             a.setAttribute('href', '/?lang=' + getLang());
@@ -132,15 +134,18 @@
 
         updateHomeHrefs();
 
+        // Jeśli użytkownik przełączy język gdziekolwiek, zaktualizuj HOME hrefy
         window.addEventListener('storage', (e)=>{
           if(e.key === LS_KEY) updateHomeHrefs();
         });
 
+        // Dodatkowo, przechwyć klik i wymuś przejście na /?lang=...
         document.addEventListener('click', function(e){
           const a = e.target.closest('a[data-home]');
           if(!a) return;
           e.preventDefault();
           const url = '/?lang=' + getLang();
+          // jeśli już jesteśmy na /, tylko podmień param i przewiń do góry
           if(location.pathname === '/'){
             const params = new URLSearchParams(location.search);
             params.set('lang', getLang());
