@@ -219,3 +219,37 @@ permalink: /
   }
 })();
 </script>
+
+<!-- Nav labels auto-translate with data-lang (no reload) -->
+<script>
+(function(){
+  const labels = {
+    pl: { home: 'Strona główna', offer: 'Oferta', projects: 'Projekty', blog: 'Blog', contact: 'Kontakt' },
+    en: { home: 'Home',          offer: 'Offer',  projects: 'Projects', blog: 'Blog', contact: 'Contact' }
+  };
+
+  function normalize(href){
+    try{ return new URL(href, location.origin).pathname; }catch(_){ return href||''; }
+  }
+  function setNavLabels(lang){
+    const L = labels[lang] || labels.pl;
+    document.querySelectorAll('header .nav a, #mobile-drawer nav a').forEach(a=>{
+      const p = normalize(a.getAttribute('href'));
+      let key = null;
+      if (p==='/' || p==='/pl/' || p==='/pl/index/') key='home';
+      else if (p.startsWith('/pl/oferta/')) key='offer';
+      else if (p.startsWith('/pl/projekty/')) key='projects';
+      else if (p.startsWith('/blog/')) key='blog';
+      else if (p.startsWith('/pl/kontakt/')) key='contact';
+      if(key) a.textContent = L[key];
+    });
+  }
+  function currentLang(){ return document.documentElement.getAttribute('data-lang') || 'pl'; }
+
+  // init + react to language changes
+  setNavLabels(currentLang());
+  new MutationObserver(muts=>{
+    for(const m of muts){ if(m.type==='attributes' && m.attributeName==='data-lang'){ setNavLabels(currentLang()); break; } }
+  }).observe(document.documentElement, { attributes:true });
+})();
+</script>
