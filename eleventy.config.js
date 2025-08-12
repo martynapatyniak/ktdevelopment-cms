@@ -8,9 +8,9 @@ module.exports = function (eleventyConfig) {
   // alias layoutu
   eleventyConfig.addLayoutAlias("layout", "layout.njk");
 
-  // kolekcja postów z folderu content/blog
+  // kolekcja postów z folderu src/blog
   eleventyConfig.addCollection("posts", function (collectionApi) {
-    return collectionApi.getFilteredByGlob("content/blog/*.md").reverse();
+    return collectionApi.getFilteredByGlob("src/blog/*.md").reverse();
   });
 
   return {
