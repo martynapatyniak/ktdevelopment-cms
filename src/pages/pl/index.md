@@ -253,3 +253,42 @@ permalink: /
   }).observe(document.documentElement, { attributes:true });
 })();
 </script>
+
+<!-- Force HOME to go to real homepage (root) with current lang) -->
+<script>
+(function(){
+  function currentLang(){ return document.documentElement.getAttribute('data-lang') || 'pl'; }
+  function pathOf(href){ try{ return new URL(href, location.origin).pathname; }catch(_){ return href||''; } }
+  function isHomeLink(a){
+    const p = pathOf(a.getAttribute('href'));
+    const t = (a.textContent||'').trim().toLowerCase();
+    return t==='strona główna' || t==='home' || p==='/' || p==='/pl/' || p==='/pl/index/';
+  }
+  function rewriteHomeHrefs(){
+    document.querySelectorAll('header .nav a, #mobile-drawer nav a').forEach(a=>{
+      if(isHomeLink(a)) a.setAttribute('href','/?lang='+currentLang());
+    });
+  }
+
+  // initial rewrite + react to language changes
+  rewriteHomeHrefs();
+  new MutationObserver(m=>{
+    for(const x of m){ if(x.type==='attributes' && x.attributeName==='data-lang'){ rewriteHomeHrefs(); break; }}
+  }).observe(document.documentElement,{ attributes:true });
+
+  // Intercept clicks on HOME and navigate to root with current lang
+  document.addEventListener('click', function(e){
+    const a = e.target.closest('a');
+    if(!a || !isHomeLink(a)) return;
+    e.preventDefault();
+    const url='/?lang='+currentLang();
+    if(location.pathname==='/' && new URLSearchParams(location.search).get('lang')===currentLang()){
+      window.scrollTo({top:0, behavior:'smooth'});
+    }else{
+      location.assign(url);
+    }
+    const cb=document.getElementById('menu-toggle'); if(cb){ cb.checked=false; }
+  }, true);
+})();
+</script>
+
