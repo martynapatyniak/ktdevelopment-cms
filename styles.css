@@ -1,3 +1,8 @@
+/* ====== STABILNY VIEWPORT ====== */
+/* Dodane, aby zapobiec przesuwaniu elementów przy pojawianiu się / znikaniu scrollbara */
+html { scrollbar-gutter: stable; }  /* nowoczesne przeglądarki */
+html { overflow-y: scroll; }        /* fallback dla Safari i starszych */
+
 /* ====== BAZA ====== */
 body{
   margin:0;
