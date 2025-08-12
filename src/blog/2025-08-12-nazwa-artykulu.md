@@ -5,7 +5,7 @@ layout: layout.njk
 permalink: "/pl/blog/{{ page.fileSlug }}/"
 ---
 
-<div class="blog-container">
+<div class="blog-container" style="text-align: justify;">
 
 ## Twoja decyzja nic nie znaczy. Bo nie ma masy.
 Niezależnie od tego, czy ktoś ekscytuje się nowymi technologiami, czy patrzy na nie z rezerwą, sztuczna inteligencja nie jest już dodatkiem do rzeczywistości. Ona stała się jej warstwą.
@@ -54,14 +54,14 @@ Chcesz przyciągnąć inwestorów do swojego start-upu.
 **E** = 10 (czujesz to całym sobą)  
 **I** = 9 (masz wizję)  
 **N** = 1 (czekasz na lepszy moment)  
-**M** = 90 → nic się nie dzieje.
+**M** = **90** → nic się nie dzieje.
 
 🔹 Scenariusz B:
 
 **E** = 8 (świadomy entuzjazm)  
 **I** = 8 (czysta intencja)  
 **N** = 9 (natychmiastowy ruch)  
-**M** = 576 → przestrzeń reaguje.
+**M** = **576** → przestrzeń reaguje.
 
 To nie jest motywacyjny slogan. To praktyczny model działania.
 Łączy fizykę świadomości, psychologię decyzji i dynamikę rynku.
