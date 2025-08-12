@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ title or "KT Development" }}</title>
     <!-- Podbij numer po zmianach CSS -->
-    <link rel="stylesheet" href="{{ '/styles.css?v=11' | url }}" />
+    <link rel="stylesheet" href="{{ '/styles.css?v=14' | url }}" />
   </head>
   <body>
 
@@ -40,7 +40,8 @@
           <label for="menu-toggle" class="close" aria-label="Zamknij">×</label>
         </header>
         <nav>
-          <a href="/pl/index/">Strona główna</a>
+          <!-- HOME zawsze na /; JS dopnie ?lang=AKTUALNY -->
+          <a href="/" data-home>Strona główna</a>
           <a href="/pl/oferta/">Oferta</a>
           <a href="/pl/projekty/">Projekty</a>
           <a href="/blog/">Blog</a>
@@ -60,7 +61,8 @@
 
         <!-- Menu poziome (desktop) -->
         <nav class="nav" aria-label="Główne">
-          <a href="/pl/index/">Strona główna</a>
+          <!-- HOME zawsze na /; JS dopnie ?lang=AKTUALNY -->
+          <a href="/" data-home>Strona główna</a>
           <a href="/pl/oferta/">Oferta</a>
           <a href="/pl/projekty/">Projekty</a>
           <a href="/blog/">Blog</a>
@@ -113,6 +115,56 @@
         mq.addEventListener('change', function (e) {
           if (e.matches && cb) { cb.checked = false; sync(); }
         });
+      })();
+    </script>
+
+    <!-- JS: HOME => zawsze /?lang=AKTUALNY (działa na KAŻDEJ podstronie) -->
+    <script>
+      (function(){
+        var LS_KEY = 'site_lang';
+
+        function getLang(){
+          var attr = document.documentElement.getAttribute('data-lang');
+          if (attr === 'pl' || attr === 'en') return attr;
+          var ls = localStorage.getItem(LS_KEY);
+          if (ls === 'pl' || ls === 'en') return ls;
+          return (navigator.language || 'en').toLowerCase().startsWith('pl') ? 'pl' : 'en';
+        }
+
+        function rewriteHomeHrefs(){
+          var lang = getLang();
+          document.querySelectorAll('a[data-home]').forEach(function(a){
+            a.setAttribute('href','/?lang='+lang);
+            a.setAttribute('hreflang', lang);
+          });
+        }
+
+        // na starcie + gdy zmieni się data-lang (np. po kliknięciu PL/EN na stronie głównej)
+        rewriteHomeHrefs();
+        new MutationObserver(function(muts){
+          for (var i=0;i<muts.length;i++){
+            var m = muts[i];
+            if (m.type==='attributes' && m.attributeName==='data-lang'){ rewriteHomeHrefs(); break; }
+          }
+        }).observe(document.documentElement,{ attributes:true });
+
+        // przechwyć klik w HOME i przenieś na /?lang=...
+        document.addEventListener('click', function(e){
+          var a = e.target.closest && e.target.closest('a[data-home]');
+          if (!a) return;
+          e.preventDefault();
+          var lang = getLang();
+          var url = '/?lang=' + lang;
+
+          if (location.pathname === '/' && new URLSearchParams(location.search).get('lang') === lang){
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else {
+            location.assign(url);
+          }
+
+          var cb = document.getElementById('menu-toggle');
+          if (cb) cb.checked = false; // zamknij hamburger na mobile
+        }, true);
       })();
     </script>
   </body>
