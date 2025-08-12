@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ title or "KT Development" }}</title>
     <!-- Podbij numer po zmianach CSS -->
-    <link rel="stylesheet" href="{{ '/styles.css?v=16' | url }}" />
+    <link rel="stylesheet" href="{{ '/styles.css?v=17' | url }}" />
   </head>
   <body>
 
@@ -64,6 +64,7 @@
         </nav>
 
         <div class="language-switcher" aria-label="Wybór języka">
+          <!-- Fallback bez JS (stare ścieżki) -->
           <a href="/pl/index/">PL</a> <span>|</span> <a href="/en/">EN</a>
         </div>
       </div>
@@ -109,48 +110,101 @@
       })();
     </script>
 
-    <!-- JS: link „Strona główna” => zawsze /?lang=AKTUALNY (na KAŻDEJ podstronie) -->
+    <!-- JS: i18n shell (GLOBALNIE: język bez przeładowania + tłumaczenie etykiet menu + HOME => /?lang=...) -->
     <script>
       (function(){
         var LS_KEY = 'site_lang';
 
-        function getLang(){
-          var attr = document.documentElement.getAttribute('data-lang');
-          if (attr === 'pl' || attr === 'en') return attr;
+        function detectLang(){
+          var sp = new URLSearchParams(location.search).get('lang');
+          if (sp === 'pl' || sp === 'en') return sp;
           var ls = localStorage.getItem(LS_KEY);
           if (ls === 'pl' || ls === 'en') return ls;
           return (navigator.language || 'en').toLowerCase().startsWith('pl') ? 'pl' : 'en';
         }
 
-        function rewriteHomeHrefs(){
-          var lang = getLang();
+        function setLang(lang){
+          if (lang !== 'pl' && lang !== 'en') lang = 'pl';
+          document.documentElement.setAttribute('data-lang', lang);
+          localStorage.setItem(LS_KEY, lang);
+          // ?lang= w URL bez przeładowania
+          var params = new URLSearchParams(location.search);
+          params.set('lang', lang);
+          history.replaceState({}, '', location.pathname + '?' + params.toString() + location.hash);
+          // aria w przełączniku
+          document.querySelectorAll('.language-switcher a').forEach(function(a){
+            var code = (a.textContent || '').trim().toLowerCase();
+            a.setAttribute('aria-current', code === lang ? 'true' : 'false');
+            a.setAttribute('aria-pressed', code === lang ? 'true' : 'false');
+          });
+          // zaktualizuj etykiety menu i HOME hrefy
+          setNavLabels(lang);
+          rewriteHomeHrefs(lang);
+        }
+
+        // mapowanie etykiet wg docelowego języka
+        var LABELS = {
+          pl: { home: 'Strona główna', offer: 'Oferta', projects: 'Projekty', blog: 'Blog', contact: 'Kontakt' },
+          en: { home: 'Home',          offer: 'Offer',  projects: 'Projects', blog: 'Blog', contact: 'Contact' }
+        };
+
+        function norm(href){
+          try { return new URL(href, location.origin).pathname; }
+          catch(_) { return href || ''; }
+        }
+
+        function setNavLabels(lang){
+          var L = LABELS[lang] || LABELS.pl;
+          // desktop + mobile
+          document.querySelectorAll('header .nav a, #mobile-drawer nav a').forEach(function(a){
+            var p = norm(a.getAttribute('href'));
+            var key = null;
+            if (p === '/' || p === '/pl/' || p === '/pl/index/') key = 'home';
+            else if (p.indexOf('/pl/oferta/') === 0) key = 'offer';
+            else if (p.indexOf('/pl/projekty/') === 0) key = 'projects';
+            else if (p.indexOf('/blog/') === 0) key = 'blog';
+            else if (p.indexOf('/pl/kontakt/') === 0) key = 'contact';
+            if (key) a.textContent = L[key];
+          });
+        }
+
+        function rewriteHomeHrefs(lang){
           document.querySelectorAll('a[data-home]').forEach(function(a){
             a.setAttribute('href','/?lang='+lang);
             a.setAttribute('hreflang', lang);
           });
         }
 
-        rewriteHomeHrefs();
-        new MutationObserver(function(muts){
-          for (var i=0;i<muts.length;i++){
-            var m = muts[i];
-            if (m.type==='attributes' && m.attributeName==='data-lang'){ rewriteHomeHrefs(); break; }
-          }
-        }).observe(document.documentElement,{ attributes:true });
+        // Inicjalizacja na KAŻDEJ podstronie
+        var start = detectLang();
+        setLang(start);
 
+        // Przechwyć klik w przełącznik PL/EN – BEZ przeładowania
+        var switcher = document.querySelector('.language-switcher');
+        if (switcher){
+          switcher.addEventListener('click', function(e){
+            var a = e.target.closest('a');
+            if (!a) return;
+            var code = (a.textContent || '').trim().toLowerCase();
+            if (code === 'pl' || code === 'en'){
+              e.preventDefault();
+              setLang(code);   // ← tu tylko tłumaczymy, nie ładujemy innej strony
+            }
+          }, true);
+        }
+
+        // HOME => zawsze do strony głównej, w AKTUALNYM języku
         document.addEventListener('click', function(e){
           var a = e.target.closest && e.target.closest('a[data-home]');
           if (!a) return;
           e.preventDefault();
-          var lang = getLang();
+          var lang = document.documentElement.getAttribute('data-lang') || 'pl';
           var url = '/?lang=' + lang;
-
           if (location.pathname === '/' && new URLSearchParams(location.search).get('lang') === lang){
             window.scrollTo({ top: 0, behavior: 'smooth' });
           } else {
             location.assign(url);
           }
-
           var cb = document.getElementById('menu-toggle');
           if (cb) cb.checked = false;
         }, true);
