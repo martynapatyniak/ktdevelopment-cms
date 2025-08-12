@@ -8,15 +8,15 @@ module.exports = function (eleventyConfig) {
   // alias layoutu
   eleventyConfig.addLayoutAlias("layout", "layout.njk");
 
-  // kolekcja postów z folderu src/blog  (UWAGA: glob względny do inputDir)
-  eleventyConfig.addCollection("posts", (collectionApi) => {
-    return collectionApi.getFilteredByGlob("blog/*.md").reverse();
+  // kolekcja postów z folderu content/blog
+  eleventyConfig.addCollection("posts", function (collectionApi) {
+    return collectionApi.getFilteredByGlob("content/blog/*.md").reverse();
   });
 
   return {
     dir: {
-      input: "src",
-      includes: "_includes",
+      input: "src",         // katalog z treścią
+      includes: "_includes",// katalog z szablonami
       output: "_site"
     }
   };
