@@ -4,7 +4,7 @@ title: "Blog & Publikacje"
 permalink: /blog/
 ---
 
-<section class="blog-list">
+<div class="blog-container">
   <h3>Blog &amp; Publikacje</h3>
 
   <ul>
@@ -18,4 +18,4 @@ permalink: /blog/
   {% if collections.posts | length == 0 %}
     <p>Tutaj wkrótce pojawią się wpisy o AI, strategii i podejmowaniu decyzji w XXI wieku.</p>
   {% endif %}
-</section>
+</div>
