@@ -1,12 +1,20 @@
 ---
-title: Blog & Publikacje
-layout: layout.njk
-permalink: /blog/
+layout: "layout.njk"
+title: "Blog & Publikacje"
+permalink: "/pl/blog/"
 ---
 
-<!-- Minimalna wersja strony bloga: wyświetla tylko nagłówek i informację o nadchodzących wpisach. -->
+<h1>Blog & Publikacje</h1>
 
-<section id="blog">
-  <h3>Blog &amp; Publikacje</h3>
-  <p>Tutaj wkrótce pojawią się wpisy o AI, strategii i podejmowaniu decyzji w XXI wieku.</p>
-</section>
+<ul>
+{% for post in collections.posts %}
+  <li>
+    <a href="{{ post.url }}">{{ post.data.title }}</a>
+    <small>— {{ post.date | date("yyyy-LL-dd") }}</small>
+  </li>
+{% endfor %}
+</ul>
+
+{% if collections.posts | length == 0 %}
+  <p>Brak wpisów na blogu.</p>
+{% endif %}
