@@ -59,8 +59,12 @@ footer{ text-align:center; padding:2rem; font-size:.875rem; color:#888; }
 
 /* ====== LANGUAGE ====== */
 .language-switcher{
-  position:absolute; top:10px; right:20px;
-  font:inherit; font-size:14px; z-index:1000;
+  position:fixed; /* stałe położenie w prawym górnym rogu */
+  top:10px;
+  right:20px;
+  font:inherit;
+  font-size:14px;
+  z-index:1000;
 }
 .language-switcher a{ color:inherit; text-decoration:none; }
 .language-switcher a:hover{ text-decoration:underline; }
@@ -136,11 +140,6 @@ footer{ text-align:center; padding:2rem; font-size:.875rem; color:#888; }
 
   /* ukryj menu poziome na mobile */
   .nav{ display:none !important; }
-
-  /* ułóż PL | EN po prawej, żeby nie kolidował z przyciskiem po lewej */
-  .language-switcher{
-    right:16px; left:auto; top:16px;
-  }
 
   /* drobne mobilne dostosowania */
   *{ box-sizing:border-box; }
