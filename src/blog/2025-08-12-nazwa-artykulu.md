@@ -7,13 +7,12 @@ permalink: "/pl/blog/{{ page.fileSlug }}/"
 
 <div class="blog-container">
 
-## Wstęp
-Równanie grawitacji decyzyjnej i to, dlaczego nie każda decyzja cokolwiek znaczy.
-
-## Kolejna sekcja
+## Twoja decyzja nic nie znaczy. Bo nie ma masy.
 Niezależnie od tego, czy ktoś ekscytuje się nowymi technologiami, czy patrzy na nie z rezerwą, sztuczna inteligencja nie jest już dodatkiem do rzeczywistości. Ona stała się jej warstwą.
 
-Korzystamy z niej świadomie, a jeśli komuś wydaje się, że nie - to tylko znaczy, że robi to nieświadomie. Ale dla każdego AI znaczy coś innego. Dlaczego?
+## Równanie grawitacji decyzyjnej i to, dlaczego nie każda decyzja cokolwiek znaczy.
+
+Korzystamy ze sztucznej inteligencji świadomie, a jeśli komuś wydaje się, że nie - to tylko znaczy, że robi to nieświadomie. Ale dla każdego AI znaczy coś innego. Dlaczego?
 
 Bo nie da się rozmawiać o technologii bez uświadomienia sobie jednej rzeczy: każdy z nas żyje w innym modelu rzeczywistości. I to nie jest poetycka metafora, tylko praktyczna konsekwencja tego, że mamy różne doświadczenia, wzorce i dogmaty, które nas zaprogramowały. Każdy działa na swoim własnym kodzie.
 
