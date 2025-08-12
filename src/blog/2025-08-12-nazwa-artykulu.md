@@ -5,7 +5,7 @@ layout: layout.njk
 permalink: "/pl/blog/{{ page.fileSlug }}/"
 ---
 
-<div class="blog-container" style="text-align: justify;">
+<div style="text-align: justify !important;">
 
 ## Twoja decyzja nic nie znaczy. Bo nie ma masy.
 Niezależnie od tego, czy ktoś ekscytuje się nowymi technologiami, czy patrzy na nie z rezerwą, sztuczna inteligencja nie jest już dodatkiem do rzeczywistości. Ona stała się jej warstwą.
