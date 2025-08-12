@@ -4,16 +4,18 @@ title: "Blog & Publikacje"
 permalink: /blog/
 ---
 
-<h3>Blog &amp; Publikacje</h3>
+<section class="blog-list">
+  <h3>Blog &amp; Publikacje</h3>
 
-<ul>
-{% for post in collections.posts %}
-  <li>
-    <a href="{{ post.url }}">{{ post.data.title }}</a>
-  </li>
-{% endfor %}
-</ul>
+  <ul>
+  {% for post in collections.posts %}
+    <li>
+      <a href="{{ post.url }}">{{ post.data.title }}</a>
+    </li>
+  {% endfor %}
+  </ul>
 
-{% if collections.posts | length == 0 %}
-  <p>Tutaj wkrótce pojawią się wpisy o AI, strategii i podejmowaniu decyzji w XXI wieku.</p>
-{% endif %}
+  {% if collections.posts | length == 0 %}
+    <p>Tutaj wkrótce pojawią się wpisy o AI, strategii i podejmowaniu decyzji w XXI wieku.</p>
+  {% endif %}
+</section>
