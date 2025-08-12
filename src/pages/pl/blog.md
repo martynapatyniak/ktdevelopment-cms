@@ -15,6 +15,6 @@ permalink: "/pl/blog/"
 {% endfor %}
 </ul>
 
-{% if collections.posts | size == 0 %}
+{% if collections.posts.size == 0 %}
   <p>Brak wpisów na blogu.</p>
 {% endif %}
