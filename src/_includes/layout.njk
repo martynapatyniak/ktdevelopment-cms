@@ -5,16 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ title or "KT Development" }}</title>
     <!-- Podbij numer po zmianach CSS -->
-    <link rel="stylesheet" href="{{ '/styles.css?v=14' | url }}" />
+    <link rel="stylesheet" href="{{ '/styles.css?v=16' | url }}" />
   </head>
   <body>
 
     <header class="header">
       <!-- === HAMBURGER + DRAWER (MOBILE) === -->
-      <!-- Ukryty checkbox musi być przed przyciskiem i panelem -->
       <input type="checkbox" id="menu-toggle" class="menu-toggle" />
 
-      <!-- Przycisk hamburger (bezpośredni sąsiad +) -->
       <label
         for="menu-toggle"
         class="hamburger"
@@ -25,7 +23,6 @@
         <span></span><span></span><span></span>
       </label>
 
-      <!-- Panel (rodzeństwo ~) -->
       <aside
         id="mobile-drawer"
         class="mobile-drawer"
@@ -36,7 +33,6 @@
       >
         <header>
           <h2 id="mobile-menu-title">Menu</h2>
-          <!-- Zamknięcie jako label: działa bez JS i z JS -->
           <label for="menu-toggle" class="close" aria-label="Zamknij">×</label>
         </header>
         <nav>
@@ -49,7 +45,6 @@
         </nav>
       </aside>
 
-      <!-- Backdrop też jako label: klikalny bez JS -->
       <label for="menu-toggle" class="mobile-drawer-backdrop" aria-hidden="true"></label>
       <!-- === /HAMBURGER === -->
 
@@ -59,7 +54,6 @@
           <h1>KT DEVELOPMENT</h1>
         </div>
 
-        <!-- Menu poziome (desktop) -->
         <nav class="nav" aria-label="Główne">
           <!-- HOME zawsze na /; JS dopnie ?lang=AKTUALNY -->
           <a href="/" data-home>Strona główna</a>
@@ -79,7 +73,7 @@
       {{ content | safe }}
     </main>
 
-    <!-- JS: aria-expanded, Esc, zamknięcie po kliknięciu linku, cleanup na desktopie -->
+    <!-- JS: hamburger podstawy -->
     <script>
       (function () {
         var cb = document.getElementById('menu-toggle');
@@ -98,19 +92,16 @@
           sync();
         }
 
-        // Zamknięcie klawiszem Esc
         if (drawer) {
           drawer.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && cb) { cb.checked = false; sync(); }
           });
-          // Zamknięcie po kliknięciu w link w panelu
           drawer.addEventListener('click', function (e) {
             var t = e.target;
             if (t && t.tagName === 'A' && cb) { cb.checked = false; sync(); }
           });
         }
 
-        // Porządek po przejściu na desktop
         var mq = window.matchMedia('(min-width: 769px)');
         mq.addEventListener('change', function (e) {
           if (e.matches && cb) { cb.checked = false; sync(); }
@@ -118,7 +109,7 @@
       })();
     </script>
 
-    <!-- JS: HOME => zawsze /?lang=AKTUALNY (działa na KAŻDEJ podstronie) -->
+    <!-- JS: link „Strona główna” => zawsze /?lang=AKTUALNY (na KAŻDEJ podstronie) -->
     <script>
       (function(){
         var LS_KEY = 'site_lang';
@@ -139,7 +130,6 @@
           });
         }
 
-        // na starcie + gdy zmieni się data-lang (np. po kliknięciu PL/EN na stronie głównej)
         rewriteHomeHrefs();
         new MutationObserver(function(muts){
           for (var i=0;i<muts.length;i++){
@@ -148,7 +138,6 @@
           }
         }).observe(document.documentElement,{ attributes:true });
 
-        // przechwyć klik w HOME i przenieś na /?lang=...
         document.addEventListener('click', function(e){
           var a = e.target.closest && e.target.closest('a[data-home]');
           if (!a) return;
@@ -163,7 +152,7 @@
           }
 
           var cb = document.getElementById('menu-toggle');
-          if (cb) cb.checked = false; // zamknij hamburger na mobile
+          if (cb) cb.checked = false;
         }, true);
       })();
     </script>
