@@ -10,11 +10,11 @@ permalink: "/pl/blog/"
 {% for post in collections.posts %}
   <li>
     <a href="{{ post.url }}">{{ post.data.title }}</a>
-    <small>— {{ post.date | date("yyyy-LL-dd") }}</small>
+    <small>— {{ post.date | date: "%Y-%m-%d" }}</small>
   </li>
 {% endfor %}
 </ul>
 
-{% if collections.posts | length == 0 %}
+{% if collections.posts | size == 0 %}
   <p>Brak wpisów na blogu.</p>
 {% endif %}
