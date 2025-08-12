@@ -49,7 +49,7 @@ permalink: /
     <section class="hero">
       <h2>Decyzje, które zakrzywiają rzeczywistość</h2>
       <p>KT DEVELOPMENT to firma doradczo-strategiczna, która łączy technologię, AI i ludzką świadomość w jednym celu – by rzeczy działały lepiej, szybciej i mądrzej.</p>
-      <a href="/pl/kontakt/" class="cta-button">Skontaktuj się</a>
+      <a href="https://calendly.com/kacper-turczynski-ktdevelopment/45-minute-meeting-spotkanie?back=1" class="cta-button">Umów konsultacje</a>
     </section>
 
     <!-- Kim jesteśmy -->
