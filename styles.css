@@ -197,3 +197,18 @@ footer{ text-align:center; padding:2rem; font-size:.875rem; color:#888; }
   }
   .hamburger span + span{ margin-top:6px; }
 }
+.blog-list {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.blog-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.blog-list li {
+  margin: 10px 0;
+}
+
