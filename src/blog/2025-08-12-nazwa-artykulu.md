@@ -5,10 +5,12 @@ layout: layout.njk
 permalink: "/pl/blog/{{ page.fileSlug }}/"
 ---
 
-<div style="text-align: justify !important;">
+<div class="blog-container">
 
 ## Twoja decyzja nic nie znaczy. Bo nie ma masy.
+<p style="text-align: justify !important;">
 Niezależnie od tego, czy ktoś ekscytuje się nowymi technologiami, czy patrzy na nie z rezerwą, sztuczna inteligencja nie jest już dodatkiem do rzeczywistości. Ona stała się jej warstwą.
+</p>
 
 ## Równanie grawitacji decyzyjnej i to, dlaczego nie każda decyzja cokolwiek znaczy.
 
