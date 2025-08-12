@@ -34,7 +34,7 @@ A jeśli ktoś nadal nie wierzy, odsyłam do książki, która zainspirowała t�
 To jedyna stała, która nie zawiodła mnie w żadnej decyzji. I działa dokładnie tak jak grawitacja - bez względu na to, czy ktoś w nią wierzy, czy nie.
 RÓWNANIE GRAWITACJI DECYZYJNEJ
 
-**M = E × I × N**
+##**M = E × I × N**
 
 **M** – masa decyzji  
 **E** – emocjonalna intensywność: czy to naprawdę Twoje, czy tylko coś, co „tak wypada”  
