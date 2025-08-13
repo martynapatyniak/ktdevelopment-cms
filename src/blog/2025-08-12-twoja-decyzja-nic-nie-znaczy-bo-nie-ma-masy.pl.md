@@ -1,9 +1,15 @@
 ---
 title: "Twoja decyzja nic nie znaczy. Bo nie ma masy."
+description: "Równanie grawitacji decyzyjnej — M = E × I × N. Dlaczego nie każda decyzja ma wagę i jak ją zwiększyć."
 tags: ["post"]
 lang: pl
 layout: layout.njk
+date: 2025-08-12
+published: true
 permalink: "/pl/blog/{{ page.fileSlug }}/"
+# opcjonalnie do switchera języków:
+altLang: en
+altUrl: "/en/blog/your-decision-means-nothing/"
 ---
 
 <div class="blog-container">
@@ -13,7 +19,7 @@ Niezależnie od tego, czy ktoś ekscytuje się nowymi technologiami, czy patrzy 
 
 ## Równanie grawitacji decyzyjnej i to, dlaczego nie każda decyzja cokolwiek znaczy.
 
-Korzystamy ze sztucznej inteligencji świadomie, a jeśli komuś wydaje się, że nie - to tylko znaczy, że robi to nieświadomie. Ale dla każdego AI znaczy coś innego. Dlaczego?
+Korzystamy ze sztucznej inteligencji świadomie, a jeśli komuś wydaje się, że nie — to tylko znaczy, że robi to nieświadomie. Ale dla każdego AI znaczy coś innego. Dlaczego?
 
 Bo nie da się rozmawiać o technologii bez uświadomienia sobie jednej rzeczy: każdy z nas żyje w innym modelu rzeczywistości. I to nie jest poetycka metafora, tylko praktyczna konsekwencja tego, że mamy różne doświadczenia, wzorce i dogmaty, które nas zaprogramowały. Każdy działa na swoim własnym kodzie.
 
@@ -24,16 +30,17 @@ Czym więc jest waga decyzji?
 
 Tym, co przyciąga najbardziej.
 
-Kto uważał na fizyce, ten wie: najbardziej masywne obiekty - czarne dziury - mają najsilniejszą grawitację. To właśnie grawitacja decyduje o tym, czy coś zakrzywia przestrzeń, czy pozostaje niezauważone.
+Kto uważał na fizyce, ten wie: najbardziej masywne obiekty — czarne dziury — mają najsilniejszą grawitację. To właśnie grawitacja decyduje o tym, czy coś zakrzywia przestrzeń, czy pozostaje niezauważone.
 
 Tak samo jest z Twoimi decyzjami.
 
 Im większa ich masa, tym mocniejszy wpływ.
 A jeśli ktoś nadal nie wierzy, odsyłam do książki, która zainspirowała tę publikację:
-„Kwantechizm 2.0, czyli klatka na ludzi” - Andrzej Dragan.
+„Kwantechizm 2.0, czyli klatka na ludzi” — Andrzej Dragan.
 
-To jedyna stała, która nie zawiodła mnie w żadnej decyzji. I działa dokładnie tak jak grawitacja - bez względu na to, czy ktoś w nią wierzy, czy nie.
-RÓWNANIE GRAWITACJI DECYZYJNEJ
+To jedyna stała, która nie zawiodła mnie w żadnej decyzji. I działa dokładnie tak jak grawitacja — bez względu na to, czy ktoś w nią wierzy, czy nie.
+
+**RÓWNANIE GRAWITACJI DECYZYJNEJ**
 
 <p style="text-align: center; font-size: 1.6em; font-weight: bold; margin: 1em 0;">
   M = E × I × N
@@ -46,7 +53,8 @@ RÓWNANIE GRAWITACJI DECYZYJNEJ
 
 Im większa masa decyzji, tym mocniej przestrzeń się ugina.
 I to nie jest metafora. To widać w biznesie, w nauce, w każdej interakcji.
-Przykład:
+
+**Przykład:**
 
 Chcesz przyciągnąć inwestorów do swojego start-upu.
 
@@ -70,9 +78,9 @@ To nie jest motywacyjny slogan. To praktyczny model działania.
 Nie musisz nikogo przekonywać.
 Jeśli sam udowodniłeś sobie wartość, jedyne, co masz zrobić, to pokazać ją światu. Nie nachalnym marketingiem. Nie proszeniem o uwagę. Spójnością.
 
-Kiedy masa Twojej decyzji jest wystarczająca - rynek sam zaczyna się wyginać w Twoją stronę.
+Kiedy masa Twojej decyzji jest wystarczająca — rynek sam zaczyna się wyginać w Twoją stronę.
 
 Nie musisz wierzyć. Sprawdź.
-Jeśli Twoja decyzja ma masę - przestrzeń odpowie.
+Jeśli Twoja decyzja ma masę — przestrzeń odpowie.
 
 </div>
