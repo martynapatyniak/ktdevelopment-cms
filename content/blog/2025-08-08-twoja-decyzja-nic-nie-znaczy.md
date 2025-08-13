@@ -2,6 +2,7 @@
 title: "Twoja decyzja nic nie znaczy. Bo nie ma masy."
 date: 2025-08-08
 published: true
+lang: pl
 description: "Równanie grawitacji decyzyjnej i to, dlaczego nie każda decyzja cokolwiek znaczy."
 ---
 
