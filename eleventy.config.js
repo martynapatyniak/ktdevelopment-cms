@@ -6,19 +6,36 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("logo.png");
 
   // --- PASSTHROUGH: wszystko z /public wrzuć bezpośrednio do _site/ ---
-  // Dzięki temu plik:
-  //   public/google8f2f386cc93d6433.html
-  // trafi do:
-  //   _site/google8f2f386cc93d6433.html
   eleventyConfig.addPassthroughCopy({ "public/*": "." });
 
-  // Alias layoutu
+  // Alias layoutu (możesz dalej używać "layout" w frontmatterze)
   eleventyConfig.addLayoutAlias("layout", "layout.njk");
 
-  // Kolekcja postów z folderu src/blog
-  eleventyConfig.addCollection("posts", function (collectionApi) {
-    return collectionApi.getFilteredByGlob("src/blog/*.md").reverse();
-  });
+  // Filtr językowy do użycia w szablonach
+  eleventyConfig.addFilter("byLang", (items, lang) =>
+    (items || []).filter(p =>
+      (p.data.published !== false) && ((p.data.lang || "pl") === lang)
+    )
+  );
+
+  // Kolekcja wszystkich postów
+  eleventyConfig.addCollection("posts", (collectionApi) =>
+    collectionApi.getFilteredByGlob("src/blog/*.md").reverse()
+  );
+
+  // Kolekcja tylko PL
+  eleventyConfig.addCollection("posts_pl", (collectionApi) =>
+    collectionApi.getFilteredByGlob("src/blog/*.md")
+      .filter(p => (p.data.lang || "pl") === "pl" && p.data.published !== false)
+      .reverse()
+  );
+
+  // Kolekcja tylko EN
+  eleventyConfig.addCollection("posts_en", (collectionApi) =>
+    collectionApi.getFilteredByGlob("src/blog/*.md")
+      .filter(p => p.data.lang === "en" && p.data.published !== false)
+      .reverse()
+  );
 
   return {
     dir: {
