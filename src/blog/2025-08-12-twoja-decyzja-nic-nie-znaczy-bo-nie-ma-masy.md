@@ -1,7 +1,7 @@
 ---
 title: "Twoja decyzja nic nie znaczy. Bo nie ma masy."
 tags: ["post"]
-lang: pl en
+lang: pl
 layout: layout.njk
 permalink: "/pl/blog/{{ page.fileSlug }}/"
 ---
