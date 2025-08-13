@@ -1,9 +1,10 @@
 ---
 title: "Your decision means nothing. Because it has no mass."
-tags: ["post"]
+date: 2025-08-08
+published: true
 lang: en
-layout: layout.njk
-permalink: "/en/blog/{{ page.fileSlug }}/"
+description: "The decision-gravity equation and why not every decision matters."
+permalink: "/en/blog/your-decision-means-nothing/"
 ---
 
 <div class="blog-container">
